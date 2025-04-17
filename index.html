@@ -525,7 +525,7 @@
 
             .card-container {
                 width: 90%; /* 幅を広く */
-                height: 270px; /* ★修正: 高さを1.5倍 (180*1.5) */
+                height: 252px; /* ★修正: 高さを1.4倍 (180*1.4) */
                 margin: 8px auto 15px auto; /* マージン調整 (上を詰める) */
             }
 
@@ -534,12 +534,12 @@
              }
              /* ★裏面のpタグ位置調整 (Tablet) */
              .card-back p:first-child { /* 日本語訳 */
-                 top: calc(50% - 50px); /* 20px下に移動 */
+                 top: calc(50% - 20px); /* さらに10px上に移動 */
                  transform: translate(-50%, -50%);
                  font-size: 1.2rem;
              }
              .card-back p:last-child { /* 英語定義 */
-                 bottom: 40px; /* 10px上に移動 */
+                 bottom: 30px; /* 10px下に移動 */
                  font-size: 14px;
              }
 
@@ -630,7 +630,7 @@
 
             .card-container {
                 width: 95%; /* ほぼ画面幅 */
-                height: 225px; /* ★修正: 高さを1.5倍 (150*1.5) */
+                height: 210px; /* ★修正: 高さを1.4倍 (150*1.4) */
                 margin: 5px auto 10px auto; /* マージン調整 (上を詰める) */
             }
 
@@ -649,13 +649,13 @@
 
              /* ★裏面のpタグ位置調整 (Mobile) */
              .card-back p:first-child { /* 日本語訳 */
-                 top: calc(50% - 40px); /* 20px下に移動 */
+                 top: calc(50% - 20px); /* さらに10px上に移動 */
                  transform: translate(-50%, -50%);
                  font-size: 1.1rem;
                  padding-top: 0; /* padding削除 */
              }
              .card-back p:last-child { /* 英語定義 */
-                 bottom: 30px; /* 10px上に移動 */
+                 bottom: 30px; /* 10px下に移動 */
                  font-size: 12px;
                  padding-bottom: 0; /* padding削除 */
              }
@@ -992,7 +992,7 @@
             // カード裏面のHTMLを生成 - ★日本語訳と英語定義の配置を調整 (Absolute Position)
             let backHTML = `
                  <p style="position: absolute; top: calc(50% - 20px); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 1.3rem; color: #FFD700; margin: 0; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
-                 <p style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
+                 <p style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
             `;
             cardBack.innerHTML = backHTML;
 
