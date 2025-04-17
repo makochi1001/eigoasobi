@@ -141,22 +141,14 @@
              box-shadow: 0 0 10px rgba(52, 152, 219, 0.3); /* 軽い光彩 */
         }
 
-
-        .control-panel {
-            margin: 20px 0;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap; /* ボタンが画面幅を超える場合に折り返す */
-            justify-content: center; /* ボタンを中央揃え */
-            z-index: 2; /* カードより手前に表示 */
-        }
+        /* .control-panel は .control-container 内の要素としてスタイル */
 
         .card-container {
             width: 90%; /* 幅を画面比率で設定 */
             max-width: 400px; /* 最大幅を設定 */
             height: 250px; /* カードの高さを設定 */
             perspective: 1500px; /* 3D効果の奥行き */
-            margin: 20px auto; /* 中央揃え */
+            margin: 10px auto 20px auto; /* 上下マージン調整 (上を詰める) */
             position: relative;
             z-index: 1; /* コントロールパネルより奥 */
         }
@@ -184,11 +176,8 @@
             height: 100%;
             -webkit-backface-visibility: hidden; /* Safari用裏面非表示 */
             backface-visibility: hidden; /* 裏面を非表示 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* 内容を中央揃え（垂直） */
-            align-items: center; /* 内容を中央揃え（水平） */
-            padding: 20px;
+            /* display: flex; を削除 (absolute配置のため) */
+            padding: 20px; /* 内側の余白 */
             box-sizing: border-box; /* paddingを含めて計算 */
             border-radius: 16px; /* 角を丸める */
             background: rgba(255, 255, 255, 0.1); /* 半透明の背景 */
@@ -202,13 +191,20 @@
         .card-front {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.5), rgba(16, 54, 140, 0.3)); /* 青系のグラデーション */
             color: white;
+            /* 表面は中央揃えのため flex を維持 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-back {
             background: linear-gradient(135deg, rgba(39, 174, 96, 0.5), rgba(20, 90, 50, 0.3)); /* 緑系のグラデーション */
             color: white;
             transform: rotateY(180deg); /* 最初から裏返しておく */
-            text-align: left; /* 裏面のテキストは左寄せ */
+            display: none; /* 初期状態は非表示 */
+            /* justify-content, align-items は absolute 配置のため不要 */
+            position: relative; /* 子要素の absolute 配置の基準 */
         }
 
         /* カード内のh2 (単語表示) */
@@ -231,7 +227,7 @@
             text-shadow:0 0 5px rgba(255,255,255,0.5);
             font-size:1.2rem;
             font-weight:400;
-            margin-bottom:0px; /* カテゴリグリッドとのマージンを詰める */
+            margin-bottom:0px; /* カテゴリグリッド/カードカウンターとのマージンを詰める */
             line-height:1.5;
             text-align:center;
             background: none; /* グラデーション解除 */
@@ -249,10 +245,19 @@
             font-weight: 300; /* 少し細めのフォント */
         }
 
+        /* カード裏面のpタグのスタイル調整 */
+        .card-back p {
+             /* width: 90%; */ /* absolute配置で調整するため削除 */
+             text-align: center; /* 中央揃え */
+             position: absolute; /* ★絶対配置に変更 */
+             left: 50%;
+             transform: translateX(-50%); /* 水平中央揃え */
+             width: 90%; /* 幅を再設定 */
+             margin: 0; /* マージンリセット */
+        }
+
         .definition {
-            margin-bottom: 15px;
-            text-align: left;
-            max-width: 90%; /* 幅を制限 */
+            /* スタイルはインラインで指定 */
         }
 
         .button {
@@ -301,13 +306,21 @@
             transform: translateY(-2px); /* 少し上に移動 */
         }
 
+        /* コントロール内のボタン共通スタイル */
+        .control-button {
+             color: white;
+             border: none;
+             border-radius: 20px;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             padding: 6px 15px; /* 左右パディングで幅を調整 */
+             font-size: 12px;
+             flex-grow: 1; /* ボタンがスペースを均等に埋めるように */
+             text-align: center;
+        }
+
         .next-button { /* 小さい方の次へボタン */
             background: linear-gradient(45deg, rgb(39, 174, 96), rgb(27, 120, 66));
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .next-button:hover {
@@ -316,13 +329,8 @@
              box-shadow: 0 2px 8px rgba(46, 204, 113, 0.4);
         }
 
-        .pause-button { /* 小さい方の一時停止ボタン */
+        .pause-button { /* 小さい方の停止ボタン */
             background: linear-gradient(45deg, rgb(211, 84, 0), rgb(170, 67, 0));
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .pause-button:hover {
@@ -330,7 +338,7 @@
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
         }
-         /* 再開ボタンのスタイル */
+         /* 再生ボタンのスタイル */
          .pause-button.resume {
              background: linear-gradient(45deg, rgb(142, 68, 173), rgb(91, 44, 111));
          }
@@ -350,9 +358,11 @@
             display: none !important; /* 確実に非表示にする */
         }
 
+        /* カードカウンターのスタイル調整 */
         .card-counter {
             font-size: 18px;
-            margin-top: 15px; /* カードとの間隔 */
+            margin-top: 10px; /* 上（タイトル）とのマージン */
+            margin-bottom: 10px; /* 下（カード）とのマージン */
             color: rgba(255, 255, 255, 0.8);
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
             background: rgba(0, 0, 0, 0.2); /* 半透明背景 */
@@ -361,6 +371,8 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             display: none; /* 初期状態は非表示、JSで表示 */
+            width: fit-content; /* 内容に合わせた幅 */
+            align-self: center; /* 中央揃え */
         }
 
         /* コントロール要素のコンテナ */
@@ -369,7 +381,7 @@
              gap: 15px;
              justify-content: center;
              flex-wrap: wrap;
-             margin-top: 15px; /* カードカウンターとの間隔 */
+             margin-top: 15px; /* カードとの間隔 */
              width: 100%;
              max-width: 500px; /* 最大幅 */
         }
@@ -397,24 +409,27 @@
         }
         .control-panel .panel-buttons {
             display: flex;
-            justify-content: center;
+            justify-content: center; /* 中央揃えに変更 */
             gap: 10px; /* ボタン間のギャップ */
             width: 100%;
         }
 
-        /* 操作ボタンパネル */
+        /* 操作ボタンパネル - ボタン幅の固定を解除 */
         #controlBox .panel-buttons button {
-             padding: 6px 0;
-             font-size: 12px;
+             /* padding: 6px 0; */ /* 上下パディングは .control-button で指定 */
+             /* font-size: 12px; */ /* .control-button で指定 */
+             /* width プロパティを削除 */
         }
-        #nextButtonSmall { width: 90px; }
-        #pauseButtonSmall { width: 70px; }
+        /* #nextButtonSmall { width: 90px; } */
+        /* #pauseButtonSmall { width: 70px; } */
 
         /* 速度調整パネル */
         #speedControl .panel-buttons button {
-            width: 50px;
-            padding: 6px 0;
+            /* width: 50px; */ /* 固定幅解除 */
+            padding: 6px 10px; /* パディング調整 */
             font-size: 12px;
+            flex-grow: 1; /* 均等割り付け */
+            text-align: center;
         }
 
         .speed-button {
@@ -485,7 +500,7 @@
 
             body > h2 { /* ページタイトル下のh2 */
                 font-size: 1.1rem;
-                margin-bottom: 10px; /* カテゴリグリッドとの間を少し空ける */
+                margin-bottom: 10px; /* カテゴリグリッド/カードカウンターとの間を少し空ける */
             }
 
             .category-grid {
@@ -500,11 +515,34 @@
              .category-card h3 { font-size: 1rem; }
              .category-card p { font-size: 0.8rem; }
 
+             /* カードカウンター (モバイル) */
+             .card-counter {
+                 margin-top: 8px;
+                 margin-bottom: 8px;
+                 font-size: 16px;
+                 padding: 4px 12px;
+             }
+
             .card-container {
                 width: 90%; /* 幅を広く */
                 height: 180px; /* 高さを低く */
-                margin: 15px auto; /* マージン調整 */
+                margin: 8px auto 15px auto; /* マージン調整 (上を詰める) */
             }
+
+             .card-back {
+                 padding: 15px; /* 裏面のpadding調整 */
+             }
+             /* ★裏面のpタグ位置調整 (Tablet) */
+             .card-back p:first-child { /* 日本語訳 */
+                 top: calc(50% - 50px); /* 20px下に移動 */
+                 transform: translate(-50%, -50%);
+                 font-size: 1.2rem;
+             }
+             .card-back p:last-child { /* 英語定義 */
+                 bottom: 40px; /* 10px上に移動 */
+                 font-size: 14px;
+             }
+
 
             .card h2 { /* カード内の単語サイズ */
                 font-size: 1.7rem;
@@ -523,24 +561,28 @@
                  margin-top: 15px;
              }
 
-            .card-counter {
-                margin-top: 10px; /* マージン縮小 */
-                font-size: 16px;
-            }
-
              .control-container {
                  gap: 10px;
-                 margin-top: 10px;
+                 margin-top: 10px; /* カードとの間隔 */
              }
              .control-panel {
                  width: 180px; /* 少し小さく */
                  padding: 8px 12px;
              }
              .control-panel .panel-label { font-size: 13px; }
-             #controlBox .panel-buttons button { padding: 5px 0; font-size: 11px; }
-             #nextButtonSmall { width: 80px; }
-             #pauseButtonSmall { width: 60px; }
-             #speedControl .panel-buttons button { width: 45px; padding: 5px 0; font-size: 11px; }
+             /* 操作ボタンのパディング調整 */
+             #controlBox .panel-buttons button {
+                 padding: 5px 10px; /* 左右にも少しパディング */
+                 font-size: 11px;
+                 flex-grow: 0; /* 均等割り付け解除 */
+             }
+             /* #nextButtonSmall { width: 80px; } */
+             /* #pauseButtonSmall { width: 60px; } */
+             #speedControl .panel-buttons button {
+                 /* width: 45px; */ /* 固定幅解除 */
+                 padding: 5px 8px; /* パディング調整 */
+                 font-size: 11px;
+             }
 
 
             .category-info {
@@ -578,12 +620,23 @@
              .category-card h3 { font-size: 0.9rem; }
              .category-card p { font-size: 0.75rem; }
 
+             /* カードカウンター (最小モバイル) */
+             .card-counter {
+                 margin-top: 5px;
+                 margin-bottom: 5px;
+                 font-size: 14px;
+                 padding: 4px 12px;
+             }
 
             .card-container {
                 width: 95%; /* ほぼ画面幅 */
                 height: 150px; /* さらに低く */
-                margin: 10px auto; /* マージン調整 */
+                margin: 5px auto 10px auto; /* マージン調整 (上を詰める) */
             }
+
+             .card-back {
+                 padding: 10px; /* 裏面のpadding調整 */
+             }
 
             .card h2 { /* カード内の単語サイズ */
                 font-size: 1.5rem;
@@ -592,7 +645,21 @@
              .card-front p, .card-back p { /* カード内のテキスト */
                 font-size: 13px;
                 margin: 3px 0;
-            }
+             }
+
+             /* ★裏面のpタグ位置調整 (Mobile) */
+             .card-back p:first-child { /* 日本語訳 */
+                 top: calc(50% - 40px); /* 20px下に移動 */
+                 transform: translate(-50%, -50%);
+                 font-size: 1.1rem;
+                 padding-top: 0; /* padding削除 */
+             }
+             .card-back p:last-child { /* 英語定義 */
+                 bottom: 30px; /* 10px上に移動 */
+                 font-size: 12px;
+                 padding-bottom: 0; /* padding削除 */
+             }
+
 
             .button { /* ボタンサイズ */
                 padding: 8px 16px; /* 少し調整 */
@@ -602,15 +669,9 @@
                  margin-top: 12px; /* マージン調整 */
              }
 
-             .card-counter {
-                 margin-top: 8px;
-                 font-size: 14px;
-                 padding: 4px 12px;
-             }
-
              .control-container {
                  gap: 8px;
-                 margin-top: 8px;
+                 margin-top: 8px; /* カードとの間隔 */
              }
              .control-panel {
                  width: 150px; /* さらに小さく */
@@ -618,12 +679,20 @@
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
-              #controlBox .panel-buttons button { padding: 4px 0; font-size: 10px; }
-              #nextButtonSmall { width: 65px; }
-              #pauseButtonSmall { width: 55px; }
+              /* 操作ボタンのパディング調整 */
+              #controlBox .panel-buttons button {
+                  padding: 4px 8px; /* 左右パディング */
+                  font-size: 10px;
+              }
+              /* #nextButtonSmall { width: 65px; } */
+              /* #pauseButtonSmall { width: 55px; } */
 
               #speedControl .panel-buttons { gap: 5px; }
-              #speedControl .panel-buttons button { width: 40px; padding: 4px 0; font-size: 10px; }
+              #speedControl .panel-buttons button {
+                  /* width: 40px; */ /* 固定幅解除 */
+                  padding: 4px 6px; /* パディング調整 */
+                  font-size: 10px;
+              }
 
 
             .category-info {
@@ -640,6 +709,8 @@
 
     <h1>EIGOASOBI</h1>
     <h2>フラッシュカード</h2>
+
+    <div class="card-counter" id="cardCounter"></div>
 
     <div class="category-grid">
         <div class="category-card active" id="category-awl1">
@@ -677,23 +748,21 @@
         </div>
     </div>
 
-    <div class="card-counter" id="cardCounter"></div>
-
     <div class="control-container">
         <div class="control-panel" id="controlBox">
             <div class="panel-label">コントロール</div>
             <div class="panel-buttons">
                 <button class="control-button next-button" id="nextButtonSmall">次へ</button>
-                <button class="control-button pause-button" id="pauseButtonSmall">一時停止</button>
+                <button class="control-button pause-button" id="pauseButtonSmall">停止</button>
             </div>
         </div>
 
         <div class="control-panel" id="speedControl">
             <div class="panel-label">表示速度</div>
             <div class="panel-buttons">
-                <button class="speed-button" id="speed1">1秒</button>
-                <button class="speed-button" id="speed2">2秒</button>
-                <button class="speed-button active" id="speed3">3秒</button>
+                <button class="speed-button active" id="speed2s">2秒</button>
+                <button class="speed-button" id="speed1s">1秒</button>
+                <button class="speed-button" id="speed0_5s">0.5秒</button>
             </div>
         </div>
     </div>
@@ -712,6 +781,7 @@
         // 星空エフェクトを生成する関数
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
+            if (!starsContainer) return; // 要素チェック追加
             // パフォーマンスに応じて星の数を調整
             const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
             let starsCount;
@@ -882,9 +952,10 @@
         const startButton = getElement('startButton');
         const cardCounter = getElement('cardCounter');
         const speedControl = getElement('speedControl');
-        const speed1Button = getElement('speed1');
-        const speed2Button = getElement('speed2');
-        const speed3Button = getElement('speed3');
+        // ★修正: 新しいIDで取得
+        const speed2sButton = getElement('speed2s');
+        const speed1sButton = getElement('speed1s');
+        const speed0_5sButton = getElement('speed0_5s');
         const controlBox = getElement('controlBox');
         const nextButtonSmall = getElement('nextButtonSmall');
         const pauseButtonSmall = getElement('pauseButtonSmall');
@@ -899,39 +970,43 @@
         let autoFlipTimer = null;
         let autoNextTimer = null;
         let isPaused = false;
-        let flipDelay = 3000;
+        let flipDelay = 2000; // ★修正: デフォルト速度を2秒に
         let autoAdvance = true;
 
         // カードの表面を表示する関数
         function showCardFront(index) {
              if (!cards || index < 0 || index >= cards.length) return; // データチェック
             const card = cards[index];
-            if (!cardFront || !cardBack || !cardCounter) return; // 要素チェック
+            if (!cardFront || !cardBack || !cardCounter || !currentCard) return; // 要素チェック
 
-            // カード表面のHTMLを生成
+            // カード表面のHTMLを生成 - 発音記号のスタイルを変更
             cardFront.innerHTML = `
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center;">
                     <h2 style="margin-bottom: 10px; font-size: 2rem; line-height: 1.2;">${card.front.word}</h2>
                     <div style="display:flex; align-items: center; justify-content: center; flex-direction: column;">
-                        <span style="font-weight: 500; font-size: 1.1rem; color: rgba(255, 255, 255, 0.7);">${card.back.pronunciation}</span>
+                        <span style="font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.pronunciation}</span>
                     </div>
                 </div>
             `;
 
-            // カード裏面のHTMLを生成
+            // カード裏面のHTMLを生成 - ★日本語訳と英語定義の配置を調整 (Absolute Position)
             let backHTML = `
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; padding: 10px;">
-                     <p style="font-size: 1.1rem; color: #FFD700; margin-bottom: 8px; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
-                     <p style="font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_en}</p>
-                 </div>
+                 <p style="position: absolute; top: calc(50% - 20px); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 1.3rem; color: #FFD700; margin: 0; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
+                 <p style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
             `;
             cardBack.innerHTML = backHTML;
 
             // カード番号の更新 (Rank表示)
             cardCounter.textContent = `Rank ${index + 1} / ${cards.length}`;
 
+            // ★修正: カード裏面を確実に非表示にする
+            if (cardBack) cardBack.style.display = 'none';
+
             // カードを表面に戻す（アニメーションのため）
-            if (currentCard) currentCard.classList.remove('flipped');
+            currentCard.classList.remove('flipped');
+            // ちらつき防止のため、クラス削除後に強制リフロー
+            void currentCard.offsetHeight;
+
 
             // 一時停止中ならクリック可能表示、そうでなければ解除
              if (currentCard) {
@@ -948,7 +1023,9 @@
                 clearTimeout(autoNextTimer);
 
                 autoFlipTimer = setTimeout(() => {
-                    if (!isPaused && currentCard) {
+                    if (!isPaused && currentCard && cardBack) {
+                        // ★修正: flipする直前に裏面を表示
+                        cardBack.style.display = 'block'; // absolute配置なので block でOK
                         currentCard.classList.add('flipped');
                         autoNextTimer = setTimeout(nextCard, flipDelay);
                     }
@@ -966,17 +1043,18 @@
 
         // 表示速度を設定する関数
         function setSpeed(seconds) {
-            flipDelay = seconds * 1000;
+            flipDelay = seconds * 1000; // ミリ秒に変換
 
-            // アクティブなボタンのスタイルを更新
-            [speed1Button, speed2Button, speed3Button].forEach(btn => {
+            // アクティブなボタンのスタイルを更新 ★修正
+            [speed2sButton, speed1sButton, speed0_5sButton].forEach(btn => {
                 if(btn) btn.classList.remove('active');
             });
 
             let activeButton;
-            if (seconds === 1) activeButton = speed1Button;
-            else if (seconds === 2) activeButton = speed2Button;
-            else activeButton = speed3Button;
+            // ★修正: 秒数に応じてボタンを選択 (新しいIDを使用)
+            if (seconds === 2) activeButton = speed2sButton;
+            else if (seconds === 1) activeButton = speed1sButton;
+            else if (seconds === 0.5) activeButton = speed0_5sButton;
 
             if(activeButton) activeButton.classList.add('active');
 
@@ -989,6 +1067,7 @@
             }
         }
 
+
         // UI表示切り替え関数
         function showFlashcardView(show) {
              const displayGrid = show ? 'none' : 'grid';
@@ -1000,11 +1079,13 @@
              if (startButton) startButton.classList.toggle('hidden', show);
 
              if (cardContainer) cardContainer.classList.toggle('hidden', !show);
-             if (cardCounter) cardCounter.style.display = displayApp;
+             // カードカウンターの表示も制御
+             if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none'; // blockではなくinline-blockに
              if (controlBox) controlBox.style.display = displayFlexApp; // flexに変更
              if (speedControl) speedControl.style.display = displayFlexApp; // flexに変更
              if (backButton) backButton.style.display = show ? 'inline-block' : 'none';
         }
+
 
         // スタートボタンのイベントリスナー
         if (startButton) {
@@ -1015,7 +1096,7 @@
                 currentCardIndex = 0;
                 isPaused = false;
                 if (pauseButtonSmall) {
-                    pauseButtonSmall.textContent = '一時停止';
+                    pauseButtonSmall.textContent = '停止'; // 初期テキストを「停止」に
                     pauseButtonSmall.classList.remove('resume'); // resumeクラス削除
                 }
                 setSpeed(flipDelay / 1000); // 現在の速度設定で開始
@@ -1046,19 +1127,32 @@
             });
         }
 
-        // カードクリック処理関数
+        // カードクリック処理関数 (手動フリップ)
         function handleCardClick() {
-            if (isPaused && currentCard) {
-                currentCard.classList.toggle('flipped');
+            if (isPaused && currentCard && cardBack) {
+                // めくる前に表示状態をトグル
+                if (currentCard.classList.contains('flipped')) {
+                    // 表面に戻す場合 -> アニメーション後に非表示
+                    currentCard.classList.remove('flipped');
+                    // アニメーション時間(0.5s)後に非表示にする
+                    setTimeout(() => {
+                         if (cardBack) cardBack.style.display = 'none';
+                    }, 500);
+                } else {
+                    // 裏面にする場合 -> 表示してからめくる
+                    cardBack.style.display = 'block'; // absolute配置なので block でOK
+                    currentCard.classList.add('flipped');
+                }
             }
         }
+
 
         // 次へボタン（小）のイベントリスナー
         if (nextButtonSmall) {
             nextButtonSmall.addEventListener('click', () => {
                  isPaused = true; // 手動操作後は一時停止
                  if (pauseButtonSmall) {
-                     pauseButtonSmall.textContent = ' 再開 ';
+                     pauseButtonSmall.textContent = '再生'; // テキストを「再生」に
                      pauseButtonSmall.classList.add('resume'); // resumeクラス追加
                  }
                  if (currentCard) currentCard.classList.add('clickable');
@@ -1068,33 +1162,41 @@
             });
         }
 
-        // 一時停止/再開ボタン（小）のイベントリスナー
+        // 停止/再生ボタン（小）のイベントリスナー
         if (pauseButtonSmall) {
             pauseButtonSmall.addEventListener('click', () => {
                 isPaused = !isPaused;
 
                 if (isPaused) {
-                    // 一時停止処理
+                    // 停止処理
                     clearTimeout(autoFlipTimer);
                     clearTimeout(autoNextTimer);
-                    pauseButtonSmall.textContent = ' 再開 ';
+                    pauseButtonSmall.textContent = '再生'; // テキストを「再生」に
                     pauseButtonSmall.classList.add('resume'); // resumeクラス追加
                     if (currentCard) currentCard.classList.add('clickable');
                 } else {
-                    // 再開処理
-                    pauseButtonSmall.textContent = '一時停止';
+                    // 再生処理
+                    pauseButtonSmall.textContent = '停止'; // テキストを「停止」に
                     pauseButtonSmall.classList.remove('resume'); // resumeクラス削除
                     if (currentCard) currentCard.classList.remove('clickable');
                     // 現在のカードの状態からタイマーを再開
-                    showCardFront(currentCardIndex);
+                    // 裏面が表示されている状態から再開する場合も考慮
+                    if (currentCard && currentCard.classList.contains('flipped')) {
+                         // 裏面表示中なら、次のカードへのタイマーのみ設定
+                         autoNextTimer = setTimeout(nextCard, flipDelay);
+                    } else {
+                         // 表面表示中なら、通常のタイマー設定
+                         showCardFront(currentCardIndex);
+                    }
                 }
             });
         }
 
-        // 速度ボタンのイベントリスナー
-        if (speed1Button) speed1Button.addEventListener('click', () => setSpeed(1));
-        if (speed2Button) speed2Button.addEventListener('click', () => setSpeed(2));
-        if (speed3Button) speed3Button.addEventListener('click', () => setSpeed(3));
+        // 速度ボタンのイベントリスナー ★修正 (新しいIDと値)
+        if (speed2sButton) speed2sButton.addEventListener('click', () => setSpeed(2));
+        if (speed1sButton) speed1sButton.addEventListener('click', () => setSpeed(1));
+        if (speed0_5sButton) speed0_5sButton.addEventListener('click', () => setSpeed(0.5));
+
 
         // カテゴリカードのクリックイベント
         categoryCards.forEach(card => {
