@@ -313,10 +313,20 @@
              border-radius: 20px;
              cursor: pointer;
              transition: all 0.3s ease;
-             padding: 6px 15px; /* 左右パディングで幅を調整 */
+             padding: 6px 12px; /* パディング調整 */
              font-size: 12px;
-             flex-grow: 1; /* ボタンがスペースを均等に埋めるように */
+             /* flex-grow: 1; を削除 */
              text-align: center;
+             min-width: 60px; /* 最小幅設定 */
+        }
+
+        .prev-button { /* 戻るボタン */
+             background: linear-gradient(45deg, #6c757d, #495057); /* グレー系 */
+        }
+        .prev-button:hover {
+             background: linear-gradient(45deg, #868e96, #5a6268);
+             transform: translateY(-1px);
+             box-shadow: 0 2px 8px rgba(108, 117, 125, 0.4);
         }
 
         .next-button { /* 小さい方の次へボタン */
@@ -394,7 +404,8 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(55, 75, 110, 0.4);
-            width: 200px;
+            width: auto; /* 幅を自動調整に変更 */
+            min-width: 200px; /* 最小幅 */
             display: none; /* 初期状態は非表示、JSで表示 */
             flex-direction: column; /* ラベルとボタンを縦に */
             align-items: center; /* 中央揃え */
@@ -410,18 +421,15 @@
         .control-panel .panel-buttons {
             display: flex;
             justify-content: center; /* 中央揃えに変更 */
-            gap: 10px; /* ボタン間のギャップ */
+            gap: 8px; /* ボタン間のギャップ調整 */
             width: 100%;
         }
 
         /* 操作ボタンパネル - ボタン幅の固定を解除 */
         #controlBox .panel-buttons button {
-             /* padding: 6px 0; */ /* 上下パディングは .control-button で指定 */
-             /* font-size: 12px; */ /* .control-button で指定 */
-             /* width プロパティを削除 */
+             /* padding は .control-button で指定 */
+             /* font-size は .control-button で指定 */
         }
-        /* #nextButtonSmall { width: 90px; } */
-        /* #pauseButtonSmall { width: 70px; } */
 
         /* 速度調整パネル */
         #speedControl .panel-buttons button {
@@ -534,12 +542,12 @@
              }
              /* ★裏面のpタグ位置調整 (Tablet) */
              .card-back p:first-child { /* 日本語訳 */
-                 top: calc(50% - 20px); /* さらに10px上に移動 */
+                 top: calc(50% - 15px); /* 5px下に移動 */
                  transform: translate(-50%, -50%);
                  font-size: 1.2rem;
              }
              .card-back p:last-child { /* 英語定義 */
-                 bottom: 30px; /* 10px下に移動 */
+                 bottom: 25px; /* 5px下に移動 */
                  font-size: 14px;
              }
 
@@ -566,22 +574,20 @@
                  margin-top: 10px; /* カードとの間隔 */
              }
              .control-panel {
-                 width: 180px; /* 少し小さく */
+                 /* width: 180px; */ /* ★修正: 固定幅削除 */
                  padding: 8px 12px;
              }
              .control-panel .panel-label { font-size: 13px; }
-             /* 操作ボタンのパディング調整 */
+             /* ★操作ボタンのスタイル調整 (Tablet) */
              #controlBox .panel-buttons button {
-                 padding: 5px 10px; /* 左右にも少しパディング */
-                 font-size: 11px;
+                 padding: 8px 15px; /* パディング増加 */
+                 font-size: 1rem; /* フォントサイズ増加 */
                  flex-grow: 0; /* 均等割り付け解除 */
              }
-             /* #nextButtonSmall { width: 80px; } */
-             /* #pauseButtonSmall { width: 60px; } */
+             /* ★速度調整ボタンのスタイル調整 (Tablet) */
              #speedControl .panel-buttons button {
-                 /* width: 45px; */ /* 固定幅解除 */
-                 padding: 5px 8px; /* パディング調整 */
-                 font-size: 11px;
+                 padding: 8px 15px; /* パディング増加 */
+                 font-size: 1rem; /* フォントサイズ増加 */
              }
 
 
@@ -649,13 +655,13 @@
 
              /* ★裏面のpタグ位置調整 (Mobile) */
              .card-back p:first-child { /* 日本語訳 */
-                 top: calc(50% - 20px); /* さらに10px上に移動 */
+                 top: calc(50% - 15px); /* 5px下に移動 */
                  transform: translate(-50%, -50%);
                  font-size: 1.1rem;
                  padding-top: 0; /* padding削除 */
              }
              .card-back p:last-child { /* 英語定義 */
-                 bottom: 30px; /* 10px下に移動 */
+                 bottom: 25px; /* 5px下に移動 */
                  font-size: 12px;
                  padding-bottom: 0; /* padding削除 */
              }
@@ -674,24 +680,22 @@
                  margin-top: 8px; /* カードとの間隔 */
              }
              .control-panel {
-                 width: 150px; /* さらに小さく */
+                 /* width: 150px; */ /* ★修正: 固定幅削除 */
                  padding: 6px 10px;
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
-              /* 操作ボタンのパディング調整 */
+              /* ★操作ボタンのスタイル調整 (Mobile) */
               #controlBox .panel-buttons button {
-                  padding: 4px 8px; /* 左右パディング */
-                  font-size: 10px;
+                  padding: 6px 12px; /* パディング増加 */
+                  font-size: 15px; /* フォントサイズ増加 */
               }
-              /* #nextButtonSmall { width: 65px; } */
-              /* #pauseButtonSmall { width: 55px; } */
 
               #speedControl .panel-buttons { gap: 5px; }
+               /* ★速度調整ボタンのスタイル調整 (Mobile) */
               #speedControl .panel-buttons button {
-                  /* width: 40px; */ /* 固定幅解除 */
-                  padding: 4px 6px; /* パディング調整 */
-                  font-size: 10px;
+                  padding: 6px 10px; /* パディング増加 */
+                  font-size: 15px; /* フォントサイズ増加 */
               }
 
 
@@ -752,6 +756,7 @@
         <div class="control-panel" id="controlBox">
             <div class="panel-label">コントロール</div>
             <div class="panel-buttons">
+                <button class="control-button prev-button" id="prevButtonSmall">戻る</button>
                 <button class="control-button next-button" id="nextButtonSmall">次へ</button>
                 <button class="control-button pause-button" id="pauseButtonSmall">停止</button>
             </div>
@@ -839,109 +844,110 @@
             }, 250); // 250ms待ってから再生成
         });
 
-        // カードデータ (AWL Rank 1-100) - 変更なし
+        // カードデータ (AWL Rank 1-100) - ★英語定義を更新
         const cards = [
-             { front: { word: "repertoire" }, back: { pronunciation: "ˈrɛp.ərˌtwɑr", definition_jp: "スキルや技能の集合", definition_en: "A collection of skills or accomplishments." } },
-             { front: { word: "obtain" }, back: { pronunciation: "əbˈteɪn", definition_jp: "手に入れる", definition_en: "To get." } },
-             { front: { word: "distribution" }, back: { pronunciation: "ˌdɪs.trəˈbju.ʃən", definition_jp: "分布", definition_en: "The way in which things are spread over an area or among a group." } },
-             { front: { word: "parameter" }, back: { pronunciation: "pəˈræm.ɪ.tər", definition_jp: "パラメータ", definition_en: "A characteristic or constant factor, limit." } },
-             { front: { word: "aspect" }, back: { pronunciation: "ˈæs.pɛkt", definition_jp: "側面", definition_en: "A particular part or feature of something." } },
-             { front: { word: "dynamic" }, back: { pronunciation: "daɪˈnæ.mɪk", definition_jp: "動的な", definition_en: "Constantly changing or moving; In physics: forces related to motion." } },
-             { front: { word: "impact" }, back: { pronunciation: "ˈɪm.pækt", definition_jp: "影響", definition_en: "A striking effect or result; (verb) to hit with force." } },
-             { front: { word: "domain" }, back: { pronunciation: "doʊˈmeɪn", definition_jp: "領域", definition_en: "An area of activity, thought, or influence; field." } },
-             { front: { word:"publish" }, back: { pronunciation: "ˈpʌb.lɪʃ", definition_jp: "出版する", definition_en: "To print in a book, journal or online." } },
-             { front: { word: "denote" }, back: { pronunciation: "dɪˈnoʊt", definition_jp: "示す", definition_en: "To be a name or symbol for." } },
-             { front: { word: "authority" }, back: { pronunciation: "əˈθɔr.ɪ.ti", definition_jp: "権威", definition_en: "People in power; expert opinion accepted by most." } },
-             { front: { word: "semantic" }, back: { pronunciation: "sɪˈmæn.tɪk", definition_jp: "意味論的な", definition_en: "Relating to the different meanings of words." } },
-             { front: { word: "par" }, back: { pronunciation: "pɑr", definition_jp: "同等", definition_en: "The usual amount." } },
-             { front: { word: "ion" }, back: { pronunciation: "ˈaɪ.ɒn", definition_jp: "イオン", definition_en: "An atom with an electrical charge." } },
-             { front: { word: "matrix" }, back: { pronunciation: "ˈmeɪ.trɪks", definition_jp: "母体、行列", definition_en: "The substance, situation, or environment in which something has its origin; In math: an arrangement of numbers in rows and columns." } },
-             { front: { word: "linear" }, back: { pronunciation: "ˈlɪn.i.ər", definition_jp: "線形の", definition_en: "Made of lines." } },
-             { front: { word: "cognitive" }, back: { pronunciation: "ˈkɒg.nɪ.tɪv", definition_jp: "認知的な", definition_en: "The process of acquiring knowledge and remembering it." } },
-             { front: { word: "graph" }, back: { pronunciation: "græf,.grɑf", definition_jp: "グラフ", definition_en: "A diagram showing the relation between variables." } },
-             { front: { word: "correlation" }, back: { pronunciation: "ˌkɔr.əˈleɪ.ʃən", definition_jp: "相関", definition_en: "A measure of the relationship between two variables." } },
-             { front: { word: "linguistic" }, back: { pronunciation: "lɪŋˈgwɪs.tɪk", definition_jp: "言語の", definition_en: "Belonging to language." } },
-             { front: { word: "acid" }, back: { pronunciation: "ˈæs.ɪd", definition_jp: "酸", definition_en: "A substance that tastes sour, reacts with metals and carbonates, and turns blue litmus paper red. e.g. lemon juice." } },
-             { front: { word: "induce" }, back: { pronunciation: "ɪn.djus", definition_jp: "誘発する", definition_en: "To cause, persuade." } },
-             { front: { word: "velocity" }, back: { pronunciation: "vəˈlɒs.ɪ.ti", definition_jp: "速度", definition_en: "Speed in a given direction." } },
-             { front: { word: "interval" }, back: { pronunciation: "ˈɪn.tər.vəl", definition_jp: "間隔", definition_en: "The distance between two points, numbers or times." } },
-             { front: { word: "discourse" }, back: { pronunciation: "ˈdɪs.kɔrs", definition_jp: "談話", definition_en: "Conversation; dialogue." } },
-             { front: { word: "finite" }, back: { pronunciation: "ˈfaɪ.naɪt", definition_jp: "有限の", definition_en: "Having limits; lasting for a limited time." } },
-             { front: { word: "stimulus" }, back: { pronunciation: "stɪmyələs", definition_jp: "刺激", definition_en: "Something that causes change." } },
-             { front: { word: "vector" }, back: { pronunciation: "ˈvɛk.tər", definition_jp: "ベクトル", definition_en: "A quantity having direction as well as magnitude." } },
-             { front: { word: "electron" }, back: { pronunciation: "ɪˈlɛk.trɒn", definition_jp: "電子", definition_en: "A negatively charged particle." } },
-             { front: { word: "receptor" }, back: { pronunciation: "rɪˈsɛp.tər", definition_jp: "受容体", definition_en: "A device that receives information." } },
-             { front: { word: "theorem" }, back: { pronunciation: "ˈθɪər.əm", definition_jp: "定理", definition_en: "A statement that can be proven." } },
-             { front: { word: "algorithm" }, back: { pronunciation: "ˈæl.gəˌrɪð.əm", definition_jp: "アルゴリズム", definition_en: "A logical rule or procedure that guarantees solving a particular problem." } },
-             { front: { word: "fluid" }, back: { pronunciation: "ˈflu.ɪd", definition_jp: "流体", definition_en: "A substance that can flow easily. e.g. water." } },
-             { front: { word: "developmental" }, back: { pronunciation: "dɪˈvɛl.əp.mənt", definition_jp: "発達の", definition_en: "Concerning the development or growth of things or people." } },
-             { front: { word: "bound" }, back: { pronunciation: "baʊnd", definition_jp: "縛られた、跳ぶ", definition_en: "Going to a specific place; to jump." } },
-             { front: { word: "molecular" }, back: { pronunciation: "məˈlɛk.jə.lər", definition_jp: "分子の", definition_en: "Relating to or caused by joined atoms." } },
-             { front: { word: "transformation" }, back: { pronunciation: "ˌtræns.fərˈmeɪ.ʃən", definition_jp: "変換", definition_en: "A change." } },
-             { front: { word: "spatial" }, back: { pronunciation: "ˈspeɪ.ʃəl", definition_jp: "空間の", definition_en: "Relating to space." } },
-             { front: { word: "coefficient" }, back: { pronunciation: "ˌkoʊ.əˈfɪʃ.ənt", definition_jp: "係数", definition_en: "A number multiplied by a variable in an algebraic expression." } },
-             { front: { word: "translation" }, back: { pronunciation: "trænzleɪʃən", definition_jp: "翻訳、並進", definition_en: "Changing from one form to another e.g. one language to another." } },
-             { front: { word: "membrane" }, back: { pronunciation: "ˈmɛm.breɪn", definition_jp: "膜", definition_en: "A thin covering of tissue." } },
-             { front: { word: "neuron" }, back: { pronunciation: "ˈnʊər.ɒn", definition_jp: "ニューロン", definition_en: "A nerve cell; the basic building block of the nervous system." } },
-             { front: { word: "simulation" }, back: { pronunciation: "ˌsɪm.jəˈleɪ.ʃən", definition_jp: "シミュレーション", definition_en: "A copy; a method to study and analyze the characteristics of the real world." } },
-             { front: { word: "lexical" }, back: { pronunciation: "ˈlɛk.sɪ.kəl", definition_jp: "語彙的な", definition_en: "Relating to words." } },
-             { front: { word: "regime" }, back: { pronunciation: "rəˈʒim", definition_jp: "体制", definition_en: "A system of management; a form of government." } },
-             { front: { word: "variance" }, back: { pronunciation: "ˈvɛər.i.əns", definition_jp: "差異、分散", definition_en: "The amount of difference; a statistical measure of the variability of a distribution." } },
-             { front: { word: "molecule" }, back: { pronunciation: "ˈmɒl.əˌkjul", definition_jp: "分子", definition_en: "Two or more atoms held together by chemical bonds." } },
-             { front: { word: "marker" }, back: { pronunciation: "ˈmɑr.kər", definition_jp: "標識", definition_en: "Something that is easy to recognize or identify." } },
-             { front: { word: "empirical" }, back: { pronunciation: "ɛmˈpɪr.ɪ.kəl", definition_jp: "経験的な", definition_en: "Based on observation or experiment." } },
-             { front: { word: "robot" }, back: { pronunciation: "ˈroʊ.bɒt", definition_jp: "ロボット", definition_en: "A mechanical creature that acts like a human." } },
-             { front: { word: "statistical" }, back: { pronunciation: "stəˈtɪs.tɪ.kəl", definition_jp: "統計的な", definition_en: "Concerning numbers that represent information." } },
-             { front: { word: "vowel" }, back: { pronunciation: "ˈvaʊ.əl", definition_jp: "母音", definition_en: "A speech sound; includes a, e, i, o, u and sometimes y." } },
-             { front: { word: "equilibrium" }, back: { pronunciation: "ˌi.kwəˈlɪb.ri.əm", definition_jp: "平衡", definition_en: "A state of balance." } },
-             { front: { word: "intensity" }, back: { pronunciation: "ɪnˈtɛn.sɪ.ti", definition_jp: "強度", definition_en: "Great energy, strength, concentration; In physics: intensity = power/unit area." } },
-             { front: { word: "regression" }, back: { pronunciation: "rɪˈgrɛʃ.ən", definition_jp: "回帰", definition_en: "A return to a backward step; In statistics: a type of correlational procedure that focuses on predicting the value of an outcome based on its correlation with another variable." } },
-             { front: { word: "diagnosis" }, back: { pronunciation: "ˌdaɪ.əgˈnoʊ.sɪs", definition_jp: "診断", definition_en: "An expert decision based on the results of a test." } },
-             { front: { word: "identification" }, back: { pronunciation: "ɪˌdɛn.tɪ.fɪˈkeɪ.ʃən", definition_jp: "識別、同定", definition_en: "The state of being identified; something that identifies a person." } },
-             { front: { word: "node" }, back: { pronunciation: "noʊd", definition_jp: "節点", definition_en: "An intersection or junction point in a network; place on a plant where a new leaf grows." } },
-             { front: { word: "partial" }, back: { pronunciation: "pɑrʃəl", definition_jp: "部分的な", definition_en: "Incomplete; favoring one side over another." } },
-             { front: { word: "correlate" }, back: { pronunciation: "ˈkɔr.əˌleɪt", definition_jp: "相関する", definition_en: "To show a relationship between two items or events." } },
-             { front: { word: "mortality" }, back: { pronunciation: "mɔrˈtæl.ɪ.ti", definition_jp: "死亡率", definition_en: "The quality or state of being human and being able to die." } },
-             { front: { word: "antibody" }, back: { pronunciation: "ˈæn.tɪˌbɒd.i", definition_jp: "抗体", definition_en: "The body's defense against disease." } },
-             { front: { word: "temporal" }, back: { pronunciation: "ˈtɛm.pər.əl", definition_jp: "時間の、側頭部の", definition_en: "Relating to time." } },
-             { front: { word: "particle" }, back: { pronunciation: "ˈpɑr.tɪ.kəl", definition_jp: "粒子", definition_en: "A very small piece of something." } },
-             { front: { word: "duration" }, back: { pronunciation: "dʊˈreɪ.ʃən", definition_jp: "持続時間", definition_en: "The length of time that something continues or lasts." } },
-             { front: { word: "behavioral" }, back: { pronunciation: "bɪˈheɪv.jər.əl", definition_jp: "行動の", definition_en: "Relating to the way someone acts." } },
-             { front: { word: "consumption" }, back: { pronunciation: "kənsʌmpʃən", definition_jp: "消費、摂取", definition_en: "The amount of money spent on things; the process of eating or drinking something." } },
-             { front: { word: "bilingual" }, back: { pronunciation: "baɪˈlɪŋ.gwəl", definition_jp: "バイリンガル", definition_en: "A person who speaks two languages." } },
-             { front: { word: "sensitivity" }, back: { pronunciation: "ˌsɛn.sɪˈtɪv.ɪ.ti", definition_jp: "感受性", definition_en: "Being sensitive; In physiology: the ability of an organism or part of an organism to react to stimuli; In electronics: the ability of a radio device to react to incoming signals." } },
-             { front: { word: "similarity" }, back: { pronunciation: "sˌɪməlɛrəti", definition_jp: "類似性", definition_en: "The degree to which people or things are the same." } },
-             { front: { word: "optimal" }, back: { pronunciation: "ˈɒp.tə.məl", definition_jp: "最適な", definition_en: "Best." } },
-             { front: { word: "explicit" }, back: { pronunciation: "ɪkˈsplɪs.ɪt", definition_jp: "明白な", definition_en: "Definite, clearly stated." } },
-             { front: { word: "mutation" }, back: { pronunciation: "mjuˈteɪ.ʃən", definition_jp: "突然変異", definition_en: "A change; In genetics: an event that changes genetic structure." } },
-             { front: { word: "colonial" }, back: { pronunciation: "kəˈloʊ.ni.əl", definition_jp: "植民地の", definition_en: "Relating to living in groups." } },
-             { front: { word: "spectrum" }, back: { pronunciation: "ˈspɛk.trəm", definition_jp: "スペクトル", definition_en: "The wavelengths of colors from red to violet." } },
-             { front: { word: "phonological" }, back: { pronunciation: "ˌfoʊn.lˈɒdʒ.ɪ.kəl", definition_jp: "音韻論的な", definition_en: "Relating to sound." } },
-             { front: { word: "nucleus" }, back: { pronunciation: "ˈnu.kli.əs", definition_jp: "核", definition_en: "The control center of a cell." } },
-             { front: { word: "onset" }, back: { pronunciation: "ɑn.sɛt", definition_jp: "開始", definition_en: "The beginning." } },
-             { front: { word: "integration" }, back: { pronunciation: "ˌɪn.tɪˈgreɪ.ʃən", definition_jp: "統合", definition_en: "Bringing things together as a whole." } },
-             { front: { word: "dominant" }, back: { pronunciation: "ˈdɒm.ə.nənt", definition_jp: "支配的な", definition_en: "Strongest." } },
-             { front: { word: "pathway" }, back: { pronunciation: "ˈpæθˌweɪ", definition_jp: "経路", definition_en: "A route; In biochemistry: a chain of reactions." } },
-             { front: { word: "coordinate" }, back: { pronunciation: "koʊˈɔr.dnˌeɪt", definition_jp: "調整する、座標", definition_en: "To bring order and organization to something; (noun) In math: a magnitude that helps define the position of a point or line by reference to a fixed figure or system of lines." } },
-             { front: { word: "calculation" }, back: { pronunciation: "kˌælkyəleɪʃən", definition_jp: "計算", definition_en: "The answer to a sum; the act of calculating." } },
-             { front: { word: "precede" }, back: { pronunciation: "prɪˈsid", definition_jp: "先行する", definition_en: "To go before." } },
-             { front: { word: "subset" }, back: { pronunciation: "ˈsʌbˌsɛt", definition_jp: "部分集合", definition_en: "A smaller set which is part of a larger set." } },
-             { front: { word: "syntactic" }, back: { pronunciation: "sɪnˈtæk.tɪk", definition_jp: "統語的な", definition_en: "Grammatical." } },
-             { front: { word: "orientation" }, back: { pronunciation: "ˌɔr.i.ənˈteɪ.ʃən", definition_jp: "方向感覚、オリエンテーション", definition_en: "The ability to locate oneself in one's environment with reference to time, place, and people." } },
-             { front: { word: "proposition" }, back: { pronunciation: "ˌprɒp.əˈzɪʃ.ən", definition_jp: "命題、提案", definition_en: "An idea; a suggestion." } },
-             { front: { word: "inequality" }, back: { pronunciation: "ˌɪn.ɪˈkwɒl.ɪ.ti", definition_jp: "不平等、不等式", definition_en: "Not being the same; In math: a statement comparing two quantities using <, >, =, ≠, or ?." } },
-             { front: { word: "identical" }, back: { pronunciation: "aɪˈdɛn.tɪ.kəl", definition_jp: "同一の", definition_en: "Exactly the same." } },
-             { front: { word: "prevalence" }, back: { pronunciation: "ˈprɛv.ə.ləns", definition_jp: "普及", definition_en: "Widespread, common." } },
-             { front: { word: "differential" }, back: { pronunciation: "ˌdɪf.əˈrɛn.ʃəl", definition_jp: "差", definition_en: "A difference; diversity." } },
-             { front: { word: "generalize" }, back: { pronunciation: "ˈdʒɛn.ər.əˌlaɪz", definition_jp: "一般化する", definition_en: "To draw a common idea or conclusion from facts." } },
-             { front: { word: "beam" }, back: { pronunciation: "bim", definition_jp: "梁、光線", definition_en: "A long piece of metal or wood; a line of light or energy." } },
-             { front: { word: "pulse" }, back: { pronunciation: "pʌls", definition_jp: "脈拍", definition_en: "The beat of the heart." } },
-             { front: { word: "norm" }, back: { pronunciation: "nɔrm", definition_jp: "基準", definition_en: "An established standard of performance or behavior." } },
-             { front: { word: "trait" }, back: { pronunciation: "treɪt", definition_jp: "特徴", definition_en: "A characteristic." } },
-             { front: { word: "prediction" }, back: { pronunciation: "prɪˈdɪk.ʃən", definition_jp: "予測", definition_en: "A statement of what will happen next." } },
-             { front: { word: "correspondence" }, back: { pronunciation: "ˌkɔr.əˈspɒn.dəns", definition_jp: "通信、一致", definition_en: "Communication by writing; similarity." } },
-             { front: { word: "essentially" }, back: { pronunciation: "ɪˈsɛnʃəlɪ", definition_jp: "本質的に", definition_en: "Basically, primarily." } },
+             { front: { word: "repertoire" }, back: { pronunciation: "ˈrɛp.ərˌtwɑr", definition_jp: "スキルや技能の集合", definition_en: "スキルや業績のコレクション" } },
+             { front: { word: "obtain" }, back: { pronunciation: "əbˈteɪn", definition_jp: "手に入れる", definition_en: "得る" } },
+             { front: { word: "distribution" }, back: { pronunciation: "ˌdɪs.trəˈbju.ʃən", definition_jp: "分布", definition_en: "物事が特定の地域やグループに広がっている方法" } },
+             { front: { word: "parameter" }, back: { pronunciation: "pəˈræm.ɪ.tər", definition_jp: "パラメータ", definition_en: "特性や一定の要素、限界" } },
+             { front: { word: "aspect" }, back: { pronunciation: "ˈæs.pɛkt", definition_jp: "側面", definition_en: "特質、部分、または要素" } },
+             { front: { word: "dynamic" }, back: { pronunciation: "daɪˈnæ.mɪk", definition_jp: "動的な", definition_en: "常に活動している、または変化している；物理学では：運動に関連する力" } },
+             { front: { word: "impact" }, back: { pronunciation: "ˈɪm.pækt", definition_jp: "影響", definition_en: "衝撃的な効果や結果（動詞）力強く打つ" } },
+             { front: { word: "domain" }, back: { pronunciation: "doʊˈmeɪn", definition_jp: "領域", definition_en: "行動、思考、または影響の分野；知識の領域" } },
+             { front: { word:"publish" }, back: { pronunciation: "ˈpʌb.lɪʃ", definition_jp: "出版する", definition_en: "本、雑誌、またはオンラインで印刷する" } },
+             { front: { word: "denote" }, back: { pronunciation: "dɪˈnoʊt", definition_jp: "示す", definition_en: "何かの名前や記号になる" } },
+             { front: { word: "authority" }, back: { pronunciation: "əˈθɔr.ɪ.ti", definition_jp: "権威", definition_en: "権力を持つ人々；ほとんどの人に受け入れられている専門家の見解" } },
+             { front: { word: "semantic" }, back: { pronunciation: "sɪˈmæn.tɪk", definition_jp: "意味論的な", definition_en: "言葉の異なる意味" } },
+             { front: { word: "par" }, back: { pronunciation: "pɑr", definition_jp: "同等", definition_en: "通常の量" } },
+             { front: { word: "ion" }, back: { pronunciation: "ˈaɪ.ɒn", definition_jp: "イオン", definition_en: "帯電した原子" } },
+             { front: { word: "matrix" }, back: { pronunciation: "ˈmeɪ.trɪks", definition_jp: "母体、行列", definition_en: "物質、状況、または環境で、何かがその起源を持つ場所 - 数学では：行と列の数字の配置" } },
+             { front: { word: "linear" }, back: { pronunciation: "ˈlɪn.i.ər", definition_jp: "線形の", definition_en: "線で構成された" } },
+             { front: { word: "cognitive" }, back: { pronunciation: "ˈkɒg.nɪ.tɪv", definition_jp: "認知的な", definition_en: "知識を得て記憶するプロセス" } },
+             { front: { word: "graph" }, back: { pronunciation: "græf,.grɑf", definition_jp: "グラフ", definition_en: "変数間の関係を示す図表" } },
+             { front: { word: "correlation" }, back: { pronunciation: "ˌkɔr.əˈleɪ.ʃən", definition_jp: "相関", definition_en: "2つの変数間の関係の尺度" } },
+             { front: { word: "linguistic" }, back: { pronunciation: "lɪŋˈgwɪs.tɪk", definition_jp: "言語の", definition_en: "言語に属する" } },
+             { front: { word: "acid" }, back: { pronunciation: "ˈæs.ɪd", definition_jp: "酸", definition_en: "酸味があり、金属や炭酸塩と反応し、青色リトマス紙を赤く変える物質。例：レモン汁" } },
+             { front: { word: "induce" }, back: { pronunciation: "ɪn.djus", definition_jp: "誘発する", definition_en: "引き起こす、説得する" } },
+             { front: { word: "velocity" }, back: { pronunciation: "vəˈlɒs.ɪ.ti", definition_jp: "速度", definition_en: "特定の方向への速度" } },
+             { front: { word: "interval" }, back: { pronunciation: "ˈɪn.tər.vəl", definition_jp: "間隔", definition_en: "2点、数字、または時間の間の距離" } },
+             { front: { word: "discourse" }, back: { pronunciation: "ˈdɪs.kɔrs", definition_jp: "談話", definition_en: "会話、対話" } },
+             { front: { word: "finite" }, back: { pronunciation: "ˈfaɪ.naɪt", definition_jp: "有限の", definition_en: "限界がある；限られた時間続く" } },
+             { front: { word: "stimulus" }, back: { pronunciation: "stɪmyələs", definition_jp: "刺激", definition_en: "変化を起こすもの" } },
+             { front: { word: "vector" }, back: { pronunciation: "ˈvɛk.tər", definition_jp: "ベクトル", definition_en: "大きさと方向の両方を持つ量" } },
+             { front: { word: "electron" }, back: { pronunciation: "ɪˈlɛk.trɒn", definition_jp: "電子", definition_en: "負に帯電した粒子" } },
+             { front: { word: "receptor" }, back: { pronunciation: "rɪˈsɛp.tər", definition_jp: "受容体", definition_en: "情報を受け取る装置" } },
+             { front: { word: "theorem" }, back: { pronunciation: "ˈθɪər.əm", definition_jp: "定理", definition_en: "証明できる声明" } },
+             { front: { word: "algorithm" }, back: { pronunciation: "ˈæl.gəˌrɪð.əm", definition_jp: "アルゴリズム", definition_en: "問題解決を保証する論理的なルールや手順" } },
+             { front: { word: "fluid" }, back: { pronunciation: "ˈflu.ɪd", definition_jp: "流体", definition_en: "簡単に流れることができる物質。例：水" } },
+             { front: { word: "developmental" }, back: { pronunciation: "dɪˈvɛl.əp.mənt", definition_jp: "発達の", definition_en: "物事や人の発展や成長に関する" } },
+             { front: { word: "bound" }, back: { pronunciation: "baʊnd", definition_jp: "縛られた、跳ぶ", definition_en: "特定の場所に行く；ジャンプする" } },
+             { front: { word: "molecular" }, back: { pronunciation: "məˈlɛk.jə.lər", definition_jp: "分子の", definition_en: "結合された原子に関するまたは原子によって引き起こされる" } },
+             { front: { word: "transformation" }, back: { pronunciation: "ˌtræns.fərˈmeɪ.ʃən", definition_jp: "変換", definition_en: "変化" } },
+             { front: { word: "spatial" }, back: { pronunciation: "ˈspeɪ.ʃəl", definition_jp: "空間の", definition_en: "空間に関する" } },
+             { front: { word: "coefficient" }, back: { pronunciation: "ˌkoʊ.əˈfɪʃ.ənt", definition_jp: "係数", definition_en: "数学的表現における変数に掛けられる数字" } },
+             { front: { word: "translation" }, back: { pronunciation: "trænzleɪʃən", definition_jp: "翻訳、並進", definition_en: "ある形から別の形に変わること。例：ある言語から別の言語への変換" } },
+             { front: { word: "membrane" }, back: { pronunciation: "ˈmɛm.breɪn", definition_jp: "膜", definition_en: "薄い組織のカバー" } },
+             { front: { word: "neuron" }, back: { pronunciation: "ˈnʊər.ɒn", definition_jp: "ニューロン", definition_en: "神経細胞；神経系の基本的な構成要素" } },
+             { front: { word: "simulation" }, back: { pronunciation: "ˌsɪm.jəˈleɪ.ʃən", definition_jp: "シミュレーション", definition_en: "コピー；実世界の特性を研究・分析するための方法" } },
+             { front: { word: "lexical" }, back: { pronunciation: "ˈlɛk.sɪ.kəl", definition_jp: "語彙的な", definition_en: "言葉に関する" } },
+             { front: { word: "regime" }, back: { pronunciation: "rəˈʒim", definition_jp: "体制", definition_en: "管理システム；政府の形態" } },
+             { front: { word: "variance" }, back: { pronunciation: "ˈvɛər.i.əns", definition_jp: "差異、分散", definition_en: "差の量；分布の変動性を測る統計値" } },
+             { front: { word: "molecule" }, back: { pronunciation: "ˈmɒl.əˌkjul", definition_jp: "分子", definition_en: "化学的に結合した2つ以上の原子" } },
+             { front: { word: "marker" }, back: { pronunciation: "ˈmɑr.kər", definition_jp: "標識", definition_en: "認識や識別が容易なもの" } },
+             { front: { word: "empirical" }, back: { pronunciation: "ɛmˈpɪr.ɪ.kəl", definition_jp: "経験的な", definition_en: "観察や実験に基づく" } },
+             { front: { word: "robot" }, back: { pronunciation: "ˈroʊ.bɒt", definition_jp: "ロボット", definition_en: "人間のように行動する機械的な生き物" } },
+             { front: { word: "statistical" }, back: { pronunciation: "stəˈtɪs.tɪ.kəl", definition_jp: "統計的な", definition_en: "情報を表す数字に関する" } },
+             { front: { word: "vowel" }, back: { pronunciation: "ˈvaʊ.əl", definition_jp: "母音", definition_en: "音声；a、e、i、o、u、時にはyも含む" } },
+             { front: { word: "equilibrium" }, back: { pronunciation: "ˌi.kwəˈlɪb.ri.əm", definition_jp: "平衡", definition_en: "バランスの状態" } },
+             { front: { word: "intensity" }, back: { pronunciation: "ɪnˈtɛn.sɪ.ti", definition_jp: "強度", definition_en: "大きなエネルギー、強さ、集中；物理学では：強度＝パワー／単位面積" } },
+             { front: { word: "regression" }, back: { pronunciation: "rɪˈgrɛʃ.ən", definition_jp: "回帰", definition_en: "後戻り；統計学では：結果の値を別の変数との相関に基づいて予測することに焦点を当てた相関手続きの一種" } },
+             { front: { word: "diagnosis" }, back: { pronunciation: "ˌdaɪ.əgˈnoʊ.sɪs", definition_jp: "診断", definition_en: "検査結果に基づく専門家による決定" } },
+             { front: { word: "identification" }, back: { pronunciation: "ɪˌdɛn.tɪ.fɪˈkeɪ.ʃən", definition_jp: "識別、同定", definition_en: "識別された状態；人を識別するもの" } },
+             { front: { word: "node" }, back: { pronunciation: "noʊd", definition_jp: "節点", definition_en: "ネットワーク内の交差点や接合点；植物で新しい葉が生えるところ" } },
+             { front: { word: "partial" }, back: { pronunciation: "pɑrʃəl", definition_jp: "部分的な", definition_en: "不完全；一方の側を他方より好む" } },
+             { front: { word: "correlate" }, back: { pronunciation: "ˈkɔr.əˌleɪt", definition_jp: "相関する", definition_en: "2つのアイテムまたはイベント間の関係を示す" } },
+             { front: { word: "mortality" }, back: { pronunciation: "mɔrˈtæl.ɪ.ti", definition_jp: "死亡率", definition_en: "人間であり死ぬことができる性質や状態" } },
+             { front: { word: "antibody" }, back: { pronunciation: "ˈæn.tɪˌbɒd.i", definition_jp: "抗体", definition_en: "病気に対する体が提供する防御" } },
+             { front: { word: "temporal" }, back: { pronunciation: "ˈtɛm.pər.əl", definition_jp: "時間の、側頭部の", definition_en: "時間に関する" } },
+             { front: { word: "particle" }, back: { pronunciation: "ˈpɑr.tɪ.kəl", definition_jp: "粒子", definition_en: "非常に小さな何かの一部" } },
+             { front: { word: "duration" }, back: { pronunciation: "dʊˈreɪ.ʃən", definition_jp: "持続時間", definition_en: "あるものが続く時間の長さ" } },
+             { front: { word: "behavioral" }, back: { pronunciation: "bɪˈheɪv.jər.əl", definition_jp: "行動の", definition_en: "行動の仕方に関する" } },
+             { front: { word: "consumption" }, back: { pronunciation: "kənsʌmpʃən", definition_jp: "消費、摂取", definition_en: "物事にかけるお金の量；食べたり飲んだりするプロセス" } },
+             { front: { word: "bilingual" }, back: { pronunciation: "baɪˈlɪŋ.gwəl", definition_jp: "バイリンガル", definition_en: "2つの言語を話す人" } },
+             { front: { word: "sensitivity" }, back: { pronunciation: "ˌsɛn.sɪˈtɪv.ɪ.ti", definition_jp: "感受性", definition_en: "敏感であること；生理学では：生物またはその一部が刺激に反応する能力；電子工学では：ラジオ機器が着信信号に反応する能力" } },
+             { front: { word: "similarity" }, back: { pronunciation: "sˌɪməlɛrəti", definition_jp: "類似性", definition_en: "人や物事が同じである程度" } },
+             { front: { word: "optimal" }, back: { pronunciation: "ˈɒp.tə.məl", definition_jp: "最適な", definition_en: "最良" } },
+             { front: { word: "explicit" }, back: { pronunciation: "ɪkˈsplɪs.ɪt", definition_jp: "明白な", definition_en: "明確な、はっきりと述べられた" } },
+             { front: { word: "mutation" }, back: { pronunciation: "mjuˈteɪ.ʃən", definition_jp: "突然変異", definition_en: "変化；遺伝学では：遺伝構造を変える出来事" } },
+             { front: { word: "colonial" }, back: { pronunciation: "kəˈloʊ.ni.əl", definition_jp: "植民地の", definition_en: "集団で生活することに関する" } },
+             { front: { word: "spectrum" }, back: { pronunciation: "ˈspɛk.trəm", definition_jp: "スペクトル", definition_en: "赤から紫までの色の波長" } },
+             { front: { word: "phonological" }, back: { pronunciation: "ˌfoʊn.lˈɒdʒ.ɪ.kəl", definition_jp: "音韻論的な", definition_en: "音に関する" } },
+             { front: { word: "nucleus" }, back: { pronunciation: "ˈnu.kli.əs", definition_jp: "核", definition_en: "細胞の制御中心" } },
+             { front: { word: "onset" }, back: { pronunciation: "ɑn.sɛt", definition_jp: "開始", definition_en: "始まり" } },
+             { front: { word: "integration" }, back: { pronunciation: "ˌɪn.tɪˈgreɪ.ʃən", definition_jp: "統合", definition_en: "物事を全体としてまとめること" } },
+             { front: { word: "dominant" }, back: { pronunciation: "ˈdɒm.ə.nənt", definition_jp: "支配的な", definition_en: "最強" } },
+             { front: { word: "pathway" }, back: { pronunciation: "ˈpæθˌweɪ", definition_jp: "経路", definition_en: "経路；生化学では：反応の連鎖" } },
+             { front: { word: "coordinate" }, back: { pronunciation: "koʊˈɔr.dnˌeɪt", definition_jp: "調整する、座標", definition_en: "何かに秩序と組織をもたらす；（名）数学では：固定図形または線のシステムを参照して点または線の位置を定義するのに役立つ大きさ" } },
+             { front: { word: "calculation" }, back: { pronunciation: "kˌælkyəleɪʃən", definition_jp: "計算", definition_en: "合計の答え；計算する行為" } },
+             { front: { word: "precede" }, back: { pronunciation: "prɪˈsid", definition_jp: "先行する", definition_en: "先行する" } },
+             { front: { word: "subset" }, back: { pronunciation: "ˈsʌbˌsɛt", definition_jp: "部分集合", definition_en: "より大きな集合の一部である小さな集合" } },
+             { front: { word: "syntactic" }, back: { pronunciation: "sɪnˈtæk.tɪk", definition_jp: "統語的な", definition_en: "文法的" } },
+             { front: { word: "orientation" }, back: { pronunciation: "ˌɔr.i.ənˈteɪ.ʃən", definition_jp: "方向感覚、オリエンテーション", definition_en: "時間、場所、人々を参照して自分の環境内で自分自身を位置づける能力" } },
+             { front: { word: "proposition" }, back: { pronunciation: "ˌprɒp.əˈzɪʃ.ən", definition_jp: "命題、提案", definition_en: "アイデア；提案" } },
+             { front: { word: "inequality" }, back: { pronunciation: "ˌɪn.ɪˈkwɒl.ɪ.ti", definition_jp: "不平等、不等式", definition_en: "同じではない；数学では：<、>、=、≠、または？を使用して2つの量を比較する文" } },
+             { front: { word: "identical" }, back: { pronunciation: "aɪˈdɛn.tɪ.kəl", definition_jp: "同一の", definition_en: "あらゆる面で同じ" } },
+             { front: { word: "prevalence" }, back: { pronunciation: "ˈprɛv.ə.ləns", definition_jp: "普及", definition_en: "広く普及している、一般的な" } },
+             { front: { word: "differential" }, back: { pronunciation: "ˌdɪf.əˈrɛn.ʃəl", definition_jp: "差", definition_en: "違い；多様性" } },
+             { front: { word: "generalize" }, back: { pronunciation: "ˈdʒɛn.ər.əˌlaɪz", definition_jp: "一般化する", definition_en: "事実から共通の考えや結論を導き出す" } },
+             { front: { word: "beam" }, back: { pronunciation: "bim", definition_jp: "梁、光線", definition_en: "金属や木の長い部分；光やエネルギーの線" } },
+             { front: { word: "pulse" }, back: { pronunciation: "pʌls", definition_jp: "脈拍", definition_en: "心臓の鼓動" } },
+             { front: { word: "norm" }, back: { pronunciation: "nɔrm", definition_jp: "基準", definition_en: "パフォーマンスや行動の確立された基準" } },
+             { front: { word: "trait" }, back: { pronunciation: "treɪt", definition_jp: "特徴", definition_en: "特徴" } },
+             { front: { word: "prediction" }, back: { pronunciation: "prɪˈdɪk.ʃən", definition_jp: "予測", definition_en: "これから起こることの声明" } },
+             { front: { word: "correspondence" }, back: { pronunciation: "ˌkɔr.əˈspɒn.dəns", definition_jp: "通信、一致", definition_en: "文章による通信；類似性" } },
+             { front: { word: "essentially" }, back: { pronunciation: "ɪˈsɛnʃəlɪ", definition_jp: "本質的に", definition_en: "基本的に、主に" } },
         ];
+
 
         // DOM要素の取得（より堅牢に）
         const getElement = (id) => document.getElementById(id);
@@ -952,11 +958,11 @@
         const startButton = getElement('startButton');
         const cardCounter = getElement('cardCounter');
         const speedControl = getElement('speedControl');
-        // ★修正: 新しいIDで取得
         const speed2sButton = getElement('speed2s');
         const speed1sButton = getElement('speed1s');
         const speed0_5sButton = getElement('speed0_5s');
         const controlBox = getElement('controlBox');
+        const prevButtonSmall = getElement('prevButtonSmall'); // 戻るボタン取得
         const nextButtonSmall = getElement('nextButtonSmall');
         const pauseButtonSmall = getElement('pauseButtonSmall');
         const backButton = getElement('backButton');
@@ -970,7 +976,7 @@
         let autoFlipTimer = null;
         let autoNextTimer = null;
         let isPaused = false;
-        let flipDelay = 2000; // ★修正: デフォルト速度を2秒に
+        let flipDelay = 2000; // デフォルト速度を2秒に
         let autoAdvance = true;
 
         // カードの表面を表示する関数
@@ -991,8 +997,8 @@
 
             // カード裏面のHTMLを生成 - ★日本語訳と英語定義の配置を調整 (Absolute Position)
             let backHTML = `
-                 <p style="position: absolute; top: calc(50% - 20px); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 1.3rem; color: #FFD700; margin: 0; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
-                 <p style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
+                 <p style="position: absolute; top: calc(50% - 15px); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 1.3rem; color: #FFD700; margin: 0; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
+                 <p style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
             `;
             cardBack.innerHTML = backHTML;
 
@@ -1040,6 +1046,25 @@
             currentCardIndex = (currentCardIndex + 1) % cards.length;
             showCardFront(currentCardIndex);
         }
+
+        // ★追加: 前のカードに進む関数
+        function prevCard() {
+            isPaused = true; // Pause on manual navigation
+            if (pauseButtonSmall) {
+                pauseButtonSmall.textContent = '再生';
+                pauseButtonSmall.classList.add('resume');
+            }
+            if (currentCard) currentCard.classList.add('clickable');
+            clearTimeout(autoFlipTimer);
+            clearTimeout(autoNextTimer);
+
+            currentCardIndex--;
+            if (currentCardIndex < 0) {
+                currentCardIndex = cards.length - 1; // Wrap around to the last card
+            }
+            showCardFront(currentCardIndex);
+        }
+
 
         // 表示速度を設定する関数
         function setSpeed(seconds) {
@@ -1146,6 +1171,10 @@
             }
         }
 
+        // ★追加: 戻るボタン（小）のイベントリスナー
+        if (prevButtonSmall) {
+            prevButtonSmall.addEventListener('click', prevCard);
+        }
 
         // 次へボタン（小）のイベントリスナー
         if (nextButtonSmall) {
@@ -1219,3 +1248,4 @@
     </script>
 </body>
 </html>
+" from the current Canvas "英語学習フラッシュカードアプリ" docume
