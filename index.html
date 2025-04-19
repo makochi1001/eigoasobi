@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英語学習フラッシュカード</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
-
         body {
             font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
@@ -315,7 +315,6 @@
              transition: all 0.3s ease;
              padding: 6px 12px; /* パディング調整 */
              font-size: 12px;
-             /* flex-grow: 1; を削除 */
              text-align: center;
              min-width: 60px; /* 最小幅設定 */
         }
@@ -381,8 +380,10 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             display: none; /* 初期状態は非表示、JSで表示 */
-            width: fit-content; /* 内容に合わせた幅 */
+            width: fit-content;
+            text-align: center;
             align-self: center; /* 中央揃え */
+            font-family: 'Roboto Mono', monospace; /* ★修正: 等幅フォント適用 */
         }
 
         /* コントロール要素のコンテナ */
@@ -405,7 +406,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(55, 75, 110, 0.4);
             width: auto; /* 幅を自動調整に変更 */
-            min-width: 200px; /* 最小幅 */
+            /* min-width: 200px; を削除 */
             display: none; /* 初期状態は非表示、JSで表示 */
             flex-direction: column; /* ラベルとボタンを縦に */
             align-items: center; /* 中央揃え */
@@ -425,28 +426,24 @@
             width: 100%;
         }
 
-        /* 操作ボタンパネル - ボタン幅の固定を解除 */
+        /* 操作ボタンパネル */
         #controlBox .panel-buttons button {
-             /* padding は .control-button で指定 */
-             /* font-size は .control-button で指定 */
+             /* 基本スタイルは .control-button で指定 */
         }
 
-        /* 速度調整パネル */
-        #speedControl .panel-buttons button {
-            /* width: 50px; */ /* 固定幅解除 */
-            padding: 6px 10px; /* パディング調整 */
-            font-size: 12px;
-            flex-grow: 1; /* 均等割り付け */
-            text-align: center;
-        }
+        /* 速度調整パネルのボタンスタイル */
+        /* ★ 削除: 以前の基本スタイルは不要になった */
+        /* #speedControl .panel-buttons button { ... } */
 
         .speed-button {
+            /* ★ 共通スタイルを .control-button から継承しつつ、固有スタイルを追加 */
             background: rgba(86, 101, 115, 0.6);
             color: white;
             border: none; /* border削除 */
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            /* padding, font-size は .control-button またはメディアクエリで指定 */
         }
 
         .speed-button:hover {
@@ -574,21 +571,24 @@
                  margin-top: 10px; /* カードとの間隔 */
              }
              .control-panel {
-                 /* width: 180px; */ /* ★修正: 固定幅削除 */
                  padding: 8px 12px;
+                 min-width: auto; /* 最小幅リセット */
              }
              .control-panel .panel-label { font-size: 13px; }
-             /* ★操作ボタンのスタイル調整 (Tablet) */
-             #controlBox .panel-buttons button {
-                 padding: 8px 15px; /* パディング増加 */
-                 font-size: 1rem; /* フォントサイズ増加 */
-                 flex-grow: 0; /* 均等割り付け解除 */
-             }
-             /* ★速度調整ボタンのスタイル調整 (Tablet) */
+
+             /* ★コントロールパネル内ボタン共通スタイル (Tablet) */
+             #controlBox .panel-buttons button,
              #speedControl .panel-buttons button {
-                 padding: 8px 15px; /* パディング増加 */
-                 font-size: 1rem; /* フォントサイズ増加 */
+                 padding: 8px 15px;
+                 font-size: 1rem;
+                 flex-grow: 1;
+                 flex-basis: 0;
              }
+             /* ★削除: 操作ボタンの個別指定を削除
+             #controlBox .panel-buttons button {
+                 flex-grow: 0;
+                 flex-basis: auto;
+             } */
 
 
             .category-info {
@@ -680,23 +680,26 @@
                  margin-top: 8px; /* カードとの間隔 */
              }
              .control-panel {
-                 /* width: 150px; */ /* ★修正: 固定幅削除 */
                  padding: 6px 10px;
+                 min-width: auto; /* 最小幅リセット */
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
-              /* ★操作ボタンのスタイル調整 (Mobile) */
-              #controlBox .panel-buttons button {
-                  padding: 6px 12px; /* パディング増加 */
-                  font-size: 15px; /* フォントサイズ増加 */
-              }
-
               #speedControl .panel-buttons { gap: 5px; }
-               /* ★速度調整ボタンのスタイル調整 (Mobile) */
+
+              /* ★コントロールパネル内ボタン共通スタイル (Mobile) */
+              #controlBox .panel-buttons button,
               #speedControl .panel-buttons button {
-                  padding: 6px 10px; /* パディング増加 */
-                  font-size: 15px; /* フォントサイズ増加 */
+                  padding: 6px 12px;
+                  font-size: 15px;
+                  flex-grow: 1;
+                  flex-basis: 0;
               }
+              /* ★削除: 操作ボタンの個別指定を削除
+              #controlBox .panel-buttons button {
+                  flex-grow: 0;
+                  flex-basis: auto;
+              } */
 
 
             .category-info {
@@ -756,18 +759,18 @@
         <div class="control-panel" id="controlBox">
             <div class="panel-label">コントロール</div>
             <div class="panel-buttons">
+                 <button class="control-button pause-button" id="pauseButtonSmall">停止</button>
                 <button class="control-button prev-button" id="prevButtonSmall">戻る</button>
                 <button class="control-button next-button" id="nextButtonSmall">次へ</button>
-                <button class="control-button pause-button" id="pauseButtonSmall">停止</button>
             </div>
         </div>
 
         <div class="control-panel" id="speedControl">
             <div class="panel-label">表示速度</div>
             <div class="panel-buttons">
-                <button class="speed-button active" id="speed2s">2秒</button>
-                <button class="speed-button" id="speed1s">1秒</button>
-                <button class="speed-button" id="speed0_5s">0.5秒</button>
+                <button class="speed-button active" id="speed2s">２秒</button>
+                <button class="speed-button" id="speed1s">１秒</button>
+                <button class="speed-button" id="speed0_5s">０.５秒</button>
             </div>
         </div>
     </div>
@@ -1002,8 +1005,9 @@
             `;
             cardBack.innerHTML = backHTML;
 
-            // カード番号の更新 (Rank表示)
-            cardCounter.textContent = `Rank ${index + 1} / ${cards.length}`;
+            // カード番号の更新 (Rank表示) - ★ゼロパディング & 等幅フォント指定
+            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${cards.length}</span>`;
+
 
             // ★修正: カード裏面を確実に非表示にする
             if (cardBack) cardBack.style.display = 'none';
@@ -1248,4 +1252,3 @@
     </script>
 </body>
 </html>
-" from the current Canvas "英語学習フラッシュカードアプリ" docume
