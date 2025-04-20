@@ -147,7 +147,6 @@
         .card-container {
             width: 90%; /* 幅を画面比率で設定 */
             max-width: 400px; /* 最大幅を設定 */
-            /* height: 250px; */ /* ★ 固定高さを削除 */
             aspect-ratio: 1000 / 618; /* ★ 黄金比 (横長) に戻す */
             perspective: 1500px; /* 3D効果の奥行き */
             margin: 10px auto 20px auto; /* 上下マージン調整 (上を詰める) */
@@ -187,17 +186,28 @@
             border: 1px solid rgba(255, 255, 255, 0.2); /* 枠線 */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* 影 */
             overflow: hidden; /* 内容がはみ出ないように */
-            /* ★ Flexboxを共通で適用 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; /* ★ 上下に配置 */
+            /* position: relative; */ /* ★ 不要 */
         }
+
+        /* ★ メインコンテンツ（単語/日本語定義）を中央揃えにするためのラッパー */
+        .main-content {
+            display: flex;
+            flex-direction: column; /* h2/pが縦に並ぶように */
+            justify-content: center; /* 垂直中央揃え */
+            align-items: center; /* 水平中央揃え */
+            flex-grow: 1; /* 利用可能なスペースを埋める */
+            width: 100%; /* 幅を100%に */
+            /* background-color: rgba(255,0,0,0.1); */ /* デバッグ用 */
+        }
+
 
         .card-front {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.5), rgba(16, 54, 140, 0.3)); /* 青系のグラデーション */
             color: white;
-            /* display, align-items, justify-content は共通へ移動 */
         }
 
         .card-back {
@@ -205,24 +215,40 @@
             color: white;
             transform: rotateY(180deg); /* 最初から裏返しておく */
             display: none; /* 初期状態は非表示 */
-            position: relative; /* 子要素の absolute 配置の基準 */
-             /* display, align-items, justify-content は共通へ移動 */
         }
 
         /* カード内のh2 (単語表示) */
         .card h2 {
-            margin-top: 0;
-            margin-bottom: 15px; /* 下の要素との間隔 */
+            margin: 0; /* マージンリセット */
             font-size: 2rem; /* 単語のフォントサイズ */
             font-weight: 600;
             letter-spacing: 1px;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            /* グラデーションテキスト */
             background: linear-gradient(to right, #ffffff, #d1d1d1);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center; /* 中央揃え */
+            max-width: 100%; /* コンテナからはみ出ないように */
         }
+
+        /* ★ 発音記号のスタイル - Flexアイテムとして配置 */
+        .pronunciation {
+            /* position: absolute; */ /* ★ 削除 */
+            /* bottom: 20px; */ /* ★ 削除 */
+            /* left: 50%; */ /* ★ 削除 */
+            /* transform: translateX(-50%); */ /* ★ 削除 */
+            width: 90%; /* はみ出し防止 */
+            text-align: center;
+            font-size: 0.95rem;
+            color: white;
+            font-weight: 400;
+            line-height: 1.4;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            margin-top: 5px; /* ★ 上の要素との間に少しマージンを追加 */
+        }
+
+
         /* ページタイトル下のh2 (メインサブタイトル) */
          body > h2#mainSubtitle {
             margin-top:0;
@@ -257,32 +283,31 @@
             font-weight: 300; /* 少し細めのフォント */
         }
 
-        /* ★ カード裏面のpタグのスタイル調整 - absolute指定削除 */
-        /* .card-back p { ... } */
-
         /* 裏面テキストの個別スタイル */
         .card-back p.definition-jp {
-            /* position, transform は削除 (Flexboxで中央配置) */
-            width: 90%; /* 幅は維持 */
+             max-width: 100%; /* コンテナからはみ出ないように */
             text-align: center; /* 中央揃えは維持 */
-            margin-top: 0; /* 上マージンリセット */
-            margin-bottom: 15px; /* ★ 下の要素との間隔 (表面のh2に合わせる) */
+            margin: 0; /* マージンリセット */
             font-size: 1.3rem;
             color: #FFD700;
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
+        /* ★ 英語定義のスタイル - Flexアイテムとして配置 */
         .card-back p.definition-en {
-             /* ★ position, transform はJS側で表面のpronunciationに合わせて設定 */
-             /* bottom スタイル削除 */
-             width: 90%; /* 幅は維持 */
-             text-align: center; /* 中央揃えは維持 */
+             /* position: absolute; */ /* ★ 削除 */
+             /* bottom: 20px; */ /* ★ 削除 */
+             /* left: 50%; */ /* ★ 削除 */
+             /* transform: translateX(-50%); */ /* ★ 削除 */
+             width: 90%; /* はみ出し防止 */
+             text-align: center;
              margin: 0; /* マージンリセット */
              font-size: 0.95rem;
              color: white;
              font-weight: 400;
              line-height: 1.4;
              text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+             margin-top: 5px; /* ★ 上の要素との間に少しマージンを追加 */
         }
 
 
@@ -571,31 +596,24 @@
 
             .card-container {
                 width: 90%;
-                /* height: 252px; */ /* ★ 固定高さを削除 */
                 margin: 8px auto 15px auto;
             }
 
-             .card-back {
+             .card-front, .card-back {
                  padding: 15px;
              }
-             /* ★裏面のpタグ位置調整 (Tablet) */
-              .card-back p.definition-jp {
-                 font-size: 1.2rem; /* Tabletでのフォントサイズ調整 */
-                 margin-bottom: 10px; /* Tabletでのマージン調整 */
-             }
+
+             .pronunciation,
              .card-back p.definition-en {
-                 font-size: 0.9rem; /* Tabletでのフォントサイズ調整 */
-                 /* ★ JSで top: calc(50% + 80px) などに調整 */
+                 font-size: 0.9rem;
+                 margin-top: 3px; /* Tabletでのマージン調整 */
              }
 
-
+             .card-back p.definition-jp {
+                 font-size: 1.2rem;
+             }
             .card h2 {
                 font-size: 1.7rem;
-                margin-bottom: 10px; /* マージン調整 */
-            }
-            /* ★表面の発音記号 */
-            .card-front .pronunciation {
-                 /* ★ JSで top: calc(50% + 80px) などに調整 */
             }
 
 
@@ -620,8 +638,6 @@
                  min-width: 0; /* ★ 最小幅リセット (Tablet) */
              }
              .control-panel .panel-label { font-size: 13px; }
-
-             /* ★ レスポンシブでのボタンサイズ調整は削除（基本スタイルでflex-growするため） */
 
 
             .category-info {
@@ -672,33 +688,24 @@
 
             .card-container {
                 width: 95%;
-                /* height: 210px; */ /* ★ 固定高さを削除 */
                 margin: 5px auto 10px auto;
             }
 
-             .card-back {
+             .card-front, .card-back {
                  padding: 10px;
              }
+             .pronunciation,
+             .card-back p.definition-en {
+                 font-size: 0.85rem;
+                  margin-top: 2px; /* Mobileでのマージン調整 */
+             }
 
+             .card-back p.definition-jp {
+                 font-size: 1.1rem;
+             }
             .card h2 {
                 font-size: 1.5rem;
-                margin-bottom: 8px; /* マージン調整 */
             }
-             /* ★表面の発音記号 */
-             .card-front .pronunciation {
-                  /* ★ JSで top: calc(50% + 60px) などに調整 */
-             }
-
-
-             /* ★裏面のpタグ位置調整 (Mobile) */
-             .card-back p.definition-jp {
-                 font-size: 1.1rem; /* Mobileでのフォントサイズ調整 */
-                 margin-bottom: 8px; /* Mobileでのマージン調整 */
-             }
-             .card-back p.definition-en {
-                 font-size: 0.85rem; /* Mobileでのフォントサイズ調整 */
-                  /* ★ JSで top: calc(50% + 60px) などに調整 */
-             }
 
 
             .button {
@@ -715,14 +722,11 @@
              }
              .control-panel {
                  padding: 6px 10px;
-                 /* min-width: 0; */ /* 削除 */
                  flex-basis: 100%; /* ★ スマホでは各パネルを1行にする */
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
               #speedControl .panel-buttons { gap: 5px; }
-
-              /* ★ レスポンシブでのボタンサイズ調整は削除（基本スタイルでflex-growするため） */
 
 
             .category-info {
@@ -808,64 +812,47 @@
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
             if (!starsContainer) return; // 要素チェック追加
-            // パフォーマンスに応じて星の数を調整
             const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
             let starsCount;
-
-            // 画面サイズに基づいて適切な星の数を設定
             if (isMobile) {
-                starsCount = window.innerWidth < 480 ? 50 : 80; // 小さい画面では50、それ以上では80
+                starsCount = window.innerWidth < 480 ? 50 : 80;
             } else {
-                starsCount = 150; // デスクトップ
+                starsCount = 150;
             }
-
-            // 既存の星をクリア
             starsContainer.innerHTML = '';
-
             for (let i = 0; i < starsCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-
-                // ランダムな位置とサイズ（モバイルでは小さめのサイズに）
-                const size = isMobile ? Math.random() * 1.5 + 0.5 : Math.random() * 2 + 1; // サイズ範囲調整
+                const size = isMobile ? Math.random() * 1.5 + 0.5 : Math.random() * 2 + 1;
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
-                // アニメーション時間も多様に
-                const duration = isMobile ? 3 + Math.random() * 5 : 4 + Math.random() * 8; // 少し長めに
-                const delay = Math.random() * 5; // 遅延も多様に
-                // 初期透明度もランダムに (0.3から1.0の間)
+                const duration = isMobile ? 3 + Math.random() * 5 : 4 + Math.random() * 8;
+                const delay = Math.random() * 5;
                 const opacity = 0.3 + Math.random() * 0.7;
-
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 star.style.left = `${left}%`;
                 star.style.top = `${top}%`;
-                // CSS変数を設定
                 star.style.setProperty('--duration', `${duration}s`);
                 star.style.setProperty('--opacity', opacity);
                 star.style.animationDelay = `${delay}s`;
-
                 starsContainer.appendChild(star);
             }
         }
-
-
-        // ページロード時に星空を生成
         window.addEventListener('load', createStars);
-        // ウィンドウサイズ変更時に星空を再生成（負荷軽減のためdebounceなど考慮するのも良い）
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                  const starsContainer = document.getElementById('starsContainer');
-                 if (starsContainer) { // 要素が存在するか確認
-                    starsContainer.innerHTML = ''; // 一旦クリア
-                    createStars(); // 再生成
+                 if (starsContainer) {
+                    starsContainer.innerHTML = '';
+                    createStars();
                  }
-            }, 250); // 250ms待ってから再生成
+            }, 250);
         });
 
-        // カードデータ (仮のまま - 本来はカテゴリ選択に応じて変更)
+        // カードデータ
         const cards = [
              { front: { word: "repertoire" }, back: { pronunciation: "ˈrɛp.ərˌtwɑr", definition_jp: "スキルや技能の集合", definition_en: "スキルや業績のコレクション" } },
              { front: { word: "obtain" }, back: { pronunciation: "əbˈteɪn", definition_jp: "手に入れる", definition_en: "得る" } },
@@ -969,8 +956,7 @@
              { front: { word: "essentially" }, back: { pronunciation: "ɪˈsɛnʃəlɪ", definition_jp: "本質的に", definition_en: "基本的に、主に" } },
         ];
 
-
-        // DOM要素の取得（より堅牢に）
+        // DOM要素の取得
         const getElement = (id) => document.getElementById(id);
         const cardContainer = getElement('cardContainer');
         const currentCard = getElement('currentCard');
@@ -983,94 +969,76 @@
         const speed1sButton = getElement('speed1s');
         const speed0_5sButton = getElement('speed0_5s');
         const controlBox = getElement('controlBox');
-        const prevButtonSmall = getElement('prevButtonSmall'); // 戻るボタン取得
+        const prevButtonSmall = getElement('prevButtonSmall');
         const nextButtonSmall = getElement('nextButtonSmall');
         const pauseButtonSmall = getElement('pauseButtonSmall');
         const backButton = getElement('backButton');
-        const categoryGrid = document.querySelector('.category-grid'); // クラスで取得
+        const categoryGrid = document.querySelector('.category-grid');
         const categoryInfo = getElement('categoryInfo');
         const selectedCategoryText = getElement('selectedCategoryText');
-        const categoryCards = document.querySelectorAll('.category-card'); // クラスで取得
+        const categoryCards = document.querySelectorAll('.category-card');
         const mainSubtitle = getElement('mainSubtitle');
-        const nawlSubtitle = getElement('nawlSubtitle'); // ★ NAWLサブタイトル要素取得
+        const nawlSubtitle = getElement('nawlSubtitle');
 
         // 状態変数
         let currentCardIndex = 0;
         let autoFlipTimer = null;
         let autoNextTimer = null;
         let isPaused = false;
-        let flipDelay = 2000; // デフォルト速度を2秒に
+        let flipDelay = 2000;
         let autoAdvance = true;
-        // let currentCategoryName = ''; // ★ 不要になった
-        let currentRankInfo = '';   // ★ 選択中のランク情報を保持
+        let currentRankInfo = '';
 
-        // カードの表面を表示する関数
+        // カードの表示を更新する関数
         function showCardFront(index) {
-             if (!cards || index < 0 || index >= cards.length) return; // データチェック
+             if (!cards || index < 0 || index >= cards.length) return;
             const card = cards[index];
-            if (!cardFront || !cardBack || !cardCounter || !currentCard) return; // 要素チェック
+            if (!cardFront || !cardBack || !cardCounter || !currentCard) return;
 
-            // ★ 画面サイズに応じてオフセット値を決定
-            let offset = '100px'; // デフォルト (PC)
-            if (window.innerWidth <= 768 && window.innerWidth > 480) {
-                offset = '80px'; // Tablet
-            } else if (window.innerWidth <= 480) {
-                offset = '60px'; // Mobile
-            }
-
-            // カード表面のHTMLを生成 - 発音記号の位置を調整
+            // ★ HTML構造を変更：メインコンテンツをラッパーで囲む
             cardFront.innerHTML = `
-                <h2>${card.front.word}</h2>
-                <span class="pronunciation" style="position: absolute; top: calc(50% + ${offset}); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.pronunciation}</span>
+                <div class="main-content">
+                    <h2>${card.front.word}</h2>
+                </div>
+                <span class="pronunciation">${card.back.pronunciation}</span>
+            `;
+            cardBack.innerHTML = `
+                 <div class="main-content">
+                    <p class="definition-jp">${card.back.definition_jp}</p>
+                 </div>
+                 <p class="definition-en">${card.back.definition_en}</p>
             `;
 
-            // ★ カード裏面のHTMLを生成 - 日本語訳(Flex中央)、英語定義(表面の発音記号と同じロジックで配置)
-            let backHTML = `
-                 <p class="definition-jp">${card.back.definition_jp}</p>
-                 <p class="definition-en" style="position: absolute; top: calc(50% + ${offset}); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center;">${card.back.definition_en}</p>
-            `;
-            cardBack.innerHTML = backHTML;
-
-
-            // カード番号の更新 (Rank表示) - ゼロパディング & 等幅フォント指定
+            // カード番号の更新
             cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${cards.length}</span>`;
 
-
-            // カード裏面を確実に非表示にする
+            // カード裏面を非表示に設定
             if (cardBack) cardBack.style.display = 'none';
 
-            // カードを表面に戻す（アニメーションのため）
+            // カードを表面に戻す
             currentCard.classList.remove('flipped');
-            // ちらつき防止のため、クラス削除後に強制リフロー
-            void currentCard.offsetHeight;
+            void currentCard.offsetHeight; // 強制リフロー
 
-
-            // 一時停止中ならクリック可能表示、そうでなければ解除
+            // 一時停止状態に応じてクリック可能クラスを制御
              if (currentCard) {
-                 if (isPaused) {
-                     currentCard.classList.add('clickable');
-                 } else {
-                     currentCard.classList.remove('clickable');
-                 }
+                 currentCard.classList.toggle('clickable', isPaused);
              }
 
-            // 自動進行が有効かつ一時停止中でない場合、タイマーを設定
+            // 自動進行タイマーの設定
             if (autoAdvance && !isPaused) {
                 clearTimeout(autoFlipTimer);
                 clearTimeout(autoNextTimer);
-
                 autoFlipTimer = setTimeout(() => {
                     if (!isPaused && currentCard && cardBack) {
-                        // flipする直前に裏面を表示
-                        cardBack.style.display = 'flex'; // ★ flexに変更
-                        currentCard.classList.add('flipped');
-                        autoNextTimer = setTimeout(nextCard, flipDelay);
+                        cardBack.style.display = 'flex'; // 裏面を表示
+                        currentCard.classList.add('flipped'); // 回転
+                        autoNextTimer = setTimeout(nextCard, flipDelay); // 次のカードへ
                     }
                 }, flipDelay);
             }
         }
 
-        // 次のカードに進む関数
+        // 次のカードへ
         function nextCard() {
             clearTimeout(autoFlipTimer);
             clearTimeout(autoNextTimer);
@@ -1078,9 +1046,9 @@
             showCardFront(currentCardIndex);
         }
 
-        // 前のカードに進む関数
+        // 前のカードへ
         function prevCard() {
-            isPaused = true; // Pause on manual navigation
+            isPaused = true;
             if (pauseButtonSmall) {
                 pauseButtonSmall.textContent = '再生';
                 pauseButtonSmall.classList.add('resume');
@@ -1088,160 +1056,115 @@
             if (currentCard) currentCard.classList.add('clickable');
             clearTimeout(autoFlipTimer);
             clearTimeout(autoNextTimer);
-
             currentCardIndex--;
             if (currentCardIndex < 0) {
-                currentCardIndex = cards.length - 1; // Wrap around to the last card
+                currentCardIndex = cards.length - 1;
             }
             showCardFront(currentCardIndex);
         }
 
-
-        // 表示速度を設定する関数
+        // 表示速度の設定
         function setSpeed(seconds) {
-            flipDelay = seconds * 1000; // ミリ秒に変換
-
-            // アクティブなボタンのスタイルを更新
+            flipDelay = seconds * 1000;
             [speed2sButton, speed1sButton, speed0_5sButton].forEach(btn => {
                 if(btn) btn.classList.remove('active');
             });
-
             let activeButton;
             if (seconds === 2) activeButton = speed2sButton;
             else if (seconds === 1) activeButton = speed1sButton;
             else if (seconds === 0.5) activeButton = speed0_5sButton;
-
             if(activeButton) activeButton.classList.add('active');
-
-            // 速度変更時にタイマーをリセット（一時停止中でない場合）
             if (!isPaused) {
                 clearTimeout(autoFlipTimer);
                 clearTimeout(autoNextTimer);
-                // 現在のカード表示から再開（新しい速度でタイマーが再設定される）
                 showCardFront(currentCardIndex);
             }
         }
 
-
-        // UI表示切り替え関数
+        // UI表示切り替え
         function showFlashcardView(show) {
              const displayGrid = show ? 'none' : 'grid';
-             const displayApp = show ? 'block' : 'none'; // カードコンテナなどは block
-             const displayFlexApp = show ? 'flex' : 'none'; // コントロールパネルは flex
-
+             const displayApp = show ? 'block' : 'none';
+             const displayFlexApp = show ? 'flex' : 'none';
              if (categoryGrid) categoryGrid.style.display = displayGrid;
              if (categoryInfo) categoryInfo.style.display = show ? 'none' : 'block';
              if (startButton) startButton.classList.toggle('hidden', show);
-
              if (cardContainer) cardContainer.classList.toggle('hidden', !show);
-             // カードカウンターの表示も制御
-             if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none'; // blockではなくinline-blockに
-             if (controlBox) controlBox.style.display = displayFlexApp; // flexに変更
-             if (speedControl) speedControl.style.display = displayFlexApp; // flexに変更
+             if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none';
+             if (controlBox) controlBox.style.display = displayFlexApp;
+             if (speedControl) speedControl.style.display = displayFlexApp;
              if (backButton) backButton.style.display = show ? 'inline-block' : 'none';
-
-             // ★ メインサブタイトルとNAWLサブタイトルの表示切り替え
              if (mainSubtitle && nawlSubtitle) {
                  if (show) {
-                     // フラッシュカード表示時
-                     // mainSubtitle.textContent = `NAWL 957 ${currentRankInfo}`; // ★ 変更前
-                     mainSubtitle.textContent = nawlSubtitle.textContent; // ★ NAWL 957 のみ表示
-                     nawlSubtitle.style.display = 'none'; // NAWLサブタイトルを非表示
+                     mainSubtitle.textContent = nawlSubtitle.textContent;
+                     nawlSubtitle.style.display = 'none';
                  } else {
-                     // カテゴリ選択表示時
-                     mainSubtitle.textContent = 'デジタルフラッシュカード'; // デフォルトテキストに戻す
-                     nawlSubtitle.style.display = 'block'; // NAWLサブタイトルを表示
+                     mainSubtitle.textContent = 'デジタルフラッシュカード';
+                     nawlSubtitle.style.display = 'block';
                  }
              }
         }
 
-        // ★ 初期選択カテゴリ情報を設定する関数 (ランク情報のみ取得・設定)
+        // 選択中カテゴリ情報の設定
         function setActiveCategoryInfo() {
             const activeCard = document.querySelector('.category-card.active');
             if (activeCard) {
-                // currentCategoryName = activeCard.querySelector('h3')?.textContent || ''; // 不要に
-                currentRankInfo = activeCard.querySelector('h3')?.textContent || ''; // ★ h3からランク情報を取得
-                if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo; // ★ ランク情報のみ表示
+                currentRankInfo = activeCard.querySelector('h3')?.textContent || '';
+                if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo;
             }
         }
+        setActiveCategoryInfo(); // 初期読み込み
 
-        // ★ 初期読み込み時に実行
-        setActiveCategoryInfo();
-
-
-        // スタートボタンのイベントリスナー
+        // イベントリスナー
         if (startButton) {
             startButton.addEventListener('click', () => {
-                // ★ 開始時に再度アクティブなカテゴリ情報を取得・設定
                 setActiveCategoryInfo();
-                showFlashcardView(true); // フラッシュカード表示
-
-                // 最初のカードを表示して開始
+                showFlashcardView(true);
                 currentCardIndex = 0;
                 isPaused = false;
                 if (pauseButtonSmall) {
-                    pauseButtonSmall.textContent = '停止'; // 初期テキストを「停止」に
-                    pauseButtonSmall.classList.remove('resume'); // resumeクラス削除
+                    pauseButtonSmall.textContent = '停止';
+                    pauseButtonSmall.classList.remove('resume');
                 }
-                setSpeed(flipDelay / 1000); // 現在の速度設定で開始
+                setSpeed(flipDelay / 1000);
                 showCardFront(currentCardIndex);
-
-                // カードクリックイベントリスナーを追加
                 if (currentCard) {
-                    currentCard.removeEventListener('click', handleCardClick); // 念のため削除
+                    currentCard.removeEventListener('click', handleCardClick);
                     currentCard.addEventListener('click', handleCardClick);
                 }
             });
         }
-
-        // 戻るボタンのイベントリスナー
         if (backButton) {
             backButton.addEventListener('click', () => {
-                showFlashcardView(false); // カテゴリ選択表示
-
-                // タイマーを停止・クリア
+                showFlashcardView(false);
                 clearTimeout(autoFlipTimer);
                 clearTimeout(autoNextTimer);
                 isPaused = true;
-
-                // カードクリックイベントリスナーを削除
                 if (currentCard) {
                     currentCard.removeEventListener('click', handleCardClick);
                 }
             });
         }
-
-        // カードクリック処理関数 (手動フリップ)
-        function handleCardClick() {
+        function handleCardClick() { // 手動フリップ
             if (isPaused && currentCard && cardBack) {
-                // めくる前に表示状態をトグル
                 if (currentCard.classList.contains('flipped')) {
-                    // 表面に戻す場合 -> アニメーション後に非表示
                     currentCard.classList.remove('flipped');
-                    // アニメーション時間(0.5s)後に非表示にする
                     setTimeout(() => {
                          if (cardBack) cardBack.style.display = 'none';
-                    }, 500);
+                    }, 500); // アニメーション後に非表示
                 } else {
-                    // 裏面にする場合 -> 表示してからめくる
-                    cardBack.style.display = 'flex'; // ★ flex に変更
+                    cardBack.style.display = 'flex'; // 表示してから回転
                     currentCard.classList.add('flipped');
                 }
             }
         }
-
-        // 前のカードに進む関数
-        if (prevButtonSmall) {
-            prevButtonSmall.addEventListener('click', prevCard);
-        }
-
-        // 次へボタン（小）のイベントリスナー
+        if (prevButtonSmall) prevButtonSmall.addEventListener('click', prevCard);
         if (nextButtonSmall) {
             nextButtonSmall.addEventListener('click', () => {
-                 isPaused = true; // 手動操作後は一時停止
+                 isPaused = true;
                  if (pauseButtonSmall) {
-                     pauseButtonSmall.textContent = '再生'; // テキストを「再生」に
-                     pauseButtonSmall.classList.add('resume'); // resumeクラス追加
+                     pauseButtonSmall.textContent = '再生';
+                     pauseButtonSmall.classList.add('resume');
                  }
                  if (currentCard) currentCard.classList.add('clickable');
                  clearTimeout(autoFlipTimer);
@@ -1249,84 +1172,56 @@
                  nextCard();
             });
         }
-
-        // 停止/再生ボタン（小）のイベントリスナー
         if (pauseButtonSmall) {
             pauseButtonSmall.addEventListener('click', () => {
                 isPaused = !isPaused;
-
                 if (isPaused) {
-                    // 停止処理
                     clearTimeout(autoFlipTimer);
                     clearTimeout(autoNextTimer);
-                    pauseButtonSmall.textContent = '再生'; // テキストを「再生」に
-                    pauseButtonSmall.classList.add('resume'); // resumeクラス追加
+                    pauseButtonSmall.textContent = '再生';
+                    pauseButtonSmall.classList.add('resume');
                     if (currentCard) currentCard.classList.add('clickable');
                 } else {
-                    // 再生処理
-                    pauseButtonSmall.textContent = '停止'; // テキストを「停止」に
-                    pauseButtonSmall.classList.remove('resume'); // resumeクラス削除
+                    pauseButtonSmall.textContent = '停止';
+                    pauseButtonSmall.classList.remove('resume');
                     if (currentCard) currentCard.classList.remove('clickable');
-                    // 現在のカードの状態からタイマーを再開
-                    // 裏面が表示されている状態から再開する場合も考慮
                     if (currentCard && currentCard.classList.contains('flipped')) {
-                         // 裏面表示中なら、次のカードへのタイマーのみ設定
                          autoNextTimer = setTimeout(nextCard, flipDelay);
                     } else {
-                         // 表面表示中なら、通常のタイマー設定
-                         showCardFront(currentCardIndex);
+                         showCardFront(currentCardIndex); // タイマー再開
                     }
                 }
             });
         }
-
-        // 速度ボタンのイベントリスナー
         if (speed2sButton) speed2sButton.addEventListener('click', () => setSpeed(2));
         if (speed1sButton) speed1sButton.addEventListener('click', () => setSpeed(1));
         if (speed0_5sButton) speed0_5sButton.addEventListener('click', () => setSpeed(0.5));
-
-
-        // カテゴリカードのクリックイベント
         categoryCards.forEach(card => {
              if (!card) return;
             card.addEventListener('click', () => {
-                categoryCards.forEach(c => {
-                    if(c) c.classList.remove('active');
-                });
+                categoryCards.forEach(c => { if(c) c.classList.remove('active'); });
                  card.classList.add('active');
-
-                 // ★ 選択中カテゴリ情報（ランク情報のみ）を更新
                  setActiveCategoryInfo();
-
                  // TODO: カテゴリに応じたデータ読み込み処理
-                 // 例: loadCards(card.id);
             });
         });
-
-         // ★ ウィンドウリサイズ時にカード表示を更新するリスナー追加
-         let cardResizeTimer;
+         let cardResizeTimer; // リサイズ時の再描画
          window.addEventListener('resize', () => {
-             // フラッシュカード表示中のみ実行
              if (cardContainer && !cardContainer.classList.contains('hidden')) {
                  clearTimeout(cardResizeTimer);
                  cardResizeTimer = setTimeout(() => {
-                     // 現在表示中のカードを再描画してオフセットを更新
                      showCardFront(currentCardIndex);
-                     // もし裏面が表示されていたら、そちらも更新
                      if (currentCard && currentCard.classList.contains('flipped')) {
-                         // 一旦表面に戻してから再度裏返すことでJS内のスタイル適用を強制
                          currentCard.classList.remove('flipped');
-                         void currentCard.offsetHeight; // 強制リフロー
-                         cardBack.style.display = 'flex'; // flex に変更
+                         void currentCard.offsetHeight;
+                         cardBack.style.display = 'flex';
                          currentCard.classList.add('flipped');
                      } else if (cardBack) {
-                         // 表面表示中でも裏面の display は none にしておく
                          cardBack.style.display = 'none';
                      }
-                 }, 250); // 250ms待ってから再描画
+                 }, 250);
              }
          });
-
     </script>
 </body>
 </html>
