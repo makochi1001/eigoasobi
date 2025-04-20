@@ -101,48 +101,43 @@
         /* カテゴリ選択グリッドのスタイル */
         .category-grid {
              display: grid;
-             grid-template-columns: repeat(2, 1fr);
+             grid-template-columns: repeat(3, max-content); /* ★ 列幅を内容に合わせる */
+             justify-content: center; /* ★ グリッドアイテムを中央揃え */
              grid-gap: 15px;
-             max-width: 600px;
-             width: 90%; /* 幅を確保 */
              margin: 15px auto 20px auto; /* 上下マージン調整 */
         }
 
         /* カテゴリカードの共通スタイル */
         .category-card {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2));
-            padding: 15px;
+            padding: 10px; /* ★ パディング */
             border-radius: 12px;
             cursor: pointer;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1); /* デフォルトボーダー */
             transition: all 0.3s ease;
-            display: flex; /* ★ Flexboxに変更 */
-            flex-direction: column; /* 縦並び */
-            justify-content: center; /* 中央揃え */
-            align-items: center; /* 中央揃え */
-            min-height: 80px; /* 高さを確保 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1000 / 618; /* ★ 黄金比を再適用 */
         }
 
         /* ★ カテゴリカード内の h3 (ランク表示) スタイル */
         .category-card h3 {
             margin: 0; /* マージンリセット */
-            font-size: 1.1rem;
+            font-size: 1rem; /* フォントサイズ */
             color: white;
             font-weight: 500;
+            line-height: 1.3; /* 行間調整 */
         }
-
-        /* ★ カテゴリカード内の p タグは削除 (h3に統合) */
-        /* .category-card p { ... } */
 
         /* 選択中のカテゴリカード */
         .category-card.active {
              border: 2px solid rgba(52, 152, 219, 0.6); /* 強調ボーダー */
              box-shadow: 0 0 10px rgba(52, 152, 219, 0.3); /* 軽い光彩 */
         }
-
-        /* .control-panel は .control-container 内の要素としてスタイル */
 
         .card-container {
             width: 90%; /* 幅を画面比率で設定 */
@@ -190,7 +185,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between; /* ★ 上下に配置 */
-            /* position: relative; */ /* ★ 不要 */
         }
 
         /* ★ メインコンテンツ（単語/日本語定義）を中央揃えにするためのラッパー */
@@ -201,7 +195,6 @@
             align-items: center; /* 水平中央揃え */
             flex-grow: 1; /* 利用可能なスペースを埋める */
             width: 100%; /* 幅を100%に */
-            /* background-color: rgba(255,0,0,0.1); */ /* デバッグ用 */
         }
 
 
@@ -234,10 +227,6 @@
 
         /* ★ 発音記号のスタイル - Flexアイテムとして配置 */
         .pronunciation {
-            /* position: absolute; */ /* ★ 削除 */
-            /* bottom: 20px; */ /* ★ 削除 */
-            /* left: 50%; */ /* ★ 削除 */
-            /* transform: translateX(-50%); */ /* ★ 削除 */
             width: 90%; /* はみ出し防止 */
             text-align: center;
             font-size: 0.95rem;
@@ -295,10 +284,6 @@
         }
         /* ★ 英語定義のスタイル - Flexアイテムとして配置 */
         .card-back p.definition-en {
-             /* position: absolute; */ /* ★ 削除 */
-             /* bottom: 20px; */ /* ★ 削除 */
-             /* left: 50%; */ /* ★ 削除 */
-             /* transform: translateX(-50%); */ /* ★ 削除 */
              width: 90%; /* はみ出し防止 */
              text-align: center;
              margin: 0; /* マージンリセット */
@@ -463,14 +448,14 @@
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(55, 75, 110, 0.4);
-            /* width: auto; */ /* width指定を削除 */
             display: none; /* 初期状態は非表示、JSで表示 */
             flex-direction: column; /* ラベルとボタンを縦に */
             align-items: center; /* 中央揃え */
-            /* ★ パネルが均等に広がるように */
+            justify-content: center; /* ★ ラベルとボタンを垂直中央揃え */
             flex-grow: 1;
             flex-basis: 0; /* flex-growと合わせて使う */
             min-width: 150px; /* 最小幅を設定して極端に狭くなるのを防ぐ */
+            aspect-ratio: 1000 / 618; /* ★ 黄金比を適用 */
         }
         .control-panel .panel-label {
             color: white;
@@ -579,13 +564,16 @@
                 grid-gap: 10px;
                 margin-top: 10px;
                 margin-bottom: 15px;
+                /* grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */ /* ★ Tabletでも3列維持 */
             }
             .category-card {
-                padding: 12px;
+                padding: 8px; /* ★ Tabletでのパディング調整 */
                 border-radius: 10px;
-                min-height: 70px; /* ★ 調整 */
             }
-             .category-card h3 { font-size: 1rem; } /* ★ Rank表示用 */
+             .category-card h3 {
+                 font-size: 0.9rem; /* ★ Tabletでのフォントサイズ調整 */
+                 line-height: 1.2;
+             }
 
              .card-counter {
                  margin-top: 8px;
@@ -671,13 +659,16 @@
                 margin-top: 8px;
                 margin-bottom: 12px;
                 width: 95%;
-            }
+                grid-template-columns: repeat(2, max-content); /* ★ スマホでは2列 max-content */
+             }
             .category-card {
-                padding: 10px;
+                padding: 10px; /* ★ スマホでのパディング調整 */
                 border-radius: 8px;
-                min-height: 60px; /* ★ 調整 */
             }
-             .category-card h3 { font-size: 0.9rem; } /* ★ Rank表示用 */
+             .category-card h3 {
+                 font-size: 0.8rem; /* ★ スマホでのフォントサイズ調整 */
+                 line-height: 1.2;
+             }
 
              .card-counter {
                  margin-top: 5px;
@@ -723,6 +714,7 @@
              .control-panel {
                  padding: 6px 10px;
                  flex-basis: 100%; /* ★ スマホでは各パネルを1行にする */
+                 aspect-ratio: auto; /* ★ スマホではアスペクト比を解除 */
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
@@ -749,8 +741,7 @@
 
     <div class="category-grid">
          <div class="category-card active" id="category-awl1">
-            <h3>Rank 1 - 100</h3>
-        </div>
+            <h3>Rank 001 - 100</h3> </div>
          <div class="category-card" id="category-awl2">
             <h3>Rank 101 - 200</h3>
         </div>
@@ -764,8 +755,15 @@
             <h3>Rank 401 - 500</h3>
         </div>
          <div class="category-card" id="category-awl6">
-            <h3>Rank 501 - 570</h3>
+            <h3>Rank 501 - 600</h3> </div>
+        <div class="category-card" id="category-awl7"> <h3>Rank 601 - 700</h3>
         </div>
+        <div class="category-card" id="category-awl8"> <h3>Rank 701 - 800</h3>
+        </div>
+        <div class="category-card" id="category-awl9"> <h3>Rank 801 - 900</h3>
+        </div>
+        <div class="category-card" id="category-awl10">
+            <h3>Rank 901 - 957</h3> </div>
     </div>
 
     <div class="card-container hidden" id="cardContainer">
@@ -800,8 +798,7 @@
     <button class="button start-button" id="startButton">スタート</button>
 
     <div class="category-info" id="categoryInfo">
-         選択中: <span id="selectedCategoryText">Rank 1 - 100</span>
-    </div>
+         選択中: <span id="selectedCategoryText">Rank 001 - 100</span> </div>
 
     <div class="back-button-container">
         <button class="back-button" id="backButton">トップ画面に戻る</button>
@@ -1110,6 +1107,10 @@
             const activeCard = document.querySelector('.category-card.active');
             if (activeCard) {
                 currentRankInfo = activeCard.querySelector('h3')?.textContent || '';
+                 // ★ 初期選択カテゴリ表示も 0 埋めを反映
+                if (currentRankInfo === 'Rank 1 - 100') {
+                    currentRankInfo = 'Rank 001 - 100';
+                }
                 if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo;
             }
         }
@@ -1225,3 +1226,4 @@
     </script>
 </body>
 </html>
+
