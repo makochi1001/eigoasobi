@@ -118,22 +118,23 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1); /* デフォルトボーダー */
             transition: all 0.3s ease;
+            display: flex; /* ★ Flexboxに変更 */
+            flex-direction: column; /* 縦並び */
+            justify-content: center; /* 中央揃え */
+            align-items: center; /* 中央揃え */
+            min-height: 80px; /* 高さを確保 */
         }
 
+        /* ★ カテゴリカード内の h3 (ランク表示) スタイル */
         .category-card h3 {
-            margin: 0 0 5px 0;
+            margin: 0; /* マージンリセット */
             font-size: 1.1rem;
             color: white;
-            font-weight: 500; /* 少し太く */
+            font-weight: 500;
         }
 
-        .category-card p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300; /* pタグは細めに */
-            text-shadow: none; /* pタグの影は削除 */
-        }
+        /* ★ カテゴリカード内の p タグは削除 (h3に統合) */
+        /* .category-card p { ... } */
 
         /* 選択中のカテゴリカード */
         .category-card.active {
@@ -146,7 +147,8 @@
         .card-container {
             width: 90%; /* 幅を画面比率で設定 */
             max-width: 400px; /* 最大幅を設定 */
-            height: 250px; /* カードの高さを設定 */
+            /* height: 250px; */ /* ★ 固定高さを削除 */
+            aspect-ratio: 1000 / 618; /* ★ 黄金比 (横長) に戻す */
             perspective: 1500px; /* 3D効果の奥行き */
             margin: 10px auto 20px auto; /* 上下マージン調整 (上を詰める) */
             position: relative;
@@ -185,16 +187,17 @@
             border: 1px solid rgba(255, 255, 255, 0.2); /* 枠線 */
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* 影 */
             overflow: hidden; /* 内容がはみ出ないように */
+            /* ★ Flexboxを共通で適用 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-front {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.5), rgba(16, 54, 140, 0.3)); /* 青系のグラデーション */
             color: white;
-            /* 表面は中央揃えのため flex を維持 */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            /* display, align-items, justify-content は共通へ移動 */
         }
 
         .card-back {
@@ -203,12 +206,13 @@
             transform: rotateY(180deg); /* 最初から裏返しておく */
             display: none; /* 初期状態は非表示 */
             position: relative; /* 子要素の absolute 配置の基準 */
+             /* display, align-items, justify-content は共通へ移動 */
         }
 
         /* カード内のh2 (単語表示) */
         .card h2 {
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* 下の要素との間隔 */
             font-size: 2rem; /* 単語のフォントサイズ */
             font-weight: 600;
             letter-spacing: 1px;
@@ -219,13 +223,13 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* ページタイトル下のh2 (フラッシュカード) */
-         body > h2 {
+        /* ページタイトル下のh2 (メインサブタイトル) */
+         body > h2#mainSubtitle {
             margin-top:0;
             text-shadow:0 0 5px rgba(255,255,255,0.5);
             font-size:1.2rem;
             font-weight:400;
-            margin-bottom:0px; /* カテゴリグリッド/カードカウンターとのマージンを詰める */
+            margin-bottom: 5px; /* ★ 下のh3との間隔 */
             line-height:1.5;
             text-align:center;
             background: none; /* グラデーション解除 */
@@ -233,6 +237,16 @@
              background-clip: unset;
              -webkit-text-fill-color: unset;
              color: white; /* 色を白に戻す */
+             min-height: 1.5em; /* テキスト変更時の高さ変動を防ぐ */
+        }
+        /* ★ 追加: NAWLサブタイトル */
+        h3#nawlSubtitle {
+            margin: 0 0 10px 0; /* 上下のマージン調整 */
+            font-size: 1.0rem; /* 少し小さめに */
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+            text-align: center;
         }
 
 
@@ -243,23 +257,27 @@
             font-weight: 300; /* 少し細めのフォント */
         }
 
-        /* カード裏面のpタグのスタイル調整 (CSSでは基本配置のみ) */
-        .card-back p {
-             position: absolute;
-             left: 50%;
-             width: 90%;
-             text-align: center;
-             margin: 0;
-             /* transform はJS側で設定 */
-        }
+        /* ★ カード裏面のpタグのスタイル調整 - absolute指定削除 */
+        /* .card-back p { ... } */
+
         /* 裏面テキストの個別スタイル */
         .card-back p.definition-jp {
+            /* position, transform は削除 (Flexboxで中央配置) */
+            width: 90%; /* 幅は維持 */
+            text-align: center; /* 中央揃えは維持 */
+            margin-top: 0; /* 上マージンリセット */
+            margin-bottom: 15px; /* ★ 下の要素との間隔 (表面のh2に合わせる) */
             font-size: 1.3rem;
             color: #FFD700;
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
         .card-back p.definition-en {
+             /* ★ position, transform はJS側で表面のpronunciationに合わせて設定 */
+             /* bottom スタイル削除 */
+             width: 90%; /* 幅は維持 */
+             text-align: center; /* 中央揃えは維持 */
+             margin: 0; /* マージンリセット */
              font-size: 0.95rem;
              color: white;
              font-weight: 400;
@@ -523,9 +541,13 @@
                 margin-bottom: 0;
             }
 
-            body > h2 {
+            body > h2#mainSubtitle {
                 font-size: 1.1rem;
-                margin-bottom: 10px;
+                margin-bottom: 3px; /* ★ 調整 */
+            }
+            h3#nawlSubtitle {
+                font-size: 0.9rem; /* ★ 調整 */
+                margin-bottom: 8px; /* ★ 調整 */
             }
 
             .category-grid {
@@ -536,9 +558,9 @@
             .category-card {
                 padding: 12px;
                 border-radius: 10px;
+                min-height: 70px; /* ★ 調整 */
             }
-             .category-card h3 { font-size: 1rem; }
-             .category-card p { font-size: 0.8rem; }
+             .category-card h3 { font-size: 1rem; } /* ★ Rank表示用 */
 
              .card-counter {
                  margin-top: 8px;
@@ -549,27 +571,33 @@
 
             .card-container {
                 width: 90%;
-                height: 252px;
+                /* height: 252px; */ /* ★ 固定高さを削除 */
                 margin: 8px auto 15px auto;
             }
 
              .card-back {
                  padding: 15px;
              }
-             /* ★裏面のpタグ位置調整 (Tablet) - JS側で設定 */
+             /* ★裏面のpタグ位置調整 (Tablet) */
               .card-back p.definition-jp {
                  font-size: 1.2rem; /* Tabletでのフォントサイズ調整 */
+                 margin-bottom: 10px; /* Tabletでのマージン調整 */
              }
              .card-back p.definition-en {
                  font-size: 0.9rem; /* Tabletでのフォントサイズ調整 */
-                 bottom: 20px; /* Tabletでの下部マージン調整 */
+                 /* ★ JSで top: calc(50% + 80px) などに調整 */
              }
 
 
             .card h2 {
                 font-size: 1.7rem;
-                margin-bottom: 10px;
+                margin-bottom: 10px; /* マージン調整 */
             }
+            /* ★表面の発音記号 */
+            .card-front .pronunciation {
+                 /* ★ JSで top: calc(50% + 80px) などに調整 */
+            }
+
 
             p { /* カード内のテキストサイズ (汎用) */
                 font-size: 15px;
@@ -589,19 +617,11 @@
              }
              .control-panel {
                  padding: 8px 12px;
-                 /* min-width: auto; */ /* レスポンシブでは最小幅をリセット */
-                 min-width: 0; /* flex-basis:0 と合わせて */
+                 min-width: 0; /* ★ 最小幅リセット (Tablet) */
              }
              .control-panel .panel-label { font-size: 13px; }
 
              /* ★ レスポンシブでのボタンサイズ調整は削除（基本スタイルでflex-growするため） */
-             /* #controlBox .panel-buttons button,
-             #speedControl .panel-buttons button {
-                 padding: 8px 15px;
-                 font-size: 1rem;
-                 flex-grow: 1;
-                 flex-basis: 0;
-             } */
 
 
             .category-info {
@@ -621,9 +641,13 @@
                 font-size: 1.8rem;
                 margin-top: 5px;
             }
-             body > h2 {
+             body > h2#mainSubtitle {
                 font-size: 1rem;
-                margin-bottom: 8px;
+                margin-bottom: 2px; /* ★ 調整 */
+            }
+             h3#nawlSubtitle {
+                font-size: 0.8rem; /* ★ 調整 */
+                margin-bottom: 5px; /* ★ 調整 */
             }
 
              .category-grid {
@@ -635,9 +659,9 @@
             .category-card {
                 padding: 10px;
                 border-radius: 8px;
+                min-height: 60px; /* ★ 調整 */
             }
-             .category-card h3 { font-size: 0.9rem; }
-             .category-card p { font-size: 0.75rem; }
+             .category-card h3 { font-size: 0.9rem; } /* ★ Rank表示用 */
 
              .card-counter {
                  margin-top: 5px;
@@ -647,9 +671,11 @@
              }
 
             .card-container {
-                width: 95%;
-                height: 210px;
-                margin: 5px auto 10px auto;
+                /* width: 95%; */ /* ★ 変更前 */
+                width: 92%; /* ★ 少し幅を狭める */
+                /* height: 210px; */ /* ★ 固定高さを削除 */
+                /* margin: 5px auto 10px auto; */ /* ★ 変更前 */
+                margin: 5px auto 5px auto; /* ★ 下マージンを減らす */
             }
 
              .card-back {
@@ -658,20 +684,22 @@
 
             .card h2 {
                 font-size: 1.5rem;
+                margin-bottom: 8px; /* マージン調整 */
             }
-
-             .card-front p, .card-back p {
-                 /* font-size: 13px; */ /* CSSでクラス指定 */
-                 /* margin: 3px 0; */ /* CSSでクラス指定 */
+             /* ★表面の発音記号 */
+             .card-front .pronunciation {
+                  /* ★ JSで top: calc(50% + 60px) などに調整 */
              }
 
-             /* ★裏面のpタグ位置調整 (Mobile) - JS側で設定 */
+
+             /* ★裏面のpタグ位置調整 (Mobile) */
              .card-back p.definition-jp {
                  font-size: 1.1rem; /* Mobileでのフォントサイズ調整 */
+                 margin-bottom: 8px; /* Mobileでのマージン調整 */
              }
              .card-back p.definition-en {
                  font-size: 0.85rem; /* Mobileでのフォントサイズ調整 */
-                 bottom: 15px; /* Mobileでの下部マージン調整 */
+                  /* ★ JSで top: calc(50% + 60px) などに調整 */
              }
 
 
@@ -685,25 +713,19 @@
 
              .control-container {
                  gap: 8px;
-                 margin-top: 8px;
+                 /* margin-top: 8px; */ /* ★ 変更前 */
+                 margin-top: 5px; /* ★ 上マージンを減らす */
              }
              .control-panel {
                  padding: 6px 10px;
-                 /* min-width: auto; */ /* レスポンシブでは最小幅をリセット */
-                 min-width: 0; /* flex-basis:0 と合わせて */
+                 /* min-width: 0; */ /* 削除 */
+                 flex-basis: 100%; /* ★ スマホでは各パネルを1行にする */
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
               #speedControl .panel-buttons { gap: 5px; }
 
               /* ★ レスポンシブでのボタンサイズ調整は削除（基本スタイルでflex-growするため） */
-              /* #controlBox .panel-buttons button,
-              #speedControl .panel-buttons button {
-                  padding: 6px 12px;
-                  font-size: 15px;
-                  flex-grow: 1;
-                  flex-basis: 0;
-              } */
 
 
             .category-info {
@@ -719,34 +741,29 @@
     <div class="stars" id="starsContainer"></div>
 
     <h1>EIGOASOBI</h1>
-    <h2>フラッシュカード</h2>
+    <h2 id="mainSubtitle">デジタルフラッシュカード</h2>
+    <h3 id="nawlSubtitle">NAWL 957</h3>
 
     <div class="card-counter" id="cardCounter"></div>
 
     <div class="category-grid">
-        <div class="category-card active" id="category-awl1">
-            <h3>AWL 570</h3>
-            <p>Rank 1 - 100</p>
+         <div class="category-card active" id="category-awl1">
+            <h3>Rank 1 - 100</h3>
         </div>
          <div class="category-card" id="category-awl2">
-            <h3>AWL 570</h3>
-            <p>Rank 101 - 200</p>
+            <h3>Rank 101 - 200</h3>
         </div>
         <div class="category-card" id="category-awl3">
-            <h3>AWL 570</h3>
-            <p>Rank 201 - 300</p>
+            <h3>Rank 201 - 300</h3>
         </div>
          <div class="category-card" id="category-awl4">
-            <h3>AWL 570</h3>
-            <p>Rank 301 - 400</p>
+            <h3>Rank 301 - 400</h3>
         </div>
          <div class="category-card" id="category-awl5">
-            <h3>AWL 570</h3>
-            <p>Rank 401 - 500</p>
+            <h3>Rank 401 - 500</h3>
         </div>
          <div class="category-card" id="category-awl6">
-            <h3>AWL 570</h3>
-            <p>Rank 501 - 570</p>
+            <h3>Rank 501 - 570</h3>
         </div>
     </div>
 
@@ -755,7 +772,7 @@
             <div class="card-front" id="cardFront">
                 </div>
             <div class="card-back" id="cardBack">
-                </div>
+                 </div>
         </div>
     </div>
 
@@ -782,7 +799,7 @@
     <button class="button start-button" id="startButton">スタート</button>
 
     <div class="category-info" id="categoryInfo">
-        選択中: <span id="selectedCategoryText">AWL 570</span>
+         選択中: <span id="selectedCategoryText">Rank 1 - 100</span>
     </div>
 
     <div class="back-button-container">
@@ -851,7 +868,7 @@
             }, 250); // 250ms待ってから再生成
         });
 
-        // カードデータ (AWL Rank 1-100) - ★英語定義を更新
+        // カードデータ (仮のまま - 本来はカテゴリ選択に応じて変更)
         const cards = [
              { front: { word: "repertoire" }, back: { pronunciation: "ˈrɛp.ərˌtwɑr", definition_jp: "スキルや技能の集合", definition_en: "スキルや業績のコレクション" } },
              { front: { word: "obtain" }, back: { pronunciation: "əbˈteɪn", definition_jp: "手に入れる", definition_en: "得る" } },
@@ -977,6 +994,8 @@
         const categoryInfo = getElement('categoryInfo');
         const selectedCategoryText = getElement('selectedCategoryText');
         const categoryCards = document.querySelectorAll('.category-card'); // クラスで取得
+        const mainSubtitle = getElement('mainSubtitle');
+        const nawlSubtitle = getElement('nawlSubtitle'); // ★ NAWLサブタイトル要素取得
 
         // 状態変数
         let currentCardIndex = 0;
@@ -985,6 +1004,8 @@
         let isPaused = false;
         let flipDelay = 2000; // デフォルト速度を2秒に
         let autoAdvance = true;
+        // let currentCategoryName = ''; // ★ 不要になった
+        let currentRankInfo = '';   // ★ 選択中のランク情報を保持
 
         // カードの表面を表示する関数
         function showCardFront(index) {
@@ -992,18 +1013,27 @@
             const card = cards[index];
             if (!cardFront || !cardBack || !cardCounter || !currentCard) return; // 要素チェック
 
-            // ★ 修正: カード表面のHTMLを生成 - 発音記号の位置を調整
+            // ★ 画面サイズに応じてオフセット値を決定
+            let offset = '100px'; // デフォルト (PC)
+            if (window.innerWidth <= 768 && window.innerWidth > 480) {
+                offset = '80px'; // Tablet
+            } else if (window.innerWidth <= 480) {
+                offset = '60px'; // Mobile
+            }
+
+            // カード表面のHTMLを生成 - 発音記号の位置を調整
             cardFront.innerHTML = `
                 <h2>${card.front.word}</h2>
-                <span class="pronunciation" style="position: absolute; top: calc(50% + 100px); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.pronunciation}</span>
+                <span class="pronunciation" style="position: absolute; top: calc(50% + ${offset}); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.pronunciation}</span>
             `;
 
-            // カード裏面のHTMLを生成 - 日本語訳(中央)と英語定義(下部)に位置指定スタイルを追加
+            // ★ カード裏面のHTMLを生成 - 日本語訳(Flex中央)、英語定義(表面の発音記号と同じロジックで配置)
             let backHTML = `
-                 <p class="definition-jp" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center; font-size: 1.3rem; color: #FFD700; margin: 0; font-weight: 500; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">${card.back.definition_jp}</p>
-                 <p class="definition-en" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; text-align: center; font-size: 0.95rem; color: white; font-weight: 400; line-height: 1.4; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); margin: 0;">${card.back.definition_en}</p>
+                 <p class="definition-jp">${card.back.definition_jp}</p>
+                 <p class="definition-en" style="position: absolute; top: calc(50% + ${offset}); left: 50%; transform: translate(-50%, -50%); width: 90%; text-align: center;">${card.back.definition_en}</p>
             `;
             cardBack.innerHTML = backHTML;
+
 
             // カード番号の更新 (Rank表示) - ゼロパディング & 等幅フォント指定
             cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${cards.length}</span>`;
@@ -1035,7 +1065,7 @@
                 autoFlipTimer = setTimeout(() => {
                     if (!isPaused && currentCard && cardBack) {
                         // flipする直前に裏面を表示
-                        cardBack.style.display = 'block'; // absolute配置なので block でOK
+                        cardBack.style.display = 'flex'; // ★ flexに変更
                         currentCard.classList.add('flipped');
                         autoNextTimer = setTimeout(nextCard, flipDelay);
                     }
@@ -1112,12 +1142,41 @@
              if (controlBox) controlBox.style.display = displayFlexApp; // flexに変更
              if (speedControl) speedControl.style.display = displayFlexApp; // flexに変更
              if (backButton) backButton.style.display = show ? 'inline-block' : 'none';
+
+             // ★ メインサブタイトルとNAWLサブタイトルの表示切り替え
+             if (mainSubtitle && nawlSubtitle) {
+                 if (show) {
+                     // フラッシュカード表示時
+                     // mainSubtitle.textContent = `NAWL 957 ${currentRankInfo}`; // ★ 変更前
+                     mainSubtitle.textContent = nawlSubtitle.textContent; // ★ NAWL 957 のみ表示
+                     nawlSubtitle.style.display = 'none'; // NAWLサブタイトルを非表示
+                 } else {
+                     // カテゴリ選択表示時
+                     mainSubtitle.textContent = 'デジタルフラッシュカード'; // デフォルトテキストに戻す
+                     nawlSubtitle.style.display = 'block'; // NAWLサブタイトルを表示
+                 }
+             }
         }
+
+        // ★ 初期選択カテゴリ情報を設定する関数 (ランク情報のみ取得・設定)
+        function setActiveCategoryInfo() {
+            const activeCard = document.querySelector('.category-card.active');
+            if (activeCard) {
+                // currentCategoryName = activeCard.querySelector('h3')?.textContent || ''; // 不要に
+                currentRankInfo = activeCard.querySelector('h3')?.textContent || ''; // ★ h3からランク情報を取得
+                if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo; // ★ ランク情報のみ表示
+            }
+        }
+
+        // ★ 初期読み込み時に実行
+        setActiveCategoryInfo();
 
 
         // スタートボタンのイベントリスナー
         if (startButton) {
             startButton.addEventListener('click', () => {
+                // ★ 開始時に再度アクティブなカテゴリ情報を取得・設定
+                setActiveCategoryInfo();
                 showFlashcardView(true); // フラッシュカード表示
 
                 // 最初のカードを表示して開始
@@ -1168,7 +1227,7 @@
                     }, 500);
                 } else {
                     // 裏面にする場合 -> 表示してからめくる
-                    cardBack.style.display = 'block'; // absolute配置なので block でOK
+                    cardBack.style.display = 'flex'; // ★ flex に変更
                     currentCard.classList.add('flipped');
                 }
             }
@@ -1239,14 +1298,37 @@
                 });
                  card.classList.add('active');
 
-                 // 選択中カテゴリテキストを更新
-                 const categoryName = card.querySelector('h3')?.textContent || '';
-                 const rankInfo = card.querySelector('p')?.textContent || '';
-                 if(selectedCategoryText) selectedCategoryText.textContent = `${categoryName} (${rankInfo})`;
+                 // ★ 選択中カテゴリ情報（ランク情報のみ）を更新
+                 setActiveCategoryInfo();
 
                  // TODO: カテゴリに応じたデータ読み込み処理
+                 // 例: loadCards(card.id);
             });
         });
+
+         // ★ ウィンドウリサイズ時にカード表示を更新するリスナー追加
+         let cardResizeTimer;
+         window.addEventListener('resize', () => {
+             // フラッシュカード表示中のみ実行
+             if (cardContainer && !cardContainer.classList.contains('hidden')) {
+                 clearTimeout(cardResizeTimer);
+                 cardResizeTimer = setTimeout(() => {
+                     // 現在表示中のカードを再描画してオフセットを更新
+                     showCardFront(currentCardIndex);
+                     // もし裏面が表示されていたら、そちらも更新
+                     if (currentCard && currentCard.classList.contains('flipped')) {
+                         // 一旦表面に戻してから再度裏返すことでJS内のスタイル適用を強制
+                         currentCard.classList.remove('flipped');
+                         void currentCard.offsetHeight; // 強制リフロー
+                         cardBack.style.display = 'flex'; // flex に変更
+                         currentCard.classList.add('flipped');
+                     } else if (cardBack) {
+                         // 表面表示中でも裏面の display は none にしておく
+                         cardBack.style.display = 'none';
+                     }
+                 }, 250); // 250ms待ってから再描画
+             }
+         });
 
     </script>
 </body>
