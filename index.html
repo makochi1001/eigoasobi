@@ -96,7 +96,16 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
             font-size: 2.2rem;
             letter-spacing: 1px;
+            display: flex; /* 絵文字の垂直中央揃えのため */
+            align-items: center; /* 絵文字の垂直中央揃えのため */
+            justify-content: center; /* 全体を中央揃え */
         }
+        /* 絵文字用のスタイル（オプション） */
+        h1 span {
+             vertical-align: middle; /* 垂直位置の微調整 */
+             display: inline-block;
+        }
+
 
         /* カテゴリ選択グリッドのスタイル */
         .category-grid {
@@ -110,7 +119,6 @@
         /* カテゴリカードの共通スタイル */
         .category-card {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2));
-            /* padding: 5px 10px; */ /* ★ 変更前 */
             padding: 20px 10px; /* ★ 上下パディングを増加 */
             border-radius: 12px;
             cursor: pointer;
@@ -567,7 +575,7 @@
                 /* grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */ /* ★ Tabletでも3列維持 */
             }
             .category-card {
-                /* padding: 4px 8px; */ /* ★ 変更前 */
+                /* padding: 16px 8px; */ /* ★ 変更前 */
                 padding: 16px 8px; /* ★ Tabletでのパディング調整 */
                 border-radius: 10px;
             }
@@ -664,7 +672,7 @@
                 grid-template-columns: repeat(2, max-content); /* ★ スマホでは2列 max-content */
              }
             .category-card {
-                /* padding: 5px 10px; */ /* ★ 変更前 */
+                /* padding: 20px 10px; */ /* ★ 変更前 */
                 padding: 20px 10px; /* ★ スマホでのパディング調整 */
                 border-radius: 8px;
             }
@@ -737,7 +745,7 @@
 <body>
     <div class="stars" id="starsContainer"></div>
 
-    <h1>EIGOASOBI</h1>
+    <h1><span>🐿️</span> EIGOASOBI <span>🌸</span></h1>
     <h2 id="mainSubtitle">デジタルフラッシュカード</h2>
     <h3 id="nawlSubtitle">NAWL 957</h3>
 
