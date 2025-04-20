@@ -521,6 +521,18 @@
             font-size: 0.9rem;
         }
 
+        /* ★ 注釈テキストのスタイル */
+        .disclaimer-text {
+            font-size: 0.75rem; /* 小さいフォントサイズ */
+            color: rgba(255, 255, 255, 0.6); /* 少し薄い色 */
+            margin-top: 10px; /* 上の要素との間隔 */
+            text-align: center;
+            max-width: 600px; /* 最大幅を指定 */
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4; /* 行間 */
+        }
+
         /* トップへ戻るボタン */
         .back-button-container {
             margin-top: 20px;
@@ -737,6 +749,11 @@
                 margin-top: 12px;
                 font-size: 0.8rem;
             }
+             /* ★ スマホでの注釈テキスト調整 */
+             .disclaimer-text {
+                 font-size: 0.7rem;
+                 margin-top: 8px;
+             }
              .back-button-container { margin-top: 12px; }
              .back-button { font-size: 12px; padding: 6px 15px; }
         }
@@ -811,6 +828,7 @@
 
     <div class="category-info" id="categoryInfo">
          選択中: <span id="selectedCategoryText">Rank 001 - 100</span> </div>
+    <p class="disclaimer-text">Words and ranks are referenced from the official NAWL (New Academic Word List, Browne et al., 2013). All Japanese translations and English definitions in this list are original and written by the author.</p>
 
     <div class="back-button-container">
         <button class="back-button" id="backButton">トップ画面に戻る</button>
@@ -988,6 +1006,7 @@
         const categoryCards = document.querySelectorAll('.category-card');
         const mainSubtitle = getElement('mainSubtitle');
         const nawlSubtitle = getElement('nawlSubtitle');
+        const disclaimerText = document.querySelector('.disclaimer-text'); // ★ 注釈要素を取得
 
         // 状態変数
         let currentCardIndex = 0;
@@ -1090,19 +1109,26 @@
             }
         }
 
-        // UI表示切り替え
+        // UI表示切り替え関数
         function showFlashcardView(show) {
              const displayGrid = show ? 'none' : 'grid';
              const displayApp = show ? 'block' : 'none';
              const displayFlexApp = show ? 'flex' : 'none';
+             const displayDisclaimer = show ? 'none' : 'block'; // ★ 注釈の表示状態
+
              if (categoryGrid) categoryGrid.style.display = displayGrid;
              if (categoryInfo) categoryInfo.style.display = show ? 'none' : 'block';
              if (startButton) startButton.classList.toggle('hidden', show);
+
              if (cardContainer) cardContainer.classList.toggle('hidden', !show);
              if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none';
              if (controlBox) controlBox.style.display = displayFlexApp;
              if (speedControl) speedControl.style.display = displayFlexApp;
              if (backButton) backButton.style.display = show ? 'inline-block' : 'none';
+
+             // ★ 注釈テキストの表示/非表示を切り替え
+             if (disclaimerText) disclaimerText.style.display = displayDisclaimer;
+
              if (mainSubtitle && nawlSubtitle) {
                  if (show) {
                      mainSubtitle.textContent = nawlSubtitle.textContent;
@@ -1132,7 +1158,7 @@
         if (startButton) {
             startButton.addEventListener('click', () => {
                 setActiveCategoryInfo();
-                showFlashcardView(true);
+                showFlashcardView(true); // フラッシュカード表示
                 currentCardIndex = 0;
                 isPaused = false;
                 if (pauseButtonSmall) {
@@ -1149,7 +1175,7 @@
         }
         if (backButton) {
             backButton.addEventListener('click', () => {
-                showFlashcardView(false);
+                showFlashcardView(false); // カテゴリ選択表示
                 clearTimeout(autoFlipTimer);
                 clearTimeout(autoNextTimer);
                 isPaused = true;
