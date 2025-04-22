@@ -7,18 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* 基本的な body スタイル */
         body {
-            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; /* フォント設定 */
+            margin: 0; /* マージン削除 */
+            padding: 15px; /* 内側余白 */
+            display: flex; /* Flexbox レイアウト */
+            flex-direction: column; /* 縦方向 */
+            align-items: center; /* 中央揃え */
             justify-content: flex-start; /* コンテンツを上部に配置 */
             min-height: 100vh; /* 画面の高さいっぱいに表示 */
             height: 100%; /* スクロールバー対策 */
             background: #000; /* フォールバック背景色 */
-            color: white;
+            color: white; /* 文字色 */
             overflow-x: hidden; /* 横スクロールバーを防止 */
             position: relative; /* 背景要素の基準点 */
             box-sizing: border-box; /* paddingを含めて計算 */
@@ -32,13 +33,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(125deg, #090e29, #020024, #1e0a3d, #09244c);
+            background: linear-gradient(125deg, #090e29, #020024, #1e0a3d, #09244c); /* グラデーション背景 */
             background-size: 400% 400%; /* アニメーションのために拡大 */
             z-index: -2; /* コンテンツの下に配置 */
-            animation: galaxyMove 20s ease infinite; /* アニメーション */
+            animation: galaxyMove 20s ease infinite; /* アニメーション適用 */
         }
 
-        /* 星のきらめき効果 */
+        /* 星のきらめき効果用コンテナ */
         .stars {
             position: fixed; /* 星を固定 */
             top: 0;
@@ -49,6 +50,7 @@
             z-index: -1; /* 背景とコンテンツの間に配置 */
         }
 
+        /* 個々の星のスタイル */
         .star {
             position: absolute;
             background-color: white;
@@ -58,81 +60,78 @@
             opacity: var(--opacity); /* 初期透明度 */
         }
 
+        /* 背景グラデーションのアニメーション */
         @keyframes galaxyMove {
             0% { background-position: 0% 50% }
             50% { background-position: 100% 50% }
             100% { background-position: 0% 50% }
         }
 
-        /* 修正: より安定した星の瞬きアニメーション */
+        /* 星の瞬きアニメーション */
         @keyframes twinkle {
             0%, 100% {
-                /* 開始/終了時は基本の透明度 */
-                opacity: var(--opacity);
+                opacity: var(--opacity); /* 開始/終了時は基本の透明度 */
                 transform: scale(1);
             }
             20% {
-                /* 少し暗く、小さく (元の60%) */
-                opacity: calc(var(--opacity) * 0.6);
+                opacity: calc(var(--opacity) * 0.6); /* 少し暗く、小さく */
                 transform: scale(0.9);
             }
             50% {
-                /* やや明るく、大きく (元の95%) */
-                 opacity: calc(var(--opacity) * 0.95);
+                 opacity: calc(var(--opacity) * 0.95); /* やや明るく、大きく */
                  transform: scale(1.05);
             }
              80% {
-                 /* 再び暗く (元の50%) */
-                 opacity: calc(var(--opacity) * 0.5);
+                 opacity: calc(var(--opacity) * 0.5); /* 再び暗く */
                  transform: scale(0.95);
              }
         }
 
-
+        /* メインタイトル (H1) */
         h1 {
             font-weight: 600;
             margin: 10px 0 5px; /* 上下のマージン調整 */
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
-            font-size: 2.2rem;
-            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5); /* テキストシャドウ */
+            font-size: 2.2rem; /* フォントサイズ */
+            letter-spacing: 1px; /* 文字間隔 */
             display: flex; /* 絵文字の垂直中央揃えのため */
             align-items: center; /* 絵文字の垂直中央揃えのため */
             justify-content: center; /* 全体を中央揃え */
         }
-        /* 絵文字用のスタイル（オプション） */
+        /* 絵文字用のスタイル */
         h1 span {
              vertical-align: middle; /* 垂直位置の微調整 */
              display: inline-block;
         }
 
 
-        /* カテゴリ選択グリッドのスタイル */
+        /* カテゴリ選択グリッド */
         .category-grid {
              display: grid;
-             grid-template-columns: repeat(3, max-content); /* ★ 列幅を内容に合わせる */
-             justify-content: center; /* ★ グリッドアイテムを中央揃え */
-             grid-gap: 15px;
+             grid-template-columns: repeat(3, max-content); /* 列幅を内容に合わせる */
+             justify-content: center; /* グリッドアイテムを中央揃え */
+             grid-gap: 15px; /* グリッド間の隙間 */
              margin: 15px auto 20px auto; /* 上下マージン調整 */
         }
 
         /* カテゴリカードの共通スタイル */
         .category-card {
-            background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2));
-            padding: 20px 10px; /* ★ 上下パディングを増加 */
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2)); /* 背景グラデーション */
+            padding: 20px 10px; /* 上下パディングを増加 */
+            border-radius: 12px; /* 角丸 */
+            cursor: pointer; /* カーソルをポインターに */
+            text-align: center; /* テキスト中央揃え */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影 */
             border: 1px solid rgba(255, 255, 255, 0.1); /* デフォルトボーダー */
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; /* トランジション効果 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        /* ★ カテゴリカード内の h3 (ランク表示) スタイル */
+        /* カテゴリカード内のランク表示 (H3) */
         .category-card h3 {
             margin: 0; /* マージンリセット */
             font-size: 0.9rem; /* フォントサイズ */
@@ -141,7 +140,7 @@
             line-height: 1.2; /* 行間 */
         }
 
-        /* ★ 準備中テキストのスタイル */
+        /* 準備中テキストのスタイル */
         .status-preparing {
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.7);
@@ -149,10 +148,10 @@
             margin-bottom: 0; /* 下マージン削除 */
         }
 
-        /* ★ 無効なカテゴリカードのスタイル */
+        /* 無効なカテゴリカードのスタイル */
         .category-disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            opacity: 0.6; /* 半透明に */
+            cursor: not-allowed; /* カーソル変更 */
         }
         /* 無効なカードホバー時の効果を抑制 */
         .category-disabled:hover {
@@ -160,47 +159,49 @@
              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-
         /* 選択中のカテゴリカード */
         .category-card.active {
              border: 2px solid rgba(52, 152, 219, 0.6); /* 強調ボーダー */
              box-shadow: 0 0 10px rgba(52, 152, 219, 0.3); /* 軽い光彩 */
         }
-        /* ★ 無効なカードが選択されても見た目は通常通り */
+        /* 無効なカードが選択されても見た目は通常通り */
         .category-disabled.active {
              border: 1px solid rgba(255, 255, 255, 0.1);
              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-             /* 必要であれば、アクティブだが無効な場合のスタイルを追加 */
         }
 
-
+        /* カードコンテナ */
         .card-container {
             width: 90%; /* 幅を画面比率で設定 */
             max-width: 400px; /* 最大幅を設定 */
-            aspect-ratio: 1000 / 618; /* ★ 黄金比 (横長) に戻す */
+            aspect-ratio: 1000 / 618; /* 黄金比 (横長) */
             perspective: 1500px; /* 3D効果の奥行き */
-            margin: 10px auto 20px auto; /* 上下マージン調整 (上を詰める) */
+            margin: 10px auto 20px auto; /* 上下マージン調整 */
             position: relative;
             z-index: 1; /* コントロールパネルより奥 */
         }
 
+        /* カード本体 */
         .card {
             width: 100%;
             height: 100%;
             position: relative;
             transform-style: preserve-3d; /* 3D空間で子要素を配置 */
-            transition: transform 0.5s ease; /* 回転アニメーション（より直線的に） */
+            transition: transform 0.5s ease; /* 回転アニメーション */
             cursor: default; /* 通常はクリック不可 */
         }
 
+        /* 一時停止中にクリック可能にするクラス */
         .card.clickable {
-            cursor: pointer; /* 一時停止中はクリック可能 */
+            cursor: pointer;
         }
 
+        /* カードが裏返った状態 */
         .card.flipped {
             transform: rotateY(180deg); /* Y軸を中心に180度回転 */
         }
 
+        /* カードの表と裏の共通スタイル */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
@@ -219,10 +220,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between; /* ★ 上下に配置 */
+            justify-content: space-between; /* 上下に配置 */
         }
 
-        /* ★ メインコンテンツ（単語/日本語定義）を中央揃えにするためのラッパー */
+        /* メインコンテンツ（単語/日本語定義）を中央揃えにするためのラッパー */
         .main-content {
             display: flex;
             flex-direction: column; /* h2/pが縦に並ぶように */
@@ -232,12 +233,13 @@
             width: 100%; /* 幅を100%に */
         }
 
-
+        /* カード表面のスタイル */
         .card-front {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.5), rgba(16, 54, 140, 0.3)); /* 青系のグラデーション */
             color: white;
         }
 
+        /* カード裏面のスタイル */
         .card-back {
             background: linear-gradient(135deg, rgba(39, 174, 96, 0.5), rgba(20, 90, 50, 0.3)); /* 緑系のグラデーション */
             color: white;
@@ -245,22 +247,22 @@
             display: none; /* 初期状態は非表示 */
         }
 
-        /* カード内のh2 (単語表示) */
+        /* カード内の単語表示 (H2) */
         .card h2 {
             margin: 0; /* マージンリセット */
             font-size: 2rem; /* 単語のフォントサイズ */
             font-weight: 600;
             letter-spacing: 1px;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            background: linear-gradient(to right, #ffffff, #d1d1d1);
+            background: linear-gradient(to right, #ffffff, #d1d1d1); /* 文字色グラデーション */
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-text-fill-color: transparent; /* 文字色を透明に */
             text-align: center; /* 中央揃え */
             max-width: 100%; /* コンテナからはみ出ないように */
         }
 
-        /* ★ 発音記号のスタイル - Flexアイテムとして配置 */
+        /* 発音記号のスタイル */
         .pronunciation {
             width: 90%; /* はみ出し防止 */
             text-align: center;
@@ -269,17 +271,16 @@
             font-weight: 400;
             line-height: 1.4;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-            margin-top: 5px; /* ★ 上の要素との間に少しマージンを追加 */
+            margin-top: 5px; /* 上の要素との間に少しマージンを追加 */
         }
 
-
-        /* ページタイトル下のh2 (メインサブタイトル) */
+        /* ページタイトル下のサブタイトル (H2) */
          body > h2#mainSubtitle {
             margin-top:0;
             text-shadow:0 0 5px rgba(255,255,255,0.5);
             font-size:1.2rem;
             font-weight:400;
-            margin-bottom: 5px; /* ★ 下のh3との間隔 */
+            margin-bottom: 5px; /* 下のh3との間隔 */
             line-height:1.5;
             text-align:center;
             background: none; /* グラデーション解除 */
@@ -287,39 +288,48 @@
              background-clip: unset;
              -webkit-text-fill-color: unset;
              color: white; /* 色を白に戻す */
-             /* min-height: 1.5em; */ /* ★ 変更前 */
-             min-height: 3em; /* ★ 2行表示に対応 */
+             min-height: 1.5em; /* テキスト変更時の高さ変動を防ぐ */
         }
-        /* ★ NAWLサブタイトル */
+        /* ★ 追加: アカデミック英語サブタイトル (H2) */
+        h2#academicSubtitle {
+            margin: 0; /* マージン削除 */
+            font-size: 1.0rem; /* フォントサイズ調整 */
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9); /* 少し明るく */
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+            text-align: center;
+            line-height: 1.3; /* 行間調整 */
+        }
+
+        /* NAWLサブタイトル (H3) */
         h3#nawlSubtitle {
-            margin: 0 0 10px 0; /* 上下のマージン調整 */
-            font-size: 1.0rem; /* 少し小さめに */
+            margin: 2px 0 10px 0; /* ★ 上マージンを少し追加 */
+            font-size: 1.0rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.8);
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
             text-align: center;
-            line-height: 1.4; /* ★ 行間を追加 */
         }
 
-
-        p { /* 汎用スタイル */
+        /* 段落 (P) の汎用スタイル */
+        p {
             margin: 5px 0;
             font-size: 18px;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             font-weight: 300; /* 少し細めのフォント */
         }
 
-        /* 裏面テキストの個別スタイル */
+        /* 裏面の日本語定義スタイル */
         .card-back p.definition-jp {
              max-width: 100%; /* コンテナからはみ出ないように */
             text-align: center; /* 中央揃えは維持 */
             margin: 0; /* マージンリセット */
             font-size: 1.3rem;
-            color: #FFD700;
+            color: #FFD700; /* 金色 */
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
         }
-        /* ★ 英語定義のスタイル - Flexアイテムとして配置 */
+        /* 裏面の英語定義スタイル (現在は日本語定義を表示) */
         .card-back p.definition-en {
              width: 90%; /* はみ出し防止 */
              text-align: center;
@@ -329,14 +339,9 @@
              font-weight: 400;
              line-height: 1.4;
              text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-             margin-top: 5px; /* ★ 上の要素との間に少しマージンを追加 */
         }
 
-
-        .definition {
-            /* スタイルはインラインで指定 */
-        }
-
+        /* ボタンの共通スタイル */
         .button {
             padding: 12px 24px;
             color: white;
@@ -371,6 +376,7 @@
             left: 100%;
         }
 
+        /* スタートボタンのスタイル */
         .start-button {
             background: linear-gradient(45deg, rgba(52, 152, 219, 0.8), rgba(41, 128, 185, 0.8)); /* 青系グラデーション */
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -394,12 +400,12 @@
              font-size: 12px;
              text-align: center;
              min-width: 60px; /* 最小幅設定 */
-             /* ★ ボタンが均等に広がるように */
-             flex-grow: 1;
+             flex-grow: 1; /* ボタンが均等に広がるように */
              flex-basis: 0;
         }
 
-        .prev-button { /* 戻るボタン */
+        /* 戻るボタン */
+        .prev-button {
              background: linear-gradient(45deg, #6c757d, #495057); /* グレー系 */
         }
         .prev-button:hover {
@@ -408,46 +414,47 @@
              box-shadow: 0 2px 8px rgba(108, 117, 125, 0.4);
         }
 
-        .next-button { /* 小さい方の次へボタン */
-            background: linear-gradient(45deg, rgb(39, 174, 96), rgb(27, 120, 66));
+        /* 次へボタン (小) */
+        .next-button {
+            background: linear-gradient(45deg, rgb(39, 174, 96), rgb(27, 120, 66)); /* 緑系 */
         }
-
         .next-button:hover {
-             background: linear-gradient(45deg, rgb(46, 204, 113), rgb(39, 174, 96)); /* ホバー色調整 */
+             background: linear-gradient(45deg, rgb(46, 204, 113), rgb(39, 174, 96));
              transform: translateY(-1px);
              box-shadow: 0 2px 8px rgba(46, 204, 113, 0.4);
         }
 
-        .pause-button { /* 小さい方の停止ボタン */
-            background: linear-gradient(45deg, rgb(211, 84, 0), rgb(170, 67, 0));
+        /* 停止ボタン (小) */
+        .pause-button {
+            background: linear-gradient(45deg, rgb(211, 84, 0), rgb(170, 67, 0)); /* オレンジ系 */
         }
-
         .pause-button:hover {
-            background: linear-gradient(45deg, rgb(243, 156, 18), rgb(211, 84, 0)); /* ホバー色調整 */
+            background: linear-gradient(45deg, rgb(243, 156, 18), rgb(211, 84, 0));
             transform: translateY(-1px);
             box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
         }
-         /* 再生ボタンのスタイル */
+         /* 再生ボタンのスタイル (停止ボタンに resume クラスが付与された場合) */
          .pause-button.resume {
-             background: linear-gradient(45deg, rgb(142, 68, 173), rgb(91, 44, 111));
+             background: linear-gradient(45deg, rgb(142, 68, 173), rgb(91, 44, 111)); /* 紫系 */
          }
          .pause-button.resume:hover {
              background: linear-gradient(45deg, rgb(155, 89, 182), rgb(142, 68, 173));
              box-shadow: 0 2px 8px rgba(155, 89, 182, 0.4);
          }
 
-
+        /* 進捗表示エリア (未使用) */
         .progress {
             margin-top: 20px;
             width: 100%;
             text-align: center;
         }
 
+        /* 非表示用クラス */
         .hidden {
             display: none !important; /* 確実に非表示にする */
         }
 
-        /* カードカウンターのスタイル調整 */
+        /* カードカウンターのスタイル */
         .card-counter {
             font-size: 18px;
             margin-top: 10px; /* 上（タイトル）とのマージン */
@@ -460,17 +467,17 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             display: none; /* 初期状態は非表示、JSで表示 */
-            width: fit-content;
+            width: fit-content; /* 内容に合わせた幅 */
             text-align: center;
-            align-self: center; /* 中央揃え */
-            font-family: 'Roboto Mono', monospace;
+            align-self: center; /* Flexコンテナ内で中央揃え */
+            font-family: 'Roboto Mono', monospace; /* 等幅フォント */
         }
 
         /* コントロール要素のコンテナ */
         .control-container {
              display: flex;
-             gap: 15px;
-             justify-content: center;
+             gap: 15px; /* 要素間の隙間 */
+             justify-content: center; /* 中央揃え */
              flex-wrap: wrap; /* 幅が足りなければ折り返す */
              margin-top: 15px; /* カードとの間隔 */
              width: 100%;
@@ -481,19 +488,20 @@
         .control-panel {
             text-align: center;
             padding: 10px 15px;
-            background: rgba(13, 16, 33, 0.7);
+            background: rgba(13, 16, 33, 0.7); /* 半透明背景 */
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(55, 75, 110, 0.4);
             display: none; /* 初期状態は非表示、JSで表示 */
             flex-direction: column; /* ラベルとボタンを縦に */
             align-items: center; /* 中央揃え */
-            justify-content: center; /* ★ ラベルとボタンを垂直中央揃え */
-            flex-grow: 1;
+            justify-content: center; /* ラベルとボタンを垂直中央揃え */
+            flex-grow: 1; /* 利用可能なスペースを埋める */
             flex-basis: 0; /* flex-growと合わせて使う */
-            min-width: 150px; /* 最小幅を設定して極端に狭くなるのを防ぐ */
-            aspect-ratio: 1000 / 618; /* ★ 黄金比を適用 */
+            min-width: 150px; /* 最小幅を設定 */
+            aspect-ratio: 1000 / 618; /* 黄金比を適用 */
         }
+        /* パネル内のラベル */
         .control-panel .panel-label {
             color: white;
             font-size: 14px;
@@ -502,6 +510,7 @@
             text-align: center;
             width: 100%;
         }
+        /* パネル内のボタンコンテナ */
         .control-panel .panel-buttons {
             display: flex;
             justify-content: center; /* 中央揃えに変更 */
@@ -509,12 +518,7 @@
             width: 100%;
         }
 
-        /* 操作ボタンパネル内のボタン */
-        #controlBox .panel-buttons button {
-             /* 基本スタイルは .control-button で指定 */
-        }
-
-        /* 速度ボタン */
+        /* 速度調整ボタン */
         .speed-button {
             background: rgba(86, 101, 115, 0.6);
             color: white;
@@ -522,7 +526,7 @@
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-             /* ★ 共通スタイルを継承 */
+             /* 共通スタイルを継承 */
              padding: 6px 12px;
              font-size: 12px;
              text-align: center;
@@ -536,13 +540,14 @@
             transform: translateY(-1px);
         }
 
+        /* 選択中の速度ボタン */
         .speed-button.active {
             background: linear-gradient(45deg, rgb(41, 128, 185), rgb(33, 97, 140));
             font-weight: 500;
             box-shadow: 0 0 10px rgba(41, 128, 185, 0.5);
         }
 
-        /* 選択中カテゴリ表示 */
+        /* 選択中カテゴリ表示エリア */
         .category-info {
             margin-top: 20px; /* スタートボタンとのマージン */
             color: rgba(255, 255, 255, 0.7);
@@ -550,7 +555,7 @@
             font-size: 0.9rem;
         }
 
-        /* ★ 注釈テキストのスタイル */
+        /* 注釈テキストのスタイル */
         .disclaimer-text {
             font-size: 0.75rem; /* 小さいフォントサイズ */
             color: rgba(255, 255, 255, 0.6); /* 少し薄い色 */
@@ -562,14 +567,15 @@
             line-height: 1.4; /* 行間 */
         }
 
-        /* トップへ戻るボタン */
+        /* トップへ戻るボタンのコンテナ */
         .back-button-container {
             margin-top: 20px;
             text-align: center;
         }
+        /* トップへ戻るボタン */
         .back-button {
             padding: 8px 20px;
-            background: linear-gradient(45deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8));
+            background: linear-gradient(45deg, rgba(52, 73, 94, 0.8), rgba(44, 62, 80, 0.8)); /* グレー系 */
             color: white;
             border: none;
             border-radius: 20px;
@@ -585,8 +591,7 @@
              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
          }
 
-
-        /* レスポンシブ対応 */
+        /* レスポンシブ対応 (タブレットサイズ) */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -602,27 +607,27 @@
 
             body > h2#mainSubtitle {
                 font-size: 1.1rem;
-                margin-bottom: 3px; /* ★ 調整 */
+                margin-bottom: 3px;
             }
+            /* ★ 追加: アカデミック英語サブタイトル (Tablet) */
+            h2#academicSubtitle { font-size: 0.9rem; }
             h3#nawlSubtitle {
-                font-size: 0.9rem; /* ★ 調整 */
-                margin-bottom: 8px; /* ★ 調整 */
+                font-size: 0.9rem;
+                margin-bottom: 8px;
             }
 
             .category-grid {
                 grid-gap: 10px;
                 margin-top: 10px;
                 margin-bottom: 15px;
-                /* grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */ /* ★ Tabletでも3列維持 */
+                /* Tabletでも3列維持 */
             }
             .category-card {
-                /* padding: 16px 8px; */ /* ★ 変更前 */
-                padding: 16px 8px; /* ★ Tabletでのパディング調整 */
+                padding: 16px 8px; /* Tabletでのパディング調整 */
                 border-radius: 10px;
             }
              .category-card h3 {
-                 /* font-size: 0.9rem; */ /* ★ 変更前 */
-                 font-size: 0.9rem; /* ★ Tabletでのフォントサイズ (ベースと同じ) */
+                 font-size: 0.9rem; /* Tabletでのフォントサイズ */
                  line-height: 1.2;
              }
 
@@ -645,7 +650,6 @@
              .pronunciation,
              .card-back p.definition-en {
                  font-size: 0.9rem;
-                 margin-top: 3px; /* Tabletでのマージン調整 */
              }
 
              .card-back p.definition-jp {
@@ -654,7 +658,6 @@
             .card h2 {
                 font-size: 1.7rem;
             }
-
 
             p { /* カード内のテキストサイズ (汎用) */
                 font-size: 15px;
@@ -674,10 +677,9 @@
              }
              .control-panel {
                  padding: 8px 12px;
-                 min-width: 0; /* ★ 最小幅リセット (Tablet) */
+                 min-width: 0; /* 最小幅リセット (Tablet) */
              }
              .control-panel .panel-label { font-size: 13px; }
-
 
             .category-info {
                 margin-top: 15px;
@@ -687,6 +689,7 @@
             .back-button { font-size: 13px; padding: 7px 18px; }
         }
 
+        /* レスポンシブ対応 (スマートフォンサイズ) */
         @media (max-width: 480px) {
              body {
                 padding: 8px;
@@ -698,11 +701,13 @@
             }
              body > h2#mainSubtitle {
                 font-size: 1rem;
-                margin-bottom: 2px; /* ★ 調整 */
+                margin-bottom: 2px;
             }
+             /* ★ 追加: アカデミック英語サブタイトル (Mobile) */
+             h2#academicSubtitle { font-size: 0.8rem; }
              h3#nawlSubtitle {
-                font-size: 0.8rem; /* ★ 調整 */
-                margin-bottom: 5px; /* ★ 調整 */
+                font-size: 0.8rem;
+                margin-bottom: 5px;
             }
 
              .category-grid {
@@ -710,16 +715,14 @@
                 margin-top: 8px;
                 margin-bottom: 12px;
                 width: 95%;
-                grid-template-columns: repeat(2, max-content); /* ★ スマホでは2列 max-content */
+                grid-template-columns: repeat(2, max-content); /* スマホでは2列 max-content */
              }
             .category-card {
-                /* padding: 20px 10px; */ /* ★ 変更前 */
-                padding: 20px 10px; /* ★ スマホでのパディング調整 */
+                padding: 20px 10px; /* スマホでのパディング調整 */
                 border-radius: 8px;
             }
              .category-card h3 {
-                 /* font-size: 0.8rem; */ /* ★ 変更前 */
-                 font-size: 0.8rem; /* ★ スマホでのフォントサイズ調整 */
+                 font-size: 0.8rem; /* スマホでのフォントサイズ調整 */
                  line-height: 1.2;
              }
 
@@ -741,7 +744,6 @@
              .pronunciation,
              .card-back p.definition-en {
                  font-size: 0.85rem;
-                  margin-top: 2px; /* Mobileでのマージン調整 */
              }
 
              .card-back p.definition-jp {
@@ -750,7 +752,6 @@
             .card h2 {
                 font-size: 1.5rem;
             }
-
 
             .button {
                 padding: 8px 16px;
@@ -766,19 +767,18 @@
              }
              .control-panel {
                  padding: 6px 10px;
-                 flex-basis: 100%; /* ★ スマホでは各パネルを1行にする */
-                 aspect-ratio: auto; /* ★ スマホではアスペクト比を解除 */
+                 flex-basis: 100%; /* スマホでは各パネルを1行にする */
+                 aspect-ratio: auto; /* スマホではアスペクト比を解除 */
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
               #speedControl .panel-buttons { gap: 5px; }
 
-
             .category-info {
                 margin-top: 12px;
                 font-size: 0.8rem;
             }
-             /* ★ スマホでの注釈テキスト調整 */
+             /* スマホでの注釈テキスト調整 */
              .disclaimer-text {
                  font-size: 0.7rem;
                  margin-top: 8px;
@@ -793,7 +793,10 @@
 
     <h1><span>🐿️</span> EIGOASOBI <span>🌸</span></h1>
     <h2 id="mainSubtitle">デジタルフラッシュカード</h2>
-    <h3 id="nawlSubtitle">アカデミック英語・学術英単語<br>New Academic Word List (NAWL) 957</h3> <div class="card-counter" id="cardCounter"></div>
+    <h2 id="academicSubtitle">アカデミック英語 - 学術英単語</h2>
+    <h3 id="nawlSubtitle">New Academic Word List (NAWL) 957 for beginners</h3>
+
+    <div class="card-counter" id="cardCounter"></div>
 
     <div class="category-grid">
          <div class="category-card active" id="category-awl1">
@@ -869,7 +872,8 @@
     <button class="button start-button" id="startButton">スタート</button>
 
     <div class="category-info" id="categoryInfo">
-         選択中: <span id="selectedCategoryText">Rank 001 - 100</span> </div>
+         選択中: <span id="selectedCategoryText">Rank 001 - 100</span>
+    </div>
     <p class="disclaimer-text">Words and ranks are referenced from the official NAWL (New Academic Word List, Browne et al., 2013). All Japanese translations and English definitions in this list are original and written by the author.</p>
 
     <div class="back-button-container">
@@ -880,18 +884,21 @@
         // 星空エフェクトを生成する関数
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
-            if (!starsContainer) return; // 要素チェック追加
-            const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-            let starsCount;
+            if (!starsContainer) return; // 要素が存在しない場合は処理を中断
+            const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window; // モバイル判定
+            let starsCount; // 星の数
+            // 画面サイズに応じて星の数を調整
             if (isMobile) {
-                starsCount = window.innerWidth < 480 ? 50 : 80;
+                starsCount = window.innerWidth < 480 ? 50 : 80; // スマホ/タブレット
             } else {
-                starsCount = 150;
+                starsCount = 150; // PC
             }
-            starsContainer.innerHTML = '';
+            starsContainer.innerHTML = ''; // 既存の星をクリア
+            // 指定した数の星を生成
             for (let i = 0; i < starsCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
+                // 星のサイズ、位置、アニメーション時間、遅延、透明度をランダムに設定
                 const size = isMobile ? Math.random() * 1.5 + 0.5 : Math.random() * 2 + 1;
                 const left = Math.random() * 100;
                 const top = Math.random() * 100;
@@ -902,43 +909,135 @@
                 star.style.height = `${size}px`;
                 star.style.left = `${left}%`;
                 star.style.top = `${top}%`;
-                star.style.setProperty('--duration', `${duration}s`);
-                star.style.setProperty('--opacity', opacity);
+                star.style.setProperty('--duration', `${duration}s`); // CSS変数に設定
+                star.style.setProperty('--opacity', opacity); // CSS変数に設定
                 star.style.animationDelay = `${delay}s`;
-                starsContainer.appendChild(star);
+                starsContainer.appendChild(star); // コンテナに追加
             }
         }
+        // ページ読み込み時に星を生成
         window.addEventListener('load', createStars);
+        // ウィンドウリサイズ時に星を再生成（タイマーで負荷軽減）
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                  const starsContainer = document.getElementById('starsContainer');
                  if (starsContainer) {
-                    starsContainer.innerHTML = '';
-                    createStars();
+                    starsContainer.innerHTML = ''; // クリア
+                    createStars(); // 再生成
                  }
-            }, 250);
+            }, 250); // 250ms後に実行
         });
 
-        // カードデータ (仮 - Rank 1-100 のみ使用)
+        // カードデータ (Rank 1-100)
         const cards = [
-             { front: { word: "repertoire" }, back: { pronunciation: "ˈrɛp.ərˌtwɑr", definition_jp: "スキルや技能の集合", definition_en: "スキルや業績のコレクション" } },
-             { front: { word: "obtain" }, back: { pronunciation: "əbˈteɪn", definition_jp: "手に入れる", definition_en: "得る" } },
-             { front: { word: "distribution" }, back: { pronunciation: "ˌdɪs.trəˈbju.ʃən", definition_jp: "分布", definition_en: "物事が特定の地域やグループに広がっている方法" } },
-             { front: { word: "parameter" }, back: { pronunciation: "pəˈræm.ɪ.tər", definition_jp: "パラメータ", definition_en: "特性や一定の要素、限界" } },
-             { front: { word: "aspect" }, back: { pronunciation: "ˈæs.pɛkt", definition_jp: "側面", definition_en: "特質、部分、または要素" } },
-             { front: { word: "dynamic" }, back: { pronunciation: "daɪˈnæ.mɪk", definition_jp: "動的な", definition_en: "常に活動している、または変化している；物理学では：運動に関連する力" } },
-             { front: { word: "impact" }, back: { pronunciation: "ˈɪm.pækt", definition_jp: "影響", definition_en: "衝撃的な効果や結果（動詞）力強く打つ" } },
-             { front: { word: "domain" }, back: { pronunciation: "doʊˈmeɪn", definition_jp: "領域", definition_en: "行動、思考、または影響の分野；知識の領域" } },
-             { front: { word:"publish" }, back: { pronunciation: "ˈpʌb.lɪʃ", definition_jp: "出版する", definition_en: "本、雑誌、またはオンラインで印刷する" } },
-             { front: { word: "denote" }, back: { pronunciation: "dɪˈnoʊt", definition_jp: "示す", definition_en: "何かの名前や記号になる" } },
-             // ... (他の Rank 1-100 の単語データ) ...
-             { front: { word: "essentially" }, back: { pronunciation: "ɪˈsɛnʃəlɪ", definition_jp: "本質的に", definition_en: "基本的に、主に" } },
+            { front: { word: "repertoire" }, back: { pronunciation: "[発音]", definition_jp: "レパートリー", definition_en: "個人やグループが習得し、使用できる技能や演目のコレクション" } },
+            { front: { word: "obtain" }, back: { pronunciation: "[発音]", definition_jp: "獲得する", definition_en: "努力や行動によって何かを手に入れること" } },
+            { front: { word: "distribution" }, back: { pronunciation: "[発音]", definition_jp: "分布", definition_en: "物事が特定の地域やグループにどのように広がっているか" } },
+            { front: { word: "parameter" }, back: { pronunciation: "[発音]", definition_jp: "パラメーター", definition_en: "何かがどのように動作するかを制御または説明する値" } },
+            { front: { word: "aspect" }, back: { pronunciation: "[発音]", definition_jp: "側面", definition_en: "特質、部分、または要素；何かを見る、または考える方法" } },
+            { front: { word: "dynamic" }, back: { pronunciation: "[発音]", definition_jp: "ダイナミック", definition_en: "活発で絶えず変化する；動きやエネルギーに関連する" } },
+            { front: { word: "impact" }, back: { pronunciation: "[発音]", definition_jp: "影響", definition_en: "強い効果または影響；（動）何かに強く衝突する・打ち当たる" } },
+            { front: { word: "domain" }, back: { pronunciation: "[発音]", definition_jp: "ドメイン", definition_en: "特定の活動、知識、または影響の範囲；コンピューター用語では：ウェブアドレスのシステム" } },
+            { front: { word: "publish" }, back: { pronunciation: "[発音]", definition_jp: "出版する", definition_en: "文書を印刷物やデジタル形式で一般に公開すること" } },
+            { front: { word: "denote" }, back: { pronunciation: "[発音]", definition_jp: "表す", definition_en: "何かを意味する、または指し示す" } },
+            { front: { word: "authority" }, back: { pronunciation: "[発音]", definition_jp: "権威", definition_en: "管理や決定を行う力や権利；認められた専門性を持つ人または組織" } },
+            { front: { word: "semantic" }, back: { pronunciation: "[発音]", definition_jp: "意味論的", definition_en: "言葉や言語の意味に関連する" } },
+            { front: { word: "par" }, back: { pronunciation: "[発音]", definition_jp: "標準", definition_en: "通常とみなされる水準や価値" } },
+            { front: { word: "ion" }, back: { pronunciation: "[発音]", definition_jp: "イオン", definition_en: "電子の獲得または損失により電荷を持つ原子や分子" } },
+            { front: { word: "matrix" }, back: { pronunciation: "[発音]", definition_jp: "マトリックス", definition_en: "何かが発展する環境または構造；数学では：行と列に配置された数字や記号" } },
+            { front: { word: "linear" }, back: { pronunciation: "[発音]", definition_jp: "線形", definition_en: "直線上に配置された；変化が直接比例の関係にある" } },
+            { front: { word: "cognitive" }, back: { pronunciation: "[発音]", definition_jp: "認知的", definition_en: "思考、理解、学習、記憶などの心の働き（心的過程）に関連する" } },
+            { front: { word: "graph" }, back: { pronunciation: "[発音]", definition_jp: "グラフ", definition_en: "変数またはデータ間の関係を示す図表" } },
+            { front: { word: "correlation" }, back: { pronunciation: "[発音]", definition_jp: "相関", definition_en: "2つの変数が共に変化する統計的な関係性" } },
+            { front: { word: "linguistic" }, back: { pronunciation: "[発音]", definition_jp: "言語学的", definition_en: "言語またはその研究に関連する" } },
+            { front: { word: "acid" }, back: { pronunciation: "[発音]", definition_jp: "酸", definition_en: "酸味があり、溶液中で水素イオンを放出し、塩基と反応する物質。例：レモン汁" } },
+            { front: { word: "induce" }, back: { pronunciation: "[発音]", definition_jp: "誘導する", definition_en: "引き起こす、説得する" } },
+            { front: { word: "velocity" }, back: { pronunciation: "[発音]", definition_jp: "速度", definition_en: "特定の方向への速度" } },
+            { front: { word: "interval" }, back: { pronunciation: "[発音]", definition_jp: "間隔", definition_en: "2点、数字、または時間の間の距離" } },
+            { front: { word: "discourse" }, back: { pronunciation: "[発音]", definition_jp: "談話", definition_en: "会話、対話" } },
+            { front: { word: "finite" }, back: { pronunciation: "[発音]", definition_jp: "有限", definition_en: "限界がある；限られた時間続く" } },
+            { front: { word: "stimulus" }, back: { pronunciation: "[発音]", definition_jp: "刺激", definition_en: "変化を起こすもの" } },
+            { front: { word: "vector" }, back: { pronunciation: "[発音]", definition_jp: "ベクトル", definition_en: "大きさと方向の両方を持つ量" } },
+            { front: { word: "electron" }, back: { pronunciation: "[発音]", definition_jp: "電子", definition_en: "負に帯電した粒子" } },
+            { front: { word: "receptor" }, back: { pronunciation: "[発音]", definition_jp: "受容体", definition_en: "情報を受け取る装置" } },
+            { front: { word: "theorem" }, back: { pronunciation: "[発音]", definition_jp: "定理", definition_en: "証明できる声明" } },
+            { front: { word: "algorithm" }, back: { pronunciation: "[発音]", definition_jp: "アルゴリズム", definition_en: "問題解決を保証する論理的なルールや手順" } },
+            { front: { word: "fluid" }, back: { pronunciation: "[発音]", definition_jp: "流体", definition_en: "簡単に流れることができる物質。例：水" } },
+            { front: { word: "developmental" }, back: { pronunciation: "[発音]", definition_jp: "発達的", definition_en: "物事や人の発展や成長に関する" } },
+            { front: { word: "bound" }, back: { pronunciation: "[発音]", definition_jp: "向かう", definition_en: "特定の場所に行く；ジャンプする" } },
+            { front: { word: "molecular" }, back: { pronunciation: "[発音]", definition_jp: "分子的", definition_en: "結合された原子に関するまたは原子によって引き起こされる" } },
+            { front: { word: "transformation" }, back: { pronunciation: "[発音]", definition_jp: "変換", definition_en: "変化" } },
+            { front: { word: "spatial" }, back: { pronunciation: "[発音]", definition_jp: "空間的", definition_en: "空間に関する" } },
+            { front: { word: "coefficient" }, back: { pronunciation: "[発音]", definition_jp: "係数", definition_en: "数学的表現における変数に掛けられる数字" } },
+            { front: { word: "translation" }, back: { pronunciation: "[発音]", definition_jp: "翻訳", definition_en: "ある形から別の形に変わること。例：ある言語から別の言語への変換" } },
+            { front: { word: "membrane" }, back: { pronunciation: "[発音]", definition_jp: "膜", definition_en: "薄い組織のカバー" } },
+            { front: { word: "neuron" }, back: { pronunciation: "[発音]", definition_jp: "ニューロン", definition_en: "神経細胞；神経系の基本的な構成要素" } },
+            { front: { word: "simulation" }, back: { pronunciation: "[発音]", definition_jp: "シミュレーション", definition_en: "コピー；実世界の特性を研究・分析するための方法" } },
+            { front: { word: "lexical" }, back: { pronunciation: "[発音]", definition_jp: "語彙的", definition_en: "言葉に関する" } },
+            { front: { word: "regime" }, back: { pronunciation: "[発音]", definition_jp: "体制", definition_en: "管理システム；政府の形態" } },
+            { front: { word: "variance" }, back: { pronunciation: "[発音]", definition_jp: "分散", definition_en: "差の量；分布の変動性を測る統計値" } },
+            { front: { word: "molecule" }, back: { pronunciation: "[発音]", definition_jp: "分子", definition_en: "化学的に結合した2つ以上の原子" } },
+            { front: { word: "marker" }, back: { pronunciation: "[発音]", definition_jp: "マーカー", definition_en: "認識や識別が容易なもの" } },
+            { front: { word: "empirical" }, back: { pronunciation: "[発音]", definition_jp: "経験的", definition_en: "観察や実験に基づく" } },
+            { front: { word: "robot" }, back: { pronunciation: "[発音]", definition_jp: "ロボット", definition_en: "人間のように行動する機械的な生き物" } },
+            { front: { word: "statistical" }, back: { pronunciation: "[発音]", definition_jp: "統計的", definition_en: "情報を表す数字に関する" } },
+            { front: { word: "vowel" }, back: { pronunciation: "[発音]", definition_jp: "母音", definition_en: "音声；a、e、i、o、u、時にはyも含む" } },
+            { front: { word: "equilibrium" }, back: { pronunciation: "[発音]", definition_jp: "平衡", definition_en: "バランスの状態" } },
+            { front: { word: "intensity" }, back: { pronunciation: "[発音]", definition_jp: "強度", definition_en: "大きなエネルギー、強さ、集中；物理学では：強度＝パワー／単位面積" } },
+            { front: { word: "regression" }, back: { pronunciation: "[発音]", definition_jp: "回帰", definition_en: "後戻り；統計学では：結果の値を別の変数との相関に基づいて予測することに焦点を当てた相関手続きの一種" } },
+            { front: { word: "diagnosis" }, back: { pronunciation: "[発音]", definition_jp: "診断", definition_en: "検査結果に基づく専門家による決定" } },
+            { front: { word: "identification" }, back: { pronunciation: "[発音]", definition_jp: "識別", definition_en: "識別された状態；人を識別するもの" } },
+            { front: { word: "node" }, back: { pronunciation: "[発音]", definition_jp: "ノード", definition_en: "ネットワーク内の交差点や接合点；植物で新しい葉が生えるところ" } },
+            { front: { word: "partial" }, back: { pronunciation: "[発音]", definition_jp: "部分的", definition_en: "不完全；一方の側を他方より好む" } },
+            { front: { word: "correlate" }, back: { pronunciation: "[発音]", definition_jp: "相関させる", definition_en: "2つのアイテムまたはイベント間の関係を示す" } },
+            { front: { word: "mortality" }, back: { pronunciation: "[発音]", definition_jp: "死亡率", definition_en: "人間であり死ぬことができる性質や状態" } },
+            { front: { word: "antibody" }, back: { pronunciation: "[発音]", definition_jp: "抗体", definition_en: "病気に対する体が提供する防御" } },
+            { front: { word: "temporal" }, back: { pronunciation: "[発音]", definition_jp: "時間的", definition_en: "時間に関する" } },
+            { front: { word: "particle" }, back: { pronunciation: "[発音]", definition_jp: "粒子", definition_en: "非常に小さな何かの一部" } },
+            { front: { word: "duration" }, back: { pronunciation: "[発音]", definition_jp: "持続時間", definition_en: "あるものが続く時間の長さ" } },
+            { front: { word: "behavioral" }, back: { pronunciation: "[発音]", definition_jp: "行動的", definition_en: "行動の仕方に関する" } },
+            { front: { word: "consumption" }, back: { pronunciation: "[発音]", definition_jp: "消費", definition_en: "物事にかけるお金の量；食べたり飲んだりするプロセス" } },
+            { front: { word: "bilingual" }, back: { pronunciation: "[発音]", definition_jp: "バイリンガル", definition_en: "2つの言語を話す人" } },
+            { front: { word: "sensitivity" }, back: { pronunciation: "[発音]", definition_jp: "感度", definition_en: "敏感であること；生理学では：生物またはその一部が刺激に反応する能力；電子工学では：ラジオ機器が着信信号に反応する能力" } },
+            { front: { word: "similarity" }, back: { pronunciation: "[発音]", definition_jp: "類似性", definition_en: "人や物事が同じである程度" } },
+            { front: { word: "optimal" }, back: { pronunciation: "[発音]", definition_jp: "最適", definition_en: "最良" } },
+            { front: { word: "explicit" }, back: { pronunciation: "[発音]", definition_jp: "明示的", definition_en: "明確な、はっきりと述べられた" } },
+            { front: { word: "mutation" }, back: { pronunciation: "[発音]", definition_jp: "突然変異", definition_en: "変化；遺伝学では：遺伝構造を変える出来事" } },
+            { front: { word: "colonial" }, back: { pronunciation: "[発音]", definition_jp: "植民地的", definition_en: "集団で生活することに関する" } },
+            { front: { word: "spectrum" }, back: { pronunciation: "[発音]", definition_jp: "スペクトル", definition_en: "赤から紫までの色の波長" } },
+            { front: { word: "phonological" }, back: { pronunciation: "[発音]", definition_jp: "音韻論的", definition_en: "音に関する" } },
+            { front: { word: "nucleus" }, back: { pronunciation: "[発音]", definition_jp: "核", definition_en: "細胞の制御中心" } },
+            { front: { word: "onset" }, back: { pronunciation: "[発音]", definition_jp: "発症", definition_en: "始まり" } },
+            { front: { word: "integration" }, back: { pronunciation: "[発音]", definition_jp: "統合", definition_en: "物事を全体としてまとめること" } },
+            { front: { word: "dominant" }, back: { pronunciation: "[発音]", definition_jp: "優勢", definition_en: "最強" } },
+            { front: { word: "pathway" }, back: { pronunciation: "[発音]", definition_jp: "経路", definition_en: "経路；生化学では：反応の連鎖" } },
+            { front: { word: "coordinate" }, back: { pronunciation: "[発音]", definition_jp: "調整する", definition_en: "何かに秩序と組織をもたらす；（名）数学では：固定図形または線のシステムを参照して点または線の位置を定義するのに役立つ大きさ" } },
+            { front: { word: "calculation" }, back: { pronunciation: "[発音]", definition_jp: "計算", definition_en: "合計の答え；計算する行為" } },
+            { front: { word: "precede" }, back: { pronunciation: "[発音]", definition_jp: "先行する", definition_en: "先行する" } },
+            { front: { word: "subset" }, back: { pronunciation: "[発音]", definition_jp: "部分集合", definition_en: "より大きな集合の一部である小さな集合" } },
+            { front: { word: "syntactic" }, back: { pronunciation: "[発音]", definition_jp: "構文的", definition_en: "文法的" } },
+            { front: { word: "orientation" }, back: { pronunciation: "[発音]", definition_jp: "方向付け", definition_en: "時間、場所、人々を参照して自分の環境内で自分自身を位置づける能力" } },
+            { front: { word: "proposition" }, back: { pronunciation: "[発音]", definition_jp: "命題", definition_en: "アイデア；提案" } },
+            { front: { word: "inequality" }, back: { pronunciation: "[発音]", definition_jp: "不等式", definition_en: "同じではない；数学では：<、>、=、≠、または？を使用して2つの量を比較する文" } },
+            { front: { word: "identical" }, back: { pronunciation: "[発音]", definition_jp: "同一", definition_en: "あらゆる面で同じ" } },
+            { front: { word: "prevalence" }, back: { pronunciation: "[発音]", definition_jp: "普及率", definition_en: "広く普及している、一般的な" } },
+            { front: { word: "differential" }, back: { pronunciation: "[発音]", definition_jp: "微分", definition_en: "違い；多様性" } },
+            { front: { word: "generalize" }, back: { pronunciation: "[発音]", definition_jp: "一般化する", definition_en: "事実から共通の考えや結論を導き出す" } },
+            { front: { word: "beam" }, back: { pronunciation: "[発音]", definition_jp: "ビーム", definition_en: "金属や木の長い部分；光やエネルギーの線" } },
+            { front: { word: "pulse" }, back: { pronunciation: "[発音]", definition_jp: "脈拍", definition_en: "心臓の鼓動" } },
+            { front: { word: "norm" }, back: { pronunciation: "[発音]", definition_jp: "規範", definition_en: "パフォーマンスや行動の確立された基準" } },
+            { front: { word: "trait" }, back: { pronunciation: "[発音]", definition_jp: "特性", definition_en: "特徴" } },
+            { front: { word: "prediction" }, back: { pronunciation: "[発音]", definition_jp: "予測", definition_en: "これから起こることの声明" } },
+            { front: { word: "correspondence" }, back: { pronunciation: "[発音]", definition_jp: "対応", definition_en: "文章による通信；類似性" } },
+            { front: { word: "essentially" }, back: { pronunciation: "[発音]", definition_jp: "本質的に", definition_en: "基本的に、主に" } }
         ];
-        // TODO: 将来的にカテゴリごとのカードデータをロードする処理を追加
+        // ★ 選択されたカテゴリの総カード数を保持する変数 (100件に更新)
+        let totalCardsInCategory = cards.length; // cards配列の要素数を設定
+        // TODO: 将来的にカテゴリごとのカードデータをロードする処理を追加する
 
-        // DOM要素の取得
+        // DOM要素の取得 (getElementByIdのショートカット)
         const getElement = (id) => document.getElementById(id);
         const cardContainer = getElement('cardContainer');
         const currentCard = getElement('currentCard');
@@ -960,103 +1059,110 @@
         const selectedCategoryText = getElement('selectedCategoryText');
         const categoryCards = document.querySelectorAll('.category-card');
         const mainSubtitle = getElement('mainSubtitle');
+        // ★ 追加: 新しいサブタイトルの要素を取得
+        const academicSubtitle = getElement('academicSubtitle');
         const nawlSubtitle = getElement('nawlSubtitle');
         const disclaimerText = document.querySelector('.disclaimer-text');
 
         // 状態変数
-        let currentCardIndex = 0;
-        let autoFlipTimer = null;
-        let autoNextTimer = null;
-        let isPaused = false;
-        let flipDelay = 2000;
-        let autoAdvance = true;
-        let currentRankInfo = '';
+        let currentCardIndex = 0; // 現在表示しているカードのインデックス
+        let autoFlipTimer = null; // カードを自動で裏返すタイマー
+        let autoNextTimer = null; // 次のカードへ自動で進むタイマー
+        let isPaused = false; // 一時停止中かどうかのフラグ
+        let flipDelay = 2000; // カードが表示されてから裏返るまでの時間 (ミリ秒)
+        let autoAdvance = true; // 自動進行するかどうかのフラグ (現在は常にtrue)
+        let currentRankInfo = ''; // 現在選択中のランク情報
 
         // カードの表示を更新する関数
         function showCardFront(index) {
-             if (!cards || index < 0 || index >= cards.length) return;
+             if (!cards || index < 0 || index >= cards.length) return; // データやインデックスのチェック
             const card = cards[index];
-            if (!cardFront || !cardBack || !cardCounter || !currentCard) return;
+            if (!cardFront || !cardBack || !cardCounter || !currentCard) return; // 要素のチェック
 
-            // ★ HTML構造を変更：メインコンテンツをラッパーで囲む
+            // カード表面のHTMLを生成・設定
             cardFront.innerHTML = `
                 <div class="main-content">
-                    <h2>${card.front.word}</h2>
-                </div>
-                <span class="pronunciation">${card.back.pronunciation}</span>
-            `;
+                    <h2>${card.front.word}</h2> </div>
+                <span class="pronunciation">${card.back.pronunciation}</span> `; // 発音記号 (プレースホルダー)
+            // カード裏面のHTMLを生成・設定
             cardBack.innerHTML = `
                  <div class="main-content">
-                    <p class="definition-jp">${card.back.definition_jp}</p>
-                 </div>
-                 <p class="definition-en">${card.back.definition_en}</p>
-            `;
+                    <p class="definition-jp">${card.back.definition_jp}</p> </div>
+                 <p class="definition-en">${card.back.definition_en}</p> `; // 日本語定義
 
-            // カード番号の更新
-            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${cards.length}</span>`;
+            // カードカウンターの表示を更新 (カテゴリの総カード数を使用)
+            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${totalCardsInCategory}</span>`;
 
             // カード裏面を非表示に設定
             if (cardBack) cardBack.style.display = 'none';
 
-            // カードを表面に戻す
+            // カードを表面に戻す (flippedクラスを削除)
             currentCard.classList.remove('flipped');
-            void currentCard.offsetHeight; // 強制リフロー
+            void currentCard.offsetHeight; // 強制リフロー (アニメーションのため)
 
             // 一時停止状態に応じてクリック可能クラスを制御
              if (currentCard) {
                  currentCard.classList.toggle('clickable', isPaused);
              }
 
-            // 自動進行タイマーの設定
+            // 自動進行タイマーの設定 (一時停止中でなければ)
             if (autoAdvance && !isPaused) {
-                clearTimeout(autoFlipTimer);
+                clearTimeout(autoFlipTimer); // 既存のタイマーをクリア
                 clearTimeout(autoNextTimer);
+                // 指定時間後にカードを裏返すタイマーを設定
                 autoFlipTimer = setTimeout(() => {
                     if (!isPaused && currentCard && cardBack) {
-                        cardBack.style.display = 'flex'; // 裏面を表示
-                        currentCard.classList.add('flipped'); // 回転
-                        autoNextTimer = setTimeout(nextCard, flipDelay); // 次のカードへ
+                        cardBack.style.display = 'flex'; // 裏面を表示状態にする
+                        currentCard.classList.add('flipped'); // 回転アニメーション開始
+                        // さらに指定時間後に次のカードへ進むタイマーを設定
+                        autoNextTimer = setTimeout(nextCard, flipDelay);
                     }
                 }, flipDelay);
             }
         }
 
-        // 次のカードへ
+        // 次のカードへ進む関数
         function nextCard() {
-            clearTimeout(autoFlipTimer);
+            clearTimeout(autoFlipTimer); // タイマークリア
             clearTimeout(autoNextTimer);
+            // 現在のカード配列の長さでインデックスを計算
             currentCardIndex = (currentCardIndex + 1) % cards.length;
-            showCardFront(currentCardIndex);
+            showCardFront(currentCardIndex); // 新しいカードを表示
         }
 
-        // 前のカードへ
+        // 前のカードへ戻る関数
         function prevCard() {
-            isPaused = true;
+            isPaused = true; // 自動進行を停止
+            // 停止ボタンを「再生」表示に変更
             if (pauseButtonSmall) {
                 pauseButtonSmall.textContent = '再生';
                 pauseButtonSmall.classList.add('resume');
             }
-            if (currentCard) currentCard.classList.add('clickable');
-            clearTimeout(autoFlipTimer);
+            if (currentCard) currentCard.classList.add('clickable'); // カードをクリック可能に
+            clearTimeout(autoFlipTimer); // タイマークリア
             clearTimeout(autoNextTimer);
-            currentCardIndex--;
+            currentCardIndex--; // インデックスを戻す
+            // 現在のカード配列の長さでインデックスを計算
             if (currentCardIndex < 0) {
                 currentCardIndex = cards.length - 1;
             }
-            showCardFront(currentCardIndex);
+            showCardFront(currentCardIndex); // 前のカードを表示
         }
 
-        // 表示速度の設定
+        // 表示速度を設定する関数
         function setSpeed(seconds) {
-            flipDelay = seconds * 1000;
+            flipDelay = seconds * 1000; // 表示時間をミリ秒に変換
+            // すべての速度ボタンから active クラスを削除
             [speed2sButton, speed1sButton, speed0_5sButton].forEach(btn => {
                 if(btn) btn.classList.remove('active');
             });
+            // 対応するボタンに active クラスを追加
             let activeButton;
             if (seconds === 2) activeButton = speed2sButton;
             else if (seconds === 1) activeButton = speed1sButton;
             else if (seconds === 0.5) activeButton = speed0_5sButton;
             if(activeButton) activeButton.classList.add('active');
+            // 一時停止中でなければ、タイマーをリセットして現在のカードを再表示
             if (!isPaused) {
                 clearTimeout(autoFlipTimer);
                 clearTimeout(autoNextTimer);
@@ -1064,178 +1170,207 @@
             }
         }
 
-        // UI表示切り替え関数
+        // UI表示を切り替える関数 (カテゴリ選択画面 ⇔ フラッシュカード画面)
         function showFlashcardView(show) {
-             const displayGrid = show ? 'none' : 'grid';
-             const displayApp = show ? 'block' : 'none';
-             const displayFlexApp = show ? 'flex' : 'none';
-             const displayDisclaimer = show ? 'none' : 'block'; // ★ 注釈の表示状態
+             const displayGrid = show ? 'none' : 'grid'; // カテゴリグリッドの表示/非表示
+             const displayApp = show ? 'block' : 'none'; // カードコンテナ等の表示/非表示
+             const displayFlexApp = show ? 'flex' : 'none'; // コントロールパネルの表示/非表示 (flex)
+             const displayDisclaimer = show ? 'none' : 'block'; // 注釈の表示/非表示
 
+             // 各要素の表示スタイルを設定
              if (categoryGrid) categoryGrid.style.display = displayGrid;
-             if (categoryInfo) categoryInfo.style.display = show ? 'none' : 'block';
-             if (startButton) startButton.classList.toggle('hidden', show);
+             if (categoryInfo) categoryInfo.style.display = show ? 'none' : 'block'; // カテゴリ情報は選択画面でのみ表示
+             if (startButton) startButton.classList.toggle('hidden', show); // スタートボタンは選択画面でのみ表示
 
-             if (cardContainer) cardContainer.classList.toggle('hidden', !show);
-             if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none';
-             if (controlBox) controlBox.style.display = displayFlexApp;
-             if (speedControl) speedControl.style.display = displayFlexApp;
-             if (backButton) backButton.style.display = show ? 'inline-block' : 'none';
+             if (cardContainer) cardContainer.classList.toggle('hidden', !show); // カードコンテナはカード画面でのみ表示
+             if (cardCounter) cardCounter.style.display = show ? 'inline-block' : 'none'; // カウンターはカード画面でのみ表示
+             if (controlBox) controlBox.style.display = displayFlexApp; // コントロールはカード画面でのみ表示
+             if (speedControl) speedControl.style.display = displayFlexApp; // 速度調整はカード画面でのみ表示
+             if (backButton) backButton.style.display = show ? 'inline-block' : 'none'; // 戻るボタンはカード画面でのみ表示
 
-             // ★ 注釈テキストの表示/非表示を切り替え
-             if (disclaimerText) disclaimerText.style.display = displayDisclaimer;
+             if (disclaimerText) disclaimerText.style.display = displayDisclaimer; // 注釈は選択画面でのみ表示
 
-             if (mainSubtitle && nawlSubtitle) {
-                 if (show) {
-                     // ★ フラッシュカード画面のサブタイトルも変更 (innerHTMLをコピー)
-                     // mainSubtitle.textContent = nawlSubtitle.textContent; // ★ 変更前
-                     mainSubtitle.innerHTML = nawlSubtitle.innerHTML; // ★ 変更後 (改行を維持)
-                     nawlSubtitle.style.display = 'none';
-                 } else {
-                     mainSubtitle.textContent = 'デジタルフラッシュカード'; // トップ画面のデフォルト
-                     nawlSubtitle.style.display = 'block';
+             // ★ サブタイトルの表示内容を切り替え
+             if (mainSubtitle && academicSubtitle && nawlSubtitle) {
+                 if (show) { // カード画面
+                     // ★ 変更点: テキストを更新し、新しいサブタイトルを非表示
+                     mainSubtitle.textContent = 'New Academic Word List (NAWL) 957 for beginners';
+                     academicSubtitle.style.display = 'none'; // 新しいサブタイトルを非表示
+                     nawlSubtitle.style.display = 'none'; // NAWLサブタイトルを非表示
+                 } else { // カテゴリ選択画面
+                     mainSubtitle.textContent = 'デジタルフラッシュカード'; // 通常のサブタイトルを表示
+                     academicSubtitle.style.display = 'block'; // 新しいサブタイトルを表示
+                     nawlSubtitle.style.display = 'block'; // NAWLサブタイトルを表示
                  }
              }
         }
 
-        // 選択中カテゴリ情報の設定
+        // 選択中のカテゴリ情報を更新・表示する関数
         function setActiveCategoryInfo() {
-            const activeCard = document.querySelector('.category-card.active');
+            const activeCard = document.querySelector('.category-card.active'); // activeクラスを持つカテゴリカードを取得
             if (activeCard) {
-                currentRankInfo = activeCard.querySelector('h3')?.textContent || '';
-                 // ★ 初期選択カテゴリ表示も 0 埋めを反映
+                currentRankInfo = activeCard.querySelector('h3')?.textContent || ''; // h3要素のテキストを取得
+                 // Rank 1-100 の場合、表示を Rank 001-100 に整形
                 if (currentRankInfo === 'Rank 1 - 100') {
                     currentRankInfo = 'Rank 001 - 100';
                 }
-                if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo;
+                if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo; // 表示エリアに設定
             }
         }
-        setActiveCategoryInfo(); // 初期読み込み
+        setActiveCategoryInfo(); // 初期読み込み時に実行
 
-        // イベントリスナー
+        // --- イベントリスナーの設定 ---
+
+        // スタートボタンのクリックイベント
         if (startButton) {
             startButton.addEventListener('click', () => {
-                const activeCard = document.querySelector('.category-card.active'); // アクティブなカードを取得
+                const activeCard = document.querySelector('.category-card.active'); // 選択中のカテゴリカードを取得
 
-                // ★ 準備中のカテゴリが選択されていたら処理を中断
+                // 準備中のカテゴリが選択されていたら処理を中断
                 if (activeCard && activeCard.classList.contains('category-disabled')) {
-                     // alert("このカテゴリは現在準備中です。"); // 必要であればメッセージ表示
-                     return; // ここで処理を終了
+                     // 必要であればアラート表示: alert("このカテゴリは現在準備中です。");
+                     return; // 処理を終了
                 }
 
-                // --- 準備中カテゴリでなければ、既存の処理を実行 ---
-                setActiveCategoryInfo();
-                showFlashcardView(true); // フラッシュカード表示
-                currentCardIndex = 0;
-                isPaused = false;
+                // ★ 選択されたカテゴリに応じて総カード数を設定
+                if (activeCard && activeCard.id === 'category-awl1') {
+                    totalCardsInCategory = 100; // Rank 001-100 の場合は 100 に設定
+                } else {
+                    // 他のカテゴリが選択された場合の処理 (現在はサンプルデータ数)
+                    // TODO: 他のカテゴリのカード数を設定するロジックを追加
+                    totalCardsInCategory = cards.length;
+                }
+
+                // 準備中でなければフラッシュカードを開始
+                setActiveCategoryInfo(); // 選択中カテゴリ情報を設定
+                showFlashcardView(true); // フラッシュカード画面を表示
+                currentCardIndex = 0; // 最初のカードから開始
+                isPaused = false; // 一時停止解除
+                // 停止ボタンを「停止」表示に戻す
                 if (pauseButtonSmall) {
                     pauseButtonSmall.textContent = '停止';
                     pauseButtonSmall.classList.remove('resume');
                 }
-                setSpeed(flipDelay / 1000);
-                showCardFront(currentCardIndex);
+                setSpeed(flipDelay / 1000); // 現在設定されている速度で開始
+                showCardFront(currentCardIndex); // 最初のカードを表示
+                // カードにクリックイベントリスナーを設定（手動フリップ用）
                 if (currentCard) {
-                    currentCard.removeEventListener('click', handleCardClick);
+                    currentCard.removeEventListener('click', handleCardClick); // 念のため既存を削除
                     currentCard.addEventListener('click', handleCardClick);
                 }
             });
         }
+        // トップへ戻るボタンのクリックイベント
         if (backButton) {
             backButton.addEventListener('click', () => {
-                showFlashcardView(false); // カテゴリ選択表示
-                clearTimeout(autoFlipTimer);
+                showFlashcardView(false); // カテゴリ選択画面を表示
+                clearTimeout(autoFlipTimer); // タイマークリア
                 clearTimeout(autoNextTimer);
-                isPaused = true;
+                isPaused = true; // 一時停止状態にする
+                // カードのクリックイベントリスナーを削除
                 if (currentCard) {
                     currentCard.removeEventListener('click', handleCardClick);
                 }
             });
         }
-        function handleCardClick() { // 手動フリップ
+        // カードの手動フリップ処理
+        function handleCardClick() {
+            // 一時停止中のみ手動フリップを許可
             if (isPaused && currentCard && cardBack) {
-                if (currentCard.classList.contains('flipped')) {
-                    currentCard.classList.remove('flipped');
+                if (currentCard.classList.contains('flipped')) { // 裏面が表示されている場合
+                    currentCard.classList.remove('flipped'); // 表面に戻す
+                    // アニメーション完了後に裏面を非表示にする
                     setTimeout(() => {
                          if (cardBack) cardBack.style.display = 'none';
-                    }, 500); // アニメーション後に非表示
-                } else {
-                    cardBack.style.display = 'flex'; // 表示してから回転
-                    currentCard.classList.add('flipped');
+                    }, 500); // 0.5秒 (CSSのtransition時間)
+                } else { // 表面が表示されている場合
+                    cardBack.style.display = 'flex'; // 裏面を表示状態にしてから
+                    currentCard.classList.add('flipped'); // 回転させる
                 }
             }
         }
+        // 戻るボタン (小) のクリックイベント
         if (prevButtonSmall) prevButtonSmall.addEventListener('click', prevCard);
+        // 次へボタン (小) のクリックイベント
         if (nextButtonSmall) {
             nextButtonSmall.addEventListener('click', () => {
-                 isPaused = true;
+                 isPaused = true; // 一時停止状態にする
+                 // 停止ボタンを「再生」表示に変更
                  if (pauseButtonSmall) {
                      pauseButtonSmall.textContent = '再生';
                      pauseButtonSmall.classList.add('resume');
                  }
-                 if (currentCard) currentCard.classList.add('clickable');
-                 clearTimeout(autoFlipTimer);
+                 if (currentCard) currentCard.classList.add('clickable'); // カードをクリック可能に
+                 clearTimeout(autoFlipTimer); // タイマークリア
                  clearTimeout(autoNextTimer);
-                 nextCard();
+                 nextCard(); // 次のカードへ
             });
         }
+        // 停止/再生ボタン (小) のクリックイベント
         if (pauseButtonSmall) {
             pauseButtonSmall.addEventListener('click', () => {
-                isPaused = !isPaused;
-                if (isPaused) {
-                    clearTimeout(autoFlipTimer);
+                isPaused = !isPaused; // 一時停止状態を反転
+                if (isPaused) { // 停止する場合
+                    clearTimeout(autoFlipTimer); // タイマークリア
                     clearTimeout(autoNextTimer);
-                    pauseButtonSmall.textContent = '再生';
-                    pauseButtonSmall.classList.add('resume');
-                    if (currentCard) currentCard.classList.add('clickable');
-                } else {
-                    pauseButtonSmall.textContent = '停止';
-                    pauseButtonSmall.classList.remove('resume');
-                    if (currentCard) currentCard.classList.remove('clickable');
-                    if (currentCard && currentCard.classList.contains('flipped')) {
-                         autoNextTimer = setTimeout(nextCard, flipDelay);
-                    } else {
-                         showCardFront(currentCardIndex); // タイマー再開
+                    pauseButtonSmall.textContent = '再生'; // ボタン表示を「再生」に
+                    pauseButtonSmall.classList.add('resume'); // resumeクラスを追加 (スタイル変更用)
+                    if (currentCard) currentCard.classList.add('clickable'); // カードをクリック可能に
+                } else { // 再生する場合
+                    pauseButtonSmall.textContent = '停止'; // ボタン表示を「停止」に
+                    pauseButtonSmall.classList.remove('resume'); // resumeクラスを削除
+                    if (currentCard) currentCard.classList.remove('clickable'); // カードをクリック不可に
+                    // カードの状態に応じてタイマーを再開
+                    if (currentCard && currentCard.classList.contains('flipped')) { // 裏面が表示されている場合
+                         autoNextTimer = setTimeout(nextCard, flipDelay); // 次のカードへ進むタイマーを再開
+                    } else { // 表面が表示されている場合
+                         showCardFront(currentCardIndex); // カード表示関数を呼び出してタイマーを再開
                     }
                 }
             });
         }
+        // 速度ボタンのクリックイベント
         if (speed2sButton) speed2sButton.addEventListener('click', () => setSpeed(2));
         if (speed1sButton) speed1sButton.addEventListener('click', () => setSpeed(1));
         if (speed0_5sButton) speed0_5sButton.addEventListener('click', () => setSpeed(0.5));
+        // カテゴリカードのクリックイベント
         categoryCards.forEach(card => {
              if (!card) return;
             card.addEventListener('click', () => {
-                // ★ 無効なカテゴリはアクティブにしない（見た目上は変わるが、JS内部での判定用）
+                // 無効なカテゴリは選択できないようにする (コメントアウト中)
                 // if (card.classList.contains('category-disabled')) {
-                //     return; // 無効なら何もしない（またはメッセージ表示）
+                //     return;
                 // }
 
-                // 一旦すべてのアクティブクラスを削除
+                // すべてのカテゴリカードから active クラスを削除
                 categoryCards.forEach(c => { if(c) c.classList.remove('active'); });
-                // クリックされたカードにアクティブクラスを追加
+                // クリックされたカードに active クラスを追加
                  card.classList.add('active');
                  // 選択中カテゴリ情報を更新
                  setActiveCategoryInfo();
-                 // TODO: カテゴリに応じたデータ読み込み処理
+                 // TODO: カテゴリに応じたデータ読み込み処理をここに追加
             });
         });
-         let cardResizeTimer; // リサイズ時の再描画
+         // ウィンドウリサイズ時のカード再描画（タイマーで負荷軽減）
+         let cardResizeTimer;
          window.addEventListener('resize', () => {
+             // フラッシュカードが表示されている場合のみ実行
              if (cardContainer && !cardContainer.classList.contains('hidden')) {
                  clearTimeout(cardResizeTimer);
                  cardResizeTimer = setTimeout(() => {
-                     showCardFront(currentCardIndex);
+                     showCardFront(currentCardIndex); // 現在のカードを再表示
+                     // 裏面が表示されていた場合は、再表示後にもう一度裏返す
                      if (currentCard && currentCard.classList.contains('flipped')) {
-                         currentCard.classList.remove('flipped');
-                         void currentCard.offsetHeight;
-                         cardBack.style.display = 'flex';
-                         currentCard.classList.add('flipped');
+                         currentCard.classList.remove('flipped'); // 一旦表面に
+                         void currentCard.offsetHeight; // 強制リフロー
+                         cardBack.style.display = 'flex'; // 裏面を表示
+                         currentCard.classList.add('flipped'); // 再度裏返す
                      } else if (cardBack) {
-                         cardBack.style.display = 'none';
+                         cardBack.style.display = 'none'; // 表面の場合は裏面を非表示に
                      }
-                 }, 250);
+                 }, 250); // 250ms後に実行
              }
          });
     </script>
 </body>
 </html>
-
