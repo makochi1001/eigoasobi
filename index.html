@@ -290,7 +290,7 @@
              color: white; /* 色を白に戻す */
              min-height: 1.5em; /* テキスト変更時の高さ変動を防ぐ */
         }
-        /* ★ 追加: アカデミック英語サブタイトル (H2) */
+        /* アカデミック英語サブタイトル (H2) */
         h2#academicSubtitle {
             margin: 0; /* マージン削除 */
             font-size: 1.0rem; /* フォントサイズ調整 */
@@ -303,7 +303,7 @@
 
         /* NAWLサブタイトル (H3) */
         h3#nawlSubtitle {
-            margin: 2px 0 10px 0; /* ★ 上マージンを少し追加 */
+            margin: 2px 0 10px 0; /* 上マージンを少し追加 */
             font-size: 1.0rem;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.8);
@@ -560,12 +560,39 @@
             font-size: 0.75rem; /* 小さいフォントサイズ */
             color: rgba(255, 255, 255, 0.6); /* 少し薄い色 */
             margin-top: 10px; /* 上の要素との間隔 */
-            text-align: center;
+            text-align: left; /* 左揃え */
             max-width: 600px; /* 最大幅を指定 */
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%; /* 幅を100%に設定して左揃え */
             line-height: 1.4; /* 行間 */
         }
+
+        /* 免責事項セクションのスタイル */
+        .disclaimer-section {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 15px; /* 上の注釈との間隔 */
+            text-align: left;
+            max-width: 600px;
+            width: 100%;
+            line-height: 1.4;
+        }
+        .disclaimer-section h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            /* ★ 変更点: カラーをリストアイテムに合わせる */
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+            text-align: center; /* タイトルを中央揃え */
+        }
+        .disclaimer-section ul {
+            list-style: disc; /* 箇条書きのマーカー */
+            padding-left: 20px; /* 左のパディング */
+            margin: 0;
+        }
+        .disclaimer-section li {
+            margin-bottom: 4px; /* 各項目の下のマージン */
+            font-size: 0.65rem; /* フォントサイズをさらに下げる */
+        }
+
 
         /* トップへ戻るボタンのコンテナ */
         .back-button-container {
@@ -591,6 +618,24 @@
              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
          }
 
+        /* PC画面表示用のメディアクエリ (769px以上) */
+        @media (min-width: 769px) {
+            .category-grid {
+                grid-gap: 22.5px; /* 1.5倍 */
+            }
+            .category-card {
+                padding: 30px 15px; /* 1.5倍 */
+                border-radius: 18px; /* 少し大きく */
+            }
+            .category-card h3 {
+                font-size: 1.35rem; /* 1.5倍 */
+            }
+            .status-preparing {
+                font-size: 1.05rem; /* 1.5倍 */
+            }
+        }
+
+
         /* レスポンシブ対応 (タブレットサイズ) */
         @media (max-width: 768px) {
             body {
@@ -609,7 +654,6 @@
                 font-size: 1.1rem;
                 margin-bottom: 3px;
             }
-            /* ★ 追加: アカデミック英語サブタイトル (Tablet) */
             h2#academicSubtitle { font-size: 0.9rem; }
             h3#nawlSubtitle {
                 font-size: 0.9rem;
@@ -620,16 +664,19 @@
                 grid-gap: 10px;
                 margin-top: 10px;
                 margin-bottom: 15px;
-                /* Tabletでも3列維持 */
             }
             .category-card {
-                padding: 16px 8px; /* Tabletでのパディング調整 */
+                padding: 16px 8px;
                 border-radius: 10px;
             }
              .category-card h3 {
-                 font-size: 0.9rem; /* Tabletでのフォントサイズ */
+                 font-size: 0.9rem;
                  line-height: 1.2;
              }
+             .status-preparing {
+                 font-size: 0.7rem;
+             }
+
 
              .card-counter {
                  margin-top: 8px;
@@ -659,17 +706,13 @@
                 font-size: 1.7rem;
             }
 
-            p { /* カード内のテキストサイズ (汎用) */
-                font-size: 15px;
-            }
+            p { font-size: 15px; }
 
             .button {
                 padding: 10px 20px;
                 font-size: 15px;
             }
-             .start-button {
-                 margin-top: 15px;
-             }
+             .start-button { margin-top: 15px; }
 
              .control-container {
                  gap: 10px;
@@ -677,7 +720,7 @@
              }
              .control-panel {
                  padding: 8px 12px;
-                 min-width: 0; /* 最小幅リセット (Tablet) */
+                 min-width: 0;
              }
              .control-panel .panel-label { font-size: 13px; }
 
@@ -685,15 +728,18 @@
                 margin-top: 15px;
                 font-size: 0.85rem;
             }
+            /* 免責事項セクション (Tablet) */
+            .disclaimer-text { font-size: 0.7rem; }
+            .disclaimer-section h4 { font-size: 0.8rem; }
+            .disclaimer-section li { font-size: 0.6rem; }
+
             .back-button-container { margin-top: 15px; }
             .back-button { font-size: 13px; padding: 7px 18px; }
         }
 
         /* レスポンシブ対応 (スマートフォンサイズ) */
         @media (max-width: 480px) {
-             body {
-                padding: 8px;
-            }
+             body { padding: 8px; }
 
             h1 {
                 font-size: 1.8rem;
@@ -703,7 +749,6 @@
                 font-size: 1rem;
                 margin-bottom: 2px;
             }
-             /* ★ 追加: アカデミック英語サブタイトル (Mobile) */
              h2#academicSubtitle { font-size: 0.8rem; }
              h3#nawlSubtitle {
                 font-size: 0.8rem;
@@ -715,15 +760,18 @@
                 margin-top: 8px;
                 margin-bottom: 12px;
                 width: 95%;
-                grid-template-columns: repeat(2, max-content); /* スマホでは2列 max-content */
+                grid-template-columns: repeat(2, max-content);
              }
             .category-card {
-                padding: 20px 10px; /* スマホでのパディング調整 */
+                padding: 20px 10px;
                 border-radius: 8px;
             }
              .category-card h3 {
-                 font-size: 0.8rem; /* スマホでのフォントサイズ調整 */
+                 font-size: 0.8rem;
                  line-height: 1.2;
+             }
+             .status-preparing {
+                 font-size: 0.7rem;
              }
 
              .card-counter {
@@ -738,28 +786,18 @@
                 margin: 5px auto 10px auto;
             }
 
-             .card-front, .card-back {
-                 padding: 10px;
-             }
+             .card-front, .card-back { padding: 10px; }
              .pronunciation,
-             .card-back p.definition-en {
-                 font-size: 0.85rem;
-             }
+             .card-back p.definition-en { font-size: 0.85rem; }
 
-             .card-back p.definition-jp {
-                 font-size: 1.1rem;
-             }
-            .card h2 {
-                font-size: 1.5rem;
-            }
+             .card-back p.definition-jp { font-size: 1.1rem; }
+             .card h2 { font-size: 1.5rem; }
 
             .button {
                 padding: 8px 16px;
                 font-size: 14px;
             }
-             .start-button {
-                 margin-top: 12px;
-             }
+             .start-button { margin-top: 12px; }
 
              .control-container {
                  gap: 8px;
@@ -767,8 +805,8 @@
              }
              .control-panel {
                  padding: 6px 10px;
-                 flex-basis: 100%; /* スマホでは各パネルを1行にする */
-                 aspect-ratio: auto; /* スマホではアスペクト比を解除 */
+                 flex-basis: 100%;
+                 aspect-ratio: auto;
              }
               .control-panel .panel-label { font-size: 12px; margin-bottom: 5px; }
               #controlBox .panel-buttons { gap: 8px; }
@@ -778,11 +816,11 @@
                 margin-top: 12px;
                 font-size: 0.8rem;
             }
-             /* スマホでの注釈テキスト調整 */
-             .disclaimer-text {
-                 font-size: 0.7rem;
-                 margin-top: 8px;
-             }
+             /* 免責事項セクション (Mobile) */
+             .disclaimer-text { font-size: 0.65rem; }
+             .disclaimer-section h4 { font-size: 0.75rem; }
+            .disclaimer-section li { font-size: 0.55rem; }
+
              .back-button-container { margin-top: 12px; }
              .back-button { font-size: 12px; padding: 6px 15px; }
         }
@@ -874,7 +912,16 @@
     <div class="category-info" id="categoryInfo">
          選択中: <span id="selectedCategoryText">Rank 001 - 100</span>
     </div>
-    <p class="disclaimer-text">Words and ranks are referenced from the official NAWL (New Academic Word List, Browne et al., 2013). All Japanese translations and English definitions in this list are original and written by the author.</p>
+    <p class="disclaimer-text">Words and ranks are referenced from the official NAWL (New Academic Word List, Browne et al., 2013). Japanese translations in this list are original, created by the author with support from generative AI tools.</p>
+
+    <div class="disclaimer-section">
+        <h4>免責事項</h4>
+        <ul>
+            <li>当サイトおよび本アプリで提供する教材・情報は、学習支援を目的としたものであり、その内容の正確性・信頼性について保証するものではありません。</li>
+            <li>利用者が本サービスを使用したことにより生じたいかなる損害についても、運営者は一切の責任を負いかねますので、ご了承ください。</li>
+            <li>本サービスの内容は、予告なく変更または削除されることがあります。</li>
+        </ul>
+    </div>
 
     <div class="back-button-container">
         <button class="back-button" id="backButton">トップ画面に戻る</button>
@@ -1189,18 +1236,21 @@
              if (backButton) backButton.style.display = show ? 'inline-block' : 'none'; // 戻るボタンはカード画面でのみ表示
 
              if (disclaimerText) disclaimerText.style.display = displayDisclaimer; // 注釈は選択画面でのみ表示
+             // ★ 免責事項セクションの表示/非表示を追加
+             const disclaimerSection = document.querySelector('.disclaimer-section');
+             if (disclaimerSection) disclaimerSection.style.display = displayDisclaimer;
 
-             // ★ サブタイトルの表示内容を切り替え
+
+             // サブタイトルの表示内容を切り替え
              if (mainSubtitle && academicSubtitle && nawlSubtitle) {
                  if (show) { // カード画面
-                     // ★ 変更点: テキストを更新し、新しいサブタイトルを非表示
                      mainSubtitle.textContent = 'New Academic Word List (NAWL) 957 for beginners';
-                     academicSubtitle.style.display = 'none'; // 新しいサブタイトルを非表示
-                     nawlSubtitle.style.display = 'none'; // NAWLサブタイトルを非表示
+                     academicSubtitle.style.display = 'none';
+                     nawlSubtitle.style.display = 'none';
                  } else { // カテゴリ選択画面
-                     mainSubtitle.textContent = 'デジタルフラッシュカード'; // 通常のサブタイトルを表示
-                     academicSubtitle.style.display = 'block'; // 新しいサブタイトルを表示
-                     nawlSubtitle.style.display = 'block'; // NAWLサブタイトルを表示
+                     mainSubtitle.textContent = 'デジタルフラッシュカード';
+                     academicSubtitle.style.display = 'block';
+                     nawlSubtitle.style.display = 'block';
                  }
              }
         }
