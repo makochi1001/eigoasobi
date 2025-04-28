@@ -146,7 +146,7 @@
         /* Rankラベル用のスタイル */
         .rank-label {
             display: block;
-            font-size: 0.75em; /* フォントサイズを1段階上げる */
+            font-size: 0.8em; /* 変更済み */
             font-weight: 400;
             margin-bottom: 1px;
         }
@@ -160,7 +160,6 @@
 
         /* 準備中テキストのスタイル */
         .status-preparing {
-            /* ★ 変更点: フォントサイズを1段階下げる */
             font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.7);
             margin-top: 3px;
@@ -294,11 +293,11 @@
             margin-top: 5px; /* 上の要素との間に少しマージンを追加 */
         }
 
-        /* ページタイトル下のサブタイトル (H2) */
+        /* ページタイトル下のサブタイトル (H2) - 共通 */
          body > h2#mainSubtitle {
             margin-top:0;
             text-shadow:0 0 5px rgba(255,255,255,0.5);
-            font-size:1.2rem;
+            font-size:1.2rem; /* 基本サイズ */
             font-weight:400;
             margin-bottom: 5px; /* 下のh3との間隔 */
             line-height:1.5;
@@ -310,6 +309,9 @@
              color: white; /* 色を白に戻す */
              min-height: 1.5em; /* テキスト変更時の高さ変動を防ぐ */
         }
+        /* ★ 削除: フラッシュカード画面専用のスタイルは不要になったため削除 */
+        /* .flashcard-view-subtitle { ... } */
+
         /* アカデミック英語サブタイトル (H2) */
         h2#academicSubtitle {
             margin: 0; /* マージン削除 */
@@ -650,10 +652,9 @@
             .category-card h3 {
                 font-size: 1.35rem;
             }
-            .rank-label { font-size: 0.75em; }
+            .rank-label { font-size: 0.8em; } /* 変更済み */
             .rank-range { font-size: 1.0em; }
             .status-preparing {
-                /* ★ 変更点: PCでのフォントサイズ調整 */
                 font-size: 0.9rem;
             }
         }
@@ -674,9 +675,12 @@
             }
 
             body > h2#mainSubtitle {
-                font-size: 1.1rem;
+                font-size: 1.1rem; /* 基本サイズ (タブレット) */
                 margin-bottom: 3px;
             }
+            /* ★ 削除: フラッシュカード画面専用のスタイルは不要 */
+            /* .flashcard-view-subtitle { ... } */
+
             h2#academicSubtitle { font-size: 0.9rem; }
             h3#nawlSubtitle {
                 font-size: 0.9rem;
@@ -697,10 +701,9 @@
                  font-size: 0.9rem;
                  line-height: 1.2;
              }
-             .rank-label { font-size: 0.75em; }
+             .rank-label { font-size: 0.8em; } /* 変更済み */
              .rank-range { font-size: 1.0em; }
              .status-preparing {
-                 /* ★ 変更点: Tabletでのフォントサイズ調整 */
                  font-size: 0.6rem;
              }
 
@@ -773,9 +776,12 @@
                 margin-top: 5px;
             }
              body > h2#mainSubtitle {
-                font-size: 1rem;
+                font-size: 1rem; /* 基本サイズ (スマホ) */
                 margin-bottom: 2px;
             }
+             /* ★ 削除: フラッシュカード画面専用のスタイルは不要 */
+             /* .flashcard-view-subtitle { ... } */
+
              h2#academicSubtitle { font-size: 0.8rem; }
              h3#nawlSubtitle {
                 font-size: 0.8rem;
@@ -783,16 +789,14 @@
             }
 
              .category-grid {
-                /* ★ 変更点: スマホ表示での左右余白とカード間余白を調整 */
-                grid-gap: 10px; /* カード間の余白を少し広げる (8px -> 10px) */
+                grid-gap: 10px;
                 margin-top: 8px;
                 margin-bottom: 12px;
-                width: 95%; /* グリッド全体の幅を少し狭めて左右に余白を作る (98% -> 95%) */
-                grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り */
+                width: 95%;
+                grid-template-columns: repeat(3, 1fr);
                 justify-content: space-around;
              }
             .category-card {
-                /* ★ 変更点: スマホ3カラム表示のためのパディング調整 */
                 padding: 6px 8px;
                 border-radius: 6px;
                 min-height: 50px;
@@ -801,10 +805,9 @@
                  font-size: 0.7rem;
                  line-height: 1.1;
              }
-             .rank-label { font-size: 0.75em; margin-bottom: 0px;}
+             .rank-label { font-size: 0.8em; margin-bottom: 0px;} /* 変更済み */
              .rank-range { font-size: 0.9em; }
              .status-preparing {
-                 /* ★ 変更点: スマホでのフォントサイズ調整 */
                  font-size: 0.55rem;
                  margin-top: 2px;
              }
@@ -867,7 +870,7 @@
     <h1><span>🐿️</span> EIGOASOBI <span>🌸</span></h1>
     <h2 id="mainSubtitle">デジタルフラッシュカード</h2>
     <h2 id="academicSubtitle">アカデミック英語 - 学術英単語</h2>
-    <h3 id="nawlSubtitle">New Academic Word List (NAWL) 957 for beginners</h3>
+    <h3 id="nawlSubtitle">New Academic Word List (NAWL) 957 for challengers</h3>
 
     <div class="card-counter" id="cardCounter"></div>
 
@@ -1315,16 +1318,19 @@
              if (disclaimerSection) disclaimerSection.style.display = displayDisclaimer;
 
 
-             // サブタイトルの表示内容を切り替え
+             // ★ 変更点: サブタイトルの表示/非表示のみ切り替え、内容は変更しない
              if (mainSubtitle && academicSubtitle && nawlSubtitle) {
                  if (show) { // カード画面
-                     mainSubtitle.textContent = 'New Academic Word List (NAWL) 957 for beginners';
-                     academicSubtitle.style.display = 'none';
-                     nawlSubtitle.style.display = 'none';
+                     // サブタイトルは常に表示させるため、ここでは何もしない
+                     // mainSubtitle.textContent = '...'; // ← 削除
+                     // mainSubtitle.classList.add('flashcard-view-subtitle'); // ← 削除
+                     // academicSubtitle.style.display = 'none'; // ← 削除
+                     // nawlSubtitle.style.display = 'none'; // ← 削除
                  } else { // カテゴリ選択画面
-                     mainSubtitle.textContent = 'デジタルフラッシュカード';
-                     academicSubtitle.style.display = 'block';
-                     nawlSubtitle.style.display = 'block';
+                     // mainSubtitle.textContent = 'デジタルフラッシュカード'; // ← 削除 (HTML初期値でOK)
+                     // mainSubtitle.classList.remove('flashcard-view-subtitle'); // ← 削除
+                     // academicSubtitle.style.display = 'block'; // ← 削除 (常にblock)
+                     // nawlSubtitle.style.display = 'block'; // ← 削除 (常にblock)
                  }
              }
         }
@@ -1369,7 +1375,7 @@
 
                 // 準備中でなければフラッシュカードを開始
                 setActiveCategoryInfo(); // 選択中カテゴリ情報を設定
-                showFlashcardView(true); // フラッシュカード画面を表示
+                showFlashcardView(true); // フラッシュカード画面を表示 (UI要素の表示切替のみ行う)
                 currentCardIndex = 0; // 最初のカードから開始
                 isPaused = false; // 一時停止解除
                 // 停止ボタンを「停止」表示に戻す
@@ -1389,7 +1395,7 @@
         // トップへ戻るボタンのクリックイベント
         if (backButton) {
             backButton.addEventListener('click', () => {
-                showFlashcardView(false); // カテゴリ選択画面を表示
+                showFlashcardView(false); // カテゴリ選択画面を表示 (UI要素の表示切替のみ行う)
                 clearTimeout(autoFlipTimer); // タイマークリア
                 clearTimeout(autoNextTimer);
                 isPaused = true; // 一時停止状態にする
