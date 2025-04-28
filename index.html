@@ -578,8 +578,7 @@
         .disclaimer-section h4 {
             font-size: 0.85rem;
             font-weight: 600;
-            /* ★ 変更点: カラーをリストアイテムに合わせる */
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.6); /* ★ カラーをリストアイテムに合わせる */
             margin-bottom: 5px;
             text-align: center; /* タイトルを中央揃え */
         }
@@ -838,40 +837,76 @@
 
     <div class="category-grid">
          <div class="category-card active" id="category-awl1">
-            <h3>Rank 001 - 100</h3>
+            <h3>Rank 001 - 050</h3>
+         </div>
+         <div class="category-card category-disabled" id="category-awl1b">
+             <h3>Rank 051 - 100</h3>
+             <p class="status-preparing">準備中</p>
          </div>
          <div class="category-card category-disabled" id="category-awl2">
-            <h3>Rank 101 - 200</h3>
+            <h3>Rank 101 - 150</h3>
             <p class="status-preparing">準備中</p>
         </div>
+        <div class="category-card category-disabled" id="category-awl2b">
+             <h3>Rank 151 - 200</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
         <div class="category-card category-disabled" id="category-awl3">
-            <h3>Rank 201 - 300</h3>
+            <h3>Rank 201 - 250</h3>
             <p class="status-preparing">準備中</p>
         </div>
+        <div class="category-card category-disabled" id="category-awl3b">
+             <h3>Rank 251 - 300</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
          <div class="category-card category-disabled" id="category-awl4">
-            <h3>Rank 301 - 400</h3>
+            <h3>Rank 301 - 350</h3>
             <p class="status-preparing">準備中</p>
         </div>
+        <div class="category-card category-disabled" id="category-awl4b">
+             <h3>Rank 351 - 400</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
          <div class="category-card category-disabled" id="category-awl5">
-            <h3>Rank 401 - 500</h3>
+            <h3>Rank 401 - 450</h3>
             <p class="status-preparing">準備中</p>
         </div>
+         <div class="category-card category-disabled" id="category-awl5b">
+             <h3>Rank 451 - 500</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
          <div class="category-card category-disabled" id="category-awl6">
-            <h3>Rank 501 - 600</h3>
+            <h3>Rank 501 - 550</h3>
             <p class="status-preparing">準備中</p>
         </div>
+         <div class="category-card category-disabled" id="category-awl6b">
+             <h3>Rank 551 - 600</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
         <div class="category-card category-disabled" id="category-awl7">
-            <h3>Rank 601 - 700</h3>
+            <h3>Rank 601 - 650</h3>
             <p class="status-preparing">準備中</p>
         </div>
+         <div class="category-card category-disabled" id="category-awl7b">
+             <h3>Rank 651 - 700</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
         <div class="category-card category-disabled" id="category-awl8">
-            <h3>Rank 701 - 800</h3>
+            <h3>Rank 701 - 750</h3>
             <p class="status-preparing">準備中</p>
         </div>
+         <div class="category-card category-disabled" id="category-awl8b">
+             <h3>Rank 751 - 800</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
         <div class="category-card category-disabled" id="category-awl9">
-            <h3>Rank 801 - 900</h3>
+            <h3>Rank 801 - 850</h3>
             <p class="status-preparing">準備中</p>
         </div>
+         <div class="category-card category-disabled" id="category-awl9b">
+             <h3>Rank 851 - 900</h3>
+             <p class="status-preparing">準備中</p>
+         </div>
         <div class="category-card category-disabled" id="category-awl10">
             <h3>Rank 901 - 957</h3>
             <p class="status-preparing">準備中</p>
@@ -910,7 +945,7 @@
     <button class="button start-button" id="startButton">スタート</button>
 
     <div class="category-info" id="categoryInfo">
-         選択中: <span id="selectedCategoryText">Rank 001 - 100</span>
+         選択中: <span id="selectedCategoryText">Rank 001 - 050</span>
     </div>
     <p class="disclaimer-text">Words and ranks are referenced from the official NAWL (New Academic Word List, Browne et al., 2013). Japanese translations in this list are original, created by the author with support from generative AI tools.</p>
 
@@ -1137,8 +1172,8 @@
                     <p class="definition-jp">${card.back.definition_jp}</p> </div>
                  <p class="definition-en">${card.back.definition_en}</p> `; // 日本語定義
 
-            // カードカウンターの表示を更新 (カテゴリの総カード数を使用)
-            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${totalCardsInCategory}</span>`;
+            // ★ カードカウンターの表示を更新 (総数を3桁表示)
+            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${totalCardsInCategory.toString().padStart(3, '0')}</span>`; // ★ 変更点
 
             // カード裏面を非表示に設定
             if (cardBack) cardBack.style.display = 'none';
@@ -1260,9 +1295,9 @@
             const activeCard = document.querySelector('.category-card.active'); // activeクラスを持つカテゴリカードを取得
             if (activeCard) {
                 currentRankInfo = activeCard.querySelector('h3')?.textContent || ''; // h3要素のテキストを取得
-                 // Rank 1-100 の場合、表示を Rank 001-100 に整形
-                if (currentRankInfo === 'Rank 1 - 100') {
-                    currentRankInfo = 'Rank 001 - 100';
+                 // Rank 001 - 050 の場合、表示を整形
+                if (currentRankInfo === 'Rank 001 - 050') { // ★ 変更点: 初期表示のテキストを更新
+                    // 何もしない (または必要に応じて整形)
                 }
                 if(selectedCategoryText) selectedCategoryText.textContent = currentRankInfo; // 表示エリアに設定
             }
@@ -1284,11 +1319,11 @@
 
                 // ★ 選択されたカテゴリに応じて総カード数を設定
                 if (activeCard && activeCard.id === 'category-awl1') {
-                    totalCardsInCategory = 100; // Rank 001-100 の場合は 100 に設定
+                    totalCardsInCategory = 50; // ★ 変更点: Rank 001-050 の場合は 50 に設定
                 } else {
                     // 他のカテゴリが選択された場合の処理 (現在はサンプルデータ数)
                     // TODO: 他のカテゴリのカード数を設定するロジックを追加
-                    totalCardsInCategory = cards.length;
+                    totalCardsInCategory = cards.length; // ★ 将来的にはカテゴリごとの数を設定
                 }
 
                 // 準備中でなければフラッシュカードを開始
