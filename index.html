@@ -109,7 +109,7 @@
         /* カテゴリ選択グリッド */
         .category-grid {
              display: grid;
-             grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り */
+             grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り (デフォルト) */
              justify-content: center;
              grid-gap: 15px;
              margin: 15px auto 20px auto;
@@ -153,8 +153,7 @@
         /* Rank範囲用のスタイル */
         .rank-range {
             display: block;
-            /* ★ 変更点: フォントサイズを1段階上げる (0.9em -> 1.0em) */
-            font-size: 1.0em;
+            font-size: 1.0em; /* 変更済み */
             font-weight: 500;
         }
 
@@ -652,8 +651,7 @@
                 font-size: 1.35rem;
             }
             .rank-label { font-size: 0.8em; } /* 変更済み */
-             /* ★ 変更点: PC表示でのRank範囲フォントサイズ調整 (1.0em -> 1.1em) */
-            .rank-range { font-size: 1.1em; }
+            .rank-range { font-size: 1.1em; } /* 変更済み */
             .status-preparing {
                 font-size: 0.9rem;
             }
@@ -700,8 +698,7 @@
                  line-height: 1.2;
              }
              .rank-label { font-size: 0.8em; } /* 変更済み */
-             /* ★ 変更点: タブレット表示でのRank範囲フォントサイズ調整 (1.0em -> 1.1em) */
-             .rank-range { font-size: 1.1em; }
+             .rank-range { font-size: 1.1em; } /* 変更済み */
              .status-preparing {
                  font-size: 0.6rem;
              }
@@ -786,27 +783,28 @@
             }
 
              .category-grid {
-                grid-gap: 10px;
-                margin-top: 8px;
-                margin-bottom: 12px;
-                width: 95%;
-                grid-template-columns: repeat(3, 1fr);
-                justify-content: space-around;
+                /* ★ 変更点: スマホ表示を2カラムに変更 */
+                grid-template-columns: repeat(2, 1fr); /* 3カラム -> 2カラム */
+                grid-gap: 12px; /* ギャップを少し広げる (10px -> 12px) */
+                margin-top: 10px; /* 上マージン調整 */
+                margin-bottom: 15px; /* 下マージン調整 */
+                width: 92%; /* 幅を少し調整 (95% -> 92%) して左右余白確保 */
+                justify-content: center; /* space-around から center に変更 */
              }
             .category-card {
-                padding: 6px 8px;
-                border-radius: 6px;
-                min-height: 50px;
+                /* ★ 変更点: 2カラム表示に合わせて調整 */
+                padding: 10px 12px; /* パディング調整 */
+                border-radius: 8px; /* 角丸調整 */
+                min-height: 60px; /* 最小高さ調整 */
             }
              .category-card h3 {
-                 font-size: 0.7rem;
-                 line-height: 1.1;
+                 font-size: 0.8rem; /* フォントサイズ調整 */
+                 line-height: 1.15; /* 行間調整 */
              }
              .rank-label { font-size: 0.8em; margin-bottom: 0px;} /* 変更済み */
-             /* ★ 変更点: スマホ表示でのRank範囲フォントサイズ調整 (0.9em -> 1.0em) */
-             .rank-range { font-size: 1.0em; }
+             .rank-range { font-size: 1.0em; } /* 変更済み */
              .status-preparing {
-                 font-size: 0.55rem;
+                 font-size: 0.6rem; /* フォントサイズ調整 */
                  margin-top: 2px;
              }
 
@@ -1496,4 +1494,4 @@
          });
     </script>
 </body>
-</html
+</html>
