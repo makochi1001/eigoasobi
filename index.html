@@ -759,18 +759,22 @@
                 margin-top: 8px;
                 margin-bottom: 12px;
                 width: 95%;
-                grid-template-columns: repeat(2, max-content);
+                /* ★ 変更点: スマホでも3カラム表示 */
+                grid-template-columns: repeat(3, max-content);
              }
             .category-card {
-                padding: 20px 10px;
+                /* ★ 変更点: スマホ3カラム表示のためのパディング調整 */
+                padding: 18px 6px;
                 border-radius: 8px;
             }
              .category-card h3 {
-                 font-size: 0.8rem;
-                 line-height: 1.2;
+                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
+                 font-size: 0.7rem;
+                 line-height: 1.1; /* 行間も少し詰める */
              }
              .status-preparing {
-                 font-size: 0.7rem;
+                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
+                 font-size: 0.6rem;
              }
 
              .card-counter {
@@ -1115,8 +1119,9 @@
             { front: { word: "correspondence" }, back: { pronunciation: "[発音]", definition_jp: "対応", definition_en: "文章による通信；類似性" } },
             { front: { word: "essentially" }, back: { pronunciation: "[発音]", definition_jp: "本質的に", definition_en: "基本的に、主に" } }
         ];
-        // ★ 選択されたカテゴリの総カード数を保持する変数 (100件に更新)
-        let totalCardsInCategory = cards.length; // cards配列の要素数を設定
+        // ★ 選択されたカテゴリの総カード数を保持する変数
+        let currentCategoryCards = []; // ★ カテゴリごとのカードを保持
+        let totalCardsInCategory = 0; // ★ カテゴリの総カード数を保持
         // TODO: 将来的にカテゴリごとのカードデータをロードする処理を追加する
 
         // DOM要素の取得 (getElementByIdのショートカット)
@@ -1157,8 +1162,9 @@
 
         // カードの表示を更新する関数
         function showCardFront(index) {
-             if (!cards || index < 0 || index >= cards.length) return; // データやインデックスのチェック
-            const card = cards[index];
+             // ★ 変更点: currentCategoryCards を参照
+             if (!currentCategoryCards || index < 0 || index >= currentCategoryCards.length) return;
+            const card = currentCategoryCards[index]; // ★ 変更点
             if (!cardFront || !cardBack || !cardCounter || !currentCard) return; // 要素のチェック
 
             // カード表面のHTMLを生成・設定
@@ -1172,8 +1178,9 @@
                     <p class="definition-jp">${card.back.definition_jp}</p> </div>
                  <p class="definition-en">${card.back.definition_en}</p> `; // 日本語定義
 
-            // ★ カードカウンターの表示を更新 (総数を3桁表示)
-            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${totalCardsInCategory.toString().padStart(3, '0')}</span>`; // ★ 変更点
+            // カードカウンターの表示を更新 (総数を3桁表示)
+            // 変更点: totalCardsInCategory を参照
+            cardCounter.innerHTML = `<span style="margin-right: 5px;">Rank</span><span id="rank-value-span" style="font-family: 'Roboto Mono', monospace; min-width: 40px; display: inline-block; text-align: right;">${(index + 1).toString().padStart(3, '0')}</span><span> / ${totalCardsInCategory.toString().padStart(3, '0')}</span>`;
 
             // カード裏面を非表示に設定
             if (cardBack) cardBack.style.display = 'none';
@@ -1207,8 +1214,8 @@
         function nextCard() {
             clearTimeout(autoFlipTimer); // タイマークリア
             clearTimeout(autoNextTimer);
-            // 現在のカード配列の長さでインデックスを計算
-            currentCardIndex = (currentCardIndex + 1) % cards.length;
+            // ★ 変更点: currentCategoryCards.length を使用
+            currentCardIndex = (currentCardIndex + 1) % currentCategoryCards.length;
             showCardFront(currentCardIndex); // 新しいカードを表示
         }
 
@@ -1224,9 +1231,9 @@
             clearTimeout(autoFlipTimer); // タイマークリア
             clearTimeout(autoNextTimer);
             currentCardIndex--; // インデックスを戻す
-            // 現在のカード配列の長さでインデックスを計算
+            // ★ 変更点: currentCategoryCards.length を使用
             if (currentCardIndex < 0) {
-                currentCardIndex = cards.length - 1;
+                currentCardIndex = currentCategoryCards.length - 1;
             }
             showCardFront(currentCardIndex); // 前のカードを表示
         }
@@ -1317,13 +1324,15 @@
                      return; // 処理を終了
                 }
 
-                // ★ 選択されたカテゴリに応じて総カード数を設定
+                // ★ 選択されたカテゴリに応じてカードデータと総数を設定
                 if (activeCard && activeCard.id === 'category-awl1') {
-                    totalCardsInCategory = 50; // ★ 変更点: Rank 001-050 の場合は 50 に設定
+                    currentCategoryCards = cards.slice(0, 50); // 最初の50件を取得
+                    totalCardsInCategory = currentCategoryCards.length; // 総数を50に設定
                 } else {
-                    // 他のカテゴリが選択された場合の処理 (現在はサンプルデータ数)
-                    // TODO: 他のカテゴリのカード数を設定するロジックを追加
-                    totalCardsInCategory = cards.length; // ★ 将来的にはカテゴリごとの数を設定
+                    // 他のカテゴリが選択された場合の処理
+                    // TODO: 他のカテゴリのカードデータをロードし、currentCategoryCards と totalCardsInCategory を設定
+                    currentCategoryCards = cards; // ★ 仮: 全データを使用
+                    totalCardsInCategory = currentCategoryCards.length; // ★ 仮: 全データ数
                 }
 
                 // 準備中でなければフラッシュカードを開始
