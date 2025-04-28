@@ -783,11 +783,11 @@
             }
 
              .category-grid {
-                /* ★ 変更点: スマホでのギャップを少し広げる */
-                grid-gap: 8px;
+                /* ★ 変更点: スマホ表示での左右余白とカード間余白を調整 */
+                grid-gap: 10px; /* カード間の余白を少し広げる (8px -> 10px) */
                 margin-top: 8px;
                 margin-bottom: 12px;
-                width: 98%;
+                width: 95%; /* グリッド全体の幅を少し狭めて左右に余白を作る (98% -> 95%) */
                 grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り */
                 justify-content: space-around;
              }
@@ -967,7 +967,6 @@
                 <button class="control-button next-button" id="nextButtonSmall">次へ</button>
             </div>
         </div>
-
         <div class="control-panel" id="speedControl">
             <div class="panel-label">表示速度</div>
             <div class="panel-buttons">
@@ -1048,7 +1047,8 @@
             }, 250); // 250ms後に実行
         });
 
-        // カードデータ (Rank 1-100)
+        // カードデータ (Rank 1-100) - サンプルデータ
+        // TODO: 本来はカテゴリごとにデータを読み込む
         const cards = [
             { front: { word: "repertoire" }, back: { pronunciation: "[発音]", definition_jp: "レパートリー", definition_en: "個人やグループが習得し、使用できる技能や演目のコレクション" } },
             { front: { word: "obtain" }, back: { pronunciation: "[発音]", definition_jp: "獲得する", definition_en: "努力や行動によって何かを手に入れること" } },
