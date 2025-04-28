@@ -120,8 +120,7 @@
         /* カテゴリカードの共通スタイル */
         .category-card {
             background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2));
-            /* ★ 変更点: パディングを調整して横長に (黄金比に近づける) */
-            padding: 12px 18px; /* 縦を減らし、横を増やす */
+            padding: 12px 18px; /* 横長のパディング */
             border-radius: 12px;
             cursor: pointer;
             text-align: center;
@@ -132,14 +131,13 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* ★ 変更点: 最小高さを調整 */
-            min-height: 55px;
+            min-height: 55px; /* 最小高さ */
         }
 
         /* カテゴリカード内のランク表示 (H3) */
         .category-card h3 {
             margin: 0;
-            font-size: 0.85rem; /* フォントサイズは維持 */
+            font-size: 0.85rem;
             color: white;
             font-weight: 500;
             line-height: 1.15;
@@ -148,21 +146,21 @@
         /* Rankラベル用のスタイル */
         .rank-label {
             display: block;
-            font-size: 0.65em; /* フォントサイズは維持 */
+            font-size: 0.65em;
             font-weight: 400;
             margin-bottom: 1px;
         }
         /* Rank範囲用のスタイル */
         .rank-range {
             display: block;
-            font-size: 0.9em; /* フォントサイズは維持 */
+            font-size: 0.9em;
             font-weight: 500;
         }
 
 
         /* 準備中テキストのスタイル */
         .status-preparing {
-            font-size: 0.65rem; /* フォントサイズは維持 */
+            font-size: 0.65rem;
             color: rgba(255, 255, 255, 0.7);
             margin-top: 3px;
             margin-bottom: 0;
@@ -793,18 +791,21 @@
              }
             .category-card {
                 /* ★ 変更点: スマホ3カラム表示のためのパディング調整 */
-                padding: 8px 4px;
+                padding: 6px 8px; /* さらに縦のパディングを減らす */
                 border-radius: 6px;
-                min-height: 55px;
+                min-height: 50px; /* ★ スマホでの最小高さ調整 */
             }
              .category-card h3 {
-                 font-size: 0.6rem;
+                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
+                 font-size: 0.7rem; /* 1段階上げる */
                  line-height: 1.1;
              }
-            .rank-label { font-size: 0.6em; margin-bottom: 0px;}
-            .rank-range { font-size: 0.8em; }
+             /* ★ 変更点: Rankラベルと範囲のフォントサイズ調整 */
+            .rank-label { font-size: 0.7em; margin-bottom: 0px;} /* 1段階上げる */
+            .rank-range { font-size: 0.9em; } /* 1段階上げる */
              .status-preparing {
-                 font-size: 0.5rem;
+                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
+                 font-size: 0.6rem; /* 1段階上げる */
                  margin-top: 2px;
              }
 
