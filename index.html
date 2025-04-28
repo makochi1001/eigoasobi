@@ -153,7 +153,8 @@
         /* Rank範囲用のスタイル */
         .rank-range {
             display: block;
-            font-size: 0.9em;
+            /* ★ 変更点: フォントサイズを1段階上げる (0.9em -> 1.0em) */
+            font-size: 1.0em;
             font-weight: 500;
         }
 
@@ -309,8 +310,6 @@
              color: white; /* 色を白に戻す */
              min-height: 1.5em; /* テキスト変更時の高さ変動を防ぐ */
         }
-        /* ★ 削除: フラッシュカード画面専用のスタイルは不要になったため削除 */
-        /* .flashcard-view-subtitle { ... } */
 
         /* アカデミック英語サブタイトル (H2) */
         h2#academicSubtitle {
@@ -653,7 +652,8 @@
                 font-size: 1.35rem;
             }
             .rank-label { font-size: 0.8em; } /* 変更済み */
-            .rank-range { font-size: 1.0em; }
+             /* ★ 変更点: PC表示でのRank範囲フォントサイズ調整 (1.0em -> 1.1em) */
+            .rank-range { font-size: 1.1em; }
             .status-preparing {
                 font-size: 0.9rem;
             }
@@ -678,8 +678,6 @@
                 font-size: 1.1rem; /* 基本サイズ (タブレット) */
                 margin-bottom: 3px;
             }
-            /* ★ 削除: フラッシュカード画面専用のスタイルは不要 */
-            /* .flashcard-view-subtitle { ... } */
 
             h2#academicSubtitle { font-size: 0.9rem; }
             h3#nawlSubtitle {
@@ -702,7 +700,8 @@
                  line-height: 1.2;
              }
              .rank-label { font-size: 0.8em; } /* 変更済み */
-             .rank-range { font-size: 1.0em; }
+             /* ★ 変更点: タブレット表示でのRank範囲フォントサイズ調整 (1.0em -> 1.1em) */
+             .rank-range { font-size: 1.1em; }
              .status-preparing {
                  font-size: 0.6rem;
              }
@@ -779,8 +778,6 @@
                 font-size: 1rem; /* 基本サイズ (スマホ) */
                 margin-bottom: 2px;
             }
-             /* ★ 削除: フラッシュカード画面専用のスタイルは不要 */
-             /* .flashcard-view-subtitle { ... } */
 
              h2#academicSubtitle { font-size: 0.8rem; }
              h3#nawlSubtitle {
@@ -806,7 +803,8 @@
                  line-height: 1.1;
              }
              .rank-label { font-size: 0.8em; margin-bottom: 0px;} /* 変更済み */
-             .rank-range { font-size: 0.9em; }
+             /* ★ 変更点: スマホ表示でのRank範囲フォントサイズ調整 (0.9em -> 1.0em) */
+             .rank-range { font-size: 1.0em; }
              .status-preparing {
                  font-size: 0.55rem;
                  margin-top: 2px;
@@ -1322,15 +1320,8 @@
              if (mainSubtitle && academicSubtitle && nawlSubtitle) {
                  if (show) { // カード画面
                      // サブタイトルは常に表示させるため、ここでは何もしない
-                     // mainSubtitle.textContent = '...'; // ← 削除
-                     // mainSubtitle.classList.add('flashcard-view-subtitle'); // ← 削除
-                     // academicSubtitle.style.display = 'none'; // ← 削除
-                     // nawlSubtitle.style.display = 'none'; // ← 削除
                  } else { // カテゴリ選択画面
-                     // mainSubtitle.textContent = 'デジタルフラッシュカード'; // ← 削除 (HTML初期値でOK)
-                     // mainSubtitle.classList.remove('flashcard-view-subtitle'); // ← 削除
-                     // academicSubtitle.style.display = 'block'; // ← 削除 (常にblock)
-                     // nawlSubtitle.style.display = 'block'; // ← 削除 (常にblock)
+                     // サブタイトルは常に表示させるため、ここでは何もしない
                  }
              }
         }
@@ -1505,4 +1496,4 @@
          });
     </script>
 </body>
-</html>
+</html
