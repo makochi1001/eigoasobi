@@ -109,43 +109,64 @@
         /* カテゴリ選択グリッド */
         .category-grid {
              display: grid;
-             grid-template-columns: repeat(3, max-content); /* 列幅を内容に合わせる */
-             justify-content: center; /* グリッドアイテムを中央揃え */
-             grid-gap: 15px; /* グリッド間の隙間 */
-             margin: 15px auto 20px auto; /* 上下マージン調整 */
+             grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り */
+             justify-content: center;
+             grid-gap: 15px;
+             margin: 15px auto 20px auto;
+             width: 95%;
+             max-width: 800px;
         }
 
         /* カテゴリカードの共通スタイル */
         .category-card {
-            background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2)); /* 背景グラデーション */
-            padding: 20px 10px; /* 上下パディングを増加 */
-            border-radius: 12px; /* 角丸 */
-            cursor: pointer; /* カーソルをポインターに */
-            text-align: center; /* テキスト中央揃え */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影 */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* デフォルトボーダー */
-            transition: all 0.3s ease; /* トランジション効果 */
+            background: linear-gradient(135deg, rgba(36, 123, 205, 0.3), rgba(16, 54, 140, 0.2));
+            /* ★ 変更点: パディングを調整して横長に (黄金比に近づける) */
+            padding: 12px 18px; /* 縦を減らし、横を増やす */
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            /* ★ 変更点: 最小高さを調整 */
+            min-height: 55px;
         }
 
         /* カテゴリカード内のランク表示 (H3) */
         .category-card h3 {
-            margin: 0; /* マージンリセット */
-            font-size: 0.9rem; /* フォントサイズ */
+            margin: 0;
+            font-size: 0.85rem; /* フォントサイズは維持 */
             color: white;
             font-weight: 500;
-            line-height: 1.2; /* 行間 */
+            line-height: 1.15;
+            width: 100%;
         }
+        /* Rankラベル用のスタイル */
+        .rank-label {
+            display: block;
+            font-size: 0.65em; /* フォントサイズは維持 */
+            font-weight: 400;
+            margin-bottom: 1px;
+        }
+        /* Rank範囲用のスタイル */
+        .rank-range {
+            display: block;
+            font-size: 0.9em; /* フォントサイズは維持 */
+            font-weight: 500;
+        }
+
 
         /* 準備中テキストのスタイル */
         .status-preparing {
-            font-size: 0.7rem;
+            font-size: 0.65rem; /* フォントサイズは維持 */
             color: rgba(255, 255, 255, 0.7);
-            margin-top: 4px;
-            margin-bottom: 0; /* 下マージン削除 */
+            margin-top: 3px;
+            margin-bottom: 0;
+            width: 100%;
         }
 
         /* 無効なカテゴリカードのスタイル */
@@ -578,7 +599,7 @@
         .disclaimer-section h4 {
             font-size: 0.85rem;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.6); /* ★ カラーをリストアイテムに合わせる */
+            color: rgba(255, 255, 255, 0.6); /* カラーをリストアイテムに合わせる */
             margin-bottom: 5px;
             text-align: center; /* タイトルを中央揃え */
         }
@@ -623,14 +644,18 @@
                 grid-gap: 22.5px; /* 1.5倍 */
             }
             .category-card {
-                padding: 30px 15px; /* 1.5倍 */
-                border-radius: 18px; /* 少し大きく */
+                /* ★ 変更点: PCでのパディング調整 */
+                padding: 22px 30px;
+                border-radius: 18px;
+                min-height: 90px; /* ★ PCでの最小高さ調整 */
             }
             .category-card h3 {
-                font-size: 1.35rem; /* 1.5倍 */
+                font-size: 1.35rem;
             }
+            .rank-label { font-size: 0.7em; }
+            .rank-range { font-size: 1.0em; }
             .status-preparing {
-                font-size: 1.05rem; /* 1.5倍 */
+                font-size: 1.05rem;
             }
         }
 
@@ -665,13 +690,17 @@
                 margin-bottom: 15px;
             }
             .category-card {
-                padding: 16px 8px;
+                /* ★ 変更点: タブレットでのパディング調整 */
+                padding: 10px 15px;
                 border-radius: 10px;
+                min-height: 70px;
             }
              .category-card h3 {
                  font-size: 0.9rem;
                  line-height: 1.2;
              }
+             .rank-label { font-size: 0.7em; }
+             .rank-range { font-size: 1.0em; }
              .status-preparing {
                  font-size: 0.7rem;
              }
@@ -755,26 +784,28 @@
             }
 
              .category-grid {
-                grid-gap: 8px;
+                grid-gap: 6px;
                 margin-top: 8px;
                 margin-bottom: 12px;
-                width: 95%;
-                /* ★ 変更点: スマホでも3カラム表示 */
-                grid-template-columns: repeat(3, max-content);
+                width: 98%;
+                grid-template-columns: repeat(3, 1fr); /* 3カラム均等割り */
+                justify-content: space-around;
              }
             .category-card {
                 /* ★ 変更点: スマホ3カラム表示のためのパディング調整 */
-                padding: 18px 6px;
-                border-radius: 8px;
+                padding: 8px 4px;
+                border-radius: 6px;
+                min-height: 55px;
             }
              .category-card h3 {
-                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
-                 font-size: 0.7rem;
-                 line-height: 1.1; /* 行間も少し詰める */
-             }
-             .status-preparing {
-                 /* ★ 変更点: スマホ3カラム表示のためのフォントサイズ調整 */
                  font-size: 0.6rem;
+                 line-height: 1.1;
+             }
+            .rank-label { font-size: 0.6em; margin-bottom: 0px;}
+            .rank-range { font-size: 0.8em; }
+             .status-preparing {
+                 font-size: 0.5rem;
+                 margin-top: 2px;
              }
 
              .card-counter {
@@ -841,78 +872,78 @@
 
     <div class="category-grid">
          <div class="category-card active" id="category-awl1">
-            <h3>Rank 001 - 050</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">001 - 050</span></h3>
          </div>
          <div class="category-card category-disabled" id="category-awl1b">
-             <h3>Rank 051 - 100</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">051 - 100</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
          <div class="category-card category-disabled" id="category-awl2">
-            <h3>Rank 101 - 150</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">101 - 150</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
         <div class="category-card category-disabled" id="category-awl2b">
-             <h3>Rank 151 - 200</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">151 - 200</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
         <div class="category-card category-disabled" id="category-awl3">
-            <h3>Rank 201 - 250</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">201 - 250</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
         <div class="category-card category-disabled" id="category-awl3b">
-             <h3>Rank 251 - 300</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">251 - 300</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
          <div class="category-card category-disabled" id="category-awl4">
-            <h3>Rank 301 - 350</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">301 - 350</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
         <div class="category-card category-disabled" id="category-awl4b">
-             <h3>Rank 351 - 400</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">351 - 400</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
          <div class="category-card category-disabled" id="category-awl5">
-            <h3>Rank 401 - 450</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">401 - 450</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
          <div class="category-card category-disabled" id="category-awl5b">
-             <h3>Rank 451 - 500</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">451 - 500</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
          <div class="category-card category-disabled" id="category-awl6">
-            <h3>Rank 501 - 550</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">501 - 550</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
          <div class="category-card category-disabled" id="category-awl6b">
-             <h3>Rank 551 - 600</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">551 - 600</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
         <div class="category-card category-disabled" id="category-awl7">
-            <h3>Rank 601 - 650</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">601 - 650</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
          <div class="category-card category-disabled" id="category-awl7b">
-             <h3>Rank 651 - 700</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">651 - 700</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
         <div class="category-card category-disabled" id="category-awl8">
-            <h3>Rank 701 - 750</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">701 - 750</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
          <div class="category-card category-disabled" id="category-awl8b">
-             <h3>Rank 751 - 800</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">751 - 800</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
         <div class="category-card category-disabled" id="category-awl9">
-            <h3>Rank 801 - 850</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">801 - 850</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
          <div class="category-card category-disabled" id="category-awl9b">
-             <h3>Rank 851 - 900</h3>
+             <h3><span class="rank-label">Rank</span><span class="rank-range">851 - 900</span></h3>
              <p class="status-preparing">準備中</p>
          </div>
         <div class="category-card category-disabled" id="category-awl10">
-            <h3>Rank 901 - 957</h3>
+            <h3><span class="rank-label">Rank</span><span class="rank-range">901 - 957</span></h3>
             <p class="status-preparing">準備中</p>
         </div>
     </div>
