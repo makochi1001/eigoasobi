@@ -269,7 +269,7 @@
         /* カード内の単語表示 (H2) */
         .card h2 {
             margin: 0; /* マージンリセット */
-            font-size: 2rem; /* 単語のフォントサイズ */
+            font-size: 2.0rem; /* 変更済み */
             font-weight: 600;
             letter-spacing: 1px;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
@@ -344,7 +344,7 @@
              max-width: 100%; /* コンテナからはみ出ないように */
             text-align: center; /* 中央揃えは維持 */
             margin: 0; /* マージンリセット */
-            font-size: 1.3rem;
+            font-size: 1.6rem; /* 変更済み */
             color: #FFD700; /* 金色 */
             font-weight: 500;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
@@ -719,18 +719,19 @@
              .card-front, .card-back {
                  padding: 15px;
              }
+             /* ★ 変更点: タブレットでの英単語フォントサイズ調整 (1.7rem) */
+             .card h2 {
+                 font-size: 1.7rem;
+             }
+             /* ★ 変更点: タブレットでの日本語定義フォントサイズ調整 (1.3rem) */
+             .card-back p.definition-jp {
+                 font-size: 1.3rem;
+             }
 
              .pronunciation,
              .card-back p.definition-en {
                  font-size: 0.9rem;
              }
-
-             .card-back p.definition-jp {
-                 font-size: 1.2rem;
-             }
-            .card h2 {
-                font-size: 1.7rem;
-            }
 
             p { font-size: 15px; }
 
@@ -801,10 +802,8 @@
                  font-size: 0.8rem; /* フォントサイズ調整 */
                  line-height: 1.15; /* 行間調整 */
              }
-             /* ★ 変更点: スマホ表示でのRankラベルフォントサイズ調整 (0.8em -> 0.9em) */
-             .rank-label { font-size: 0.9em; margin-bottom: 2px;}
-             /* ★ 変更点: スマホ表示でのRank範囲フォントサイズ調整 (1.1em -> 1.2em) */
-             .rank-range { font-size: 1.2em; }
+             .rank-label { font-size: 0.9em; margin-bottom: 2px;} /* 変更済み */
+             .rank-range { font-size: 1.2em; } /* 変更済み */
              .status-preparing {
                  font-size: 0.6rem; /* フォントサイズ調整 */
                  margin-top: 2px;
@@ -823,11 +822,17 @@
             }
 
              .card-front, .card-back { padding: 10px; }
+             /* ★ 変更点: スマホでの英単語フォントサイズ調整 (1.5rem) */
+             .card h2 {
+                 font-size: 1.5rem;
+             }
+             /* ★ 変更点: スマホでの日本語定義フォントサイズ調整 (1.2rem) */
+             .card-back p.definition-jp {
+                 font-size: 1.2rem;
+             }
+
              .pronunciation,
              .card-back p.definition-en { font-size: 0.85rem; }
-
-             .card-back p.definition-jp { font-size: 1.1rem; }
-             .card h2 { font-size: 1.5rem; }
 
             .button {
                 padding: 8px 16px;
@@ -868,7 +873,7 @@
     <h1><span>🐿️</span> EIGOASOBI <span>🌸</span></h1>
     <h2 id="mainSubtitle">デジタルフラッシュカード</h2>
     <h2 id="academicSubtitle">アカデミック英語 - 学術英単語</h2>
-    <h3 id="nawlSubtitle">New Academic Word List (NAWL) 957 for challengers</h3>
+    <h3 id="nawlSubtitle">New Academic Word List (NAWL) 957</h3>
 
     <div class="card-counter" id="cardCounter"></div>
 
@@ -1048,109 +1053,59 @@
             }, 250); // 250ms後に実行
         });
 
-        // カードデータ (Rank 1-100) - サンプルデータ
-        // TODO: 本来はカテゴリごとにデータを読み込む
+        // カードデータ (Rank 1-50) - ★ 更新されたデータ
         const cards = [
-            { front: { word: "repertoire" }, back: { pronunciation: "[発音]", definition_jp: "レパートリー", definition_en: "個人やグループが習得し、使用できる技能や演目のコレクション" } },
-            { front: { word: "obtain" }, back: { pronunciation: "[発音]", definition_jp: "獲得する", definition_en: "努力や行動によって何かを手に入れること" } },
-            { front: { word: "distribution" }, back: { pronunciation: "[発音]", definition_jp: "分布", definition_en: "物事が特定の地域やグループにどのように広がっているか" } },
-            { front: { word: "parameter" }, back: { pronunciation: "[発音]", definition_jp: "パラメーター", definition_en: "何かがどのように動作するかを制御または説明する値" } },
-            { front: { word: "aspect" }, back: { pronunciation: "[発音]", definition_jp: "側面", definition_en: "特質、部分、または要素；何かを見る、または考える方法" } },
-            { front: { word: "dynamic" }, back: { pronunciation: "[発音]", definition_jp: "ダイナミック", definition_en: "活発で絶えず変化する；動きやエネルギーに関連する" } },
-            { front: { word: "impact" }, back: { pronunciation: "[発音]", definition_jp: "影響", definition_en: "強い効果または影響；（動）何かに強く衝突する・打ち当たる" } },
-            { front: { word: "domain" }, back: { pronunciation: "[発音]", definition_jp: "ドメイン", definition_en: "特定の活動、知識、または影響の範囲；コンピューター用語では：ウェブアドレスのシステム" } },
-            { front: { word: "publish" }, back: { pronunciation: "[発音]", definition_jp: "出版する", definition_en: "文書を印刷物やデジタル形式で一般に公開すること" } },
-            { front: { word: "denote" }, back: { pronunciation: "[発音]", definition_jp: "表す", definition_en: "何かを意味する、または指し示す" } },
-            { front: { word: "authority" }, back: { pronunciation: "[発音]", definition_jp: "権威", definition_en: "管理や決定を行う力や権利；認められた専門性を持つ人または組織" } },
-            { front: { word: "semantic" }, back: { pronunciation: "[発音]", definition_jp: "意味論的", definition_en: "言葉や言語の意味に関連する" } },
-            { front: { word: "par" }, back: { pronunciation: "[発音]", definition_jp: "標準", definition_en: "通常とみなされる水準や価値" } },
-            { front: { word: "ion" }, back: { pronunciation: "[発音]", definition_jp: "イオン", definition_en: "電子の獲得または損失により電荷を持つ原子や分子" } },
-            { front: { word: "matrix" }, back: { pronunciation: "[発音]", definition_jp: "マトリックス", definition_en: "何かが発展する環境または構造；数学では：行と列に配置された数字や記号" } },
-            { front: { word: "linear" }, back: { pronunciation: "[発音]", definition_jp: "線形", definition_en: "直線上に配置された；変化が直接比例の関係にある" } },
-            { front: { word: "cognitive" }, back: { pronunciation: "[発音]", definition_jp: "認知的", definition_en: "思考、理解、学習、記憶などの心の働き（心的過程）に関連する" } },
-            { front: { word: "graph" }, back: { pronunciation: "[発音]", definition_jp: "グラフ", definition_en: "変数またはデータ間の関係を示す図表" } },
-            { front: { word: "correlation" }, back: { pronunciation: "[発音]", definition_jp: "相関", definition_en: "2つの変数が共に変化する統計的な関係性" } },
-            { front: { word: "linguistic" }, back: { pronunciation: "[発音]", definition_jp: "言語学的", definition_en: "言語またはその研究に関連する" } },
-            { front: { word: "acid" }, back: { pronunciation: "[発音]", definition_jp: "酸", definition_en: "酸味があり、溶液中で水素イオンを放出し、塩基と反応する物質。例：レモン汁" } },
-            { front: { word: "induce" }, back: { pronunciation: "[発音]", definition_jp: "誘導する", definition_en: "引き起こす、説得する" } },
-            { front: { word: "velocity" }, back: { pronunciation: "[発音]", definition_jp: "速度", definition_en: "特定の方向への速度" } },
-            { front: { word: "interval" }, back: { pronunciation: "[発音]", definition_jp: "間隔", definition_en: "2点、数字、または時間の間の距離" } },
-            { front: { word: "discourse" }, back: { pronunciation: "[発音]", definition_jp: "談話", definition_en: "会話、対話" } },
-            { front: { word: "finite" }, back: { pronunciation: "[発音]", definition_jp: "有限", definition_en: "限界がある；限られた時間続く" } },
-            { front: { word: "stimulus" }, back: { pronunciation: "[発音]", definition_jp: "刺激", definition_en: "変化を起こすもの" } },
-            { front: { word: "vector" }, back: { pronunciation: "[発音]", definition_jp: "ベクトル", definition_en: "大きさと方向の両方を持つ量" } },
-            { front: { word: "electron" }, back: { pronunciation: "[発音]", definition_jp: "電子", definition_en: "負に帯電した粒子" } },
-            { front: { word: "receptor" }, back: { pronunciation: "[発音]", definition_jp: "受容体", definition_en: "情報を受け取る装置" } },
-            { front: { word: "theorem" }, back: { pronunciation: "[発音]", definition_jp: "定理", definition_en: "証明できる声明" } },
-            { front: { word: "algorithm" }, back: { pronunciation: "[発音]", definition_jp: "アルゴリズム", definition_en: "問題解決を保証する論理的なルールや手順" } },
-            { front: { word: "fluid" }, back: { pronunciation: "[発音]", definition_jp: "流体", definition_en: "簡単に流れることができる物質。例：水" } },
-            { front: { word: "developmental" }, back: { pronunciation: "[発音]", definition_jp: "発達的", definition_en: "物事や人の発展や成長に関する" } },
-            { front: { word: "bound" }, back: { pronunciation: "[発音]", definition_jp: "向かう", definition_en: "特定の場所に行く；ジャンプする" } },
-            { front: { word: "molecular" }, back: { pronunciation: "[発音]", definition_jp: "分子的", definition_en: "結合された原子に関するまたは原子によって引き起こされる" } },
-            { front: { word: "transformation" }, back: { pronunciation: "[発音]", definition_jp: "変換", definition_en: "変化" } },
-            { front: { word: "spatial" }, back: { pronunciation: "[発音]", definition_jp: "空間的", definition_en: "空間に関する" } },
-            { front: { word: "coefficient" }, back: { pronunciation: "[発音]", definition_jp: "係数", definition_en: "数学的表現における変数に掛けられる数字" } },
-            { front: { word: "translation" }, back: { pronunciation: "[発音]", definition_jp: "翻訳", definition_en: "ある形から別の形に変わること。例：ある言語から別の言語への変換" } },
-            { front: { word: "membrane" }, back: { pronunciation: "[発音]", definition_jp: "膜", definition_en: "薄い組織のカバー" } },
-            { front: { word: "neuron" }, back: { pronunciation: "[発音]", definition_jp: "ニューロン", definition_en: "神経細胞；神経系の基本的な構成要素" } },
-            { front: { word: "simulation" }, back: { pronunciation: "[発音]", definition_jp: "シミュレーション", definition_en: "コピー；実世界の特性を研究・分析するための方法" } },
-            { front: { word: "lexical" }, back: { pronunciation: "[発音]", definition_jp: "語彙的", definition_en: "言葉に関する" } },
-            { front: { word: "regime" }, back: { pronunciation: "[発音]", definition_jp: "体制", definition_en: "管理システム；政府の形態" } },
-            { front: { word: "variance" }, back: { pronunciation: "[発音]", definition_jp: "分散", definition_en: "差の量；分布の変動性を測る統計値" } },
-            { front: { word: "molecule" }, back: { pronunciation: "[発音]", definition_jp: "分子", definition_en: "化学的に結合した2つ以上の原子" } },
-            { front: { word: "marker" }, back: { pronunciation: "[発音]", definition_jp: "マーカー", definition_en: "認識や識別が容易なもの" } },
-            { front: { word: "empirical" }, back: { pronunciation: "[発音]", definition_jp: "経験的", definition_en: "観察や実験に基づく" } },
-            { front: { word: "robot" }, back: { pronunciation: "[発音]", definition_jp: "ロボット", definition_en: "人間のように行動する機械的な生き物" } },
-            { front: { word: "statistical" }, back: { pronunciation: "[発音]", definition_jp: "統計的", definition_en: "情報を表す数字に関する" } },
-            { front: { word: "vowel" }, back: { pronunciation: "[発音]", definition_jp: "母音", definition_en: "音声；a、e、i、o、u、時にはyも含む" } },
-            { front: { word: "equilibrium" }, back: { pronunciation: "[発音]", definition_jp: "平衡", definition_en: "バランスの状態" } },
-            { front: { word: "intensity" }, back: { pronunciation: "[発音]", definition_jp: "強度", definition_en: "大きなエネルギー、強さ、集中；物理学では：強度＝パワー／単位面積" } },
-            { front: { word: "regression" }, back: { pronunciation: "[発音]", definition_jp: "回帰", definition_en: "後戻り；統計学では：結果の値を別の変数との相関に基づいて予測することに焦点を当てた相関手続きの一種" } },
-            { front: { word: "diagnosis" }, back: { pronunciation: "[発音]", definition_jp: "診断", definition_en: "検査結果に基づく専門家による決定" } },
-            { front: { word: "identification" }, back: { pronunciation: "[発音]", definition_jp: "識別", definition_en: "識別された状態；人を識別するもの" } },
-            { front: { word: "node" }, back: { pronunciation: "[発音]", definition_jp: "ノード", definition_en: "ネットワーク内の交差点や接合点；植物で新しい葉が生えるところ" } },
-            { front: { word: "partial" }, back: { pronunciation: "[発音]", definition_jp: "部分的", definition_en: "不完全；一方の側を他方より好む" } },
-            { front: { word: "correlate" }, back: { pronunciation: "[発音]", definition_jp: "相関させる", definition_en: "2つのアイテムまたはイベント間の関係を示す" } },
-            { front: { word: "mortality" }, back: { pronunciation: "[発音]", definition_jp: "死亡率", definition_en: "人間であり死ぬことができる性質や状態" } },
-            { front: { word: "antibody" }, back: { pronunciation: "[発音]", definition_jp: "抗体", definition_en: "病気に対する体が提供する防御" } },
-            { front: { word: "temporal" }, back: { pronunciation: "[発音]", definition_jp: "時間的", definition_en: "時間に関する" } },
-            { front: { word: "particle" }, back: { pronunciation: "[発音]", definition_jp: "粒子", definition_en: "非常に小さな何かの一部" } },
-            { front: { word: "duration" }, back: { pronunciation: "[発音]", definition_jp: "持続時間", definition_en: "あるものが続く時間の長さ" } },
-            { front: { word: "behavioral" }, back: { pronunciation: "[発音]", definition_jp: "行動的", definition_en: "行動の仕方に関する" } },
-            { front: { word: "consumption" }, back: { pronunciation: "[発音]", definition_jp: "消費", definition_en: "物事にかけるお金の量；食べたり飲んだりするプロセス" } },
-            { front: { word: "bilingual" }, back: { pronunciation: "[発音]", definition_jp: "バイリンガル", definition_en: "2つの言語を話す人" } },
-            { front: { word: "sensitivity" }, back: { pronunciation: "[発音]", definition_jp: "感度", definition_en: "敏感であること；生理学では：生物またはその一部が刺激に反応する能力；電子工学では：ラジオ機器が着信信号に反応する能力" } },
-            { front: { word: "similarity" }, back: { pronunciation: "[発音]", definition_jp: "類似性", definition_en: "人や物事が同じである程度" } },
-            { front: { word: "optimal" }, back: { pronunciation: "[発音]", definition_jp: "最適", definition_en: "最良" } },
-            { front: { word: "explicit" }, back: { pronunciation: "[発音]", definition_jp: "明示的", definition_en: "明確な、はっきりと述べられた" } },
-            { front: { word: "mutation" }, back: { pronunciation: "[発音]", definition_jp: "突然変異", definition_en: "変化；遺伝学では：遺伝構造を変える出来事" } },
-            { front: { word: "colonial" }, back: { pronunciation: "[発音]", definition_jp: "植民地的", definition_en: "集団で生活することに関する" } },
-            { front: { word: "spectrum" }, back: { pronunciation: "[発音]", definition_jp: "スペクトル", definition_en: "赤から紫までの色の波長" } },
-            { front: { word: "phonological" }, back: { pronunciation: "[発音]", definition_jp: "音韻論的", definition_en: "音に関する" } },
-            { front: { word: "nucleus" }, back: { pronunciation: "[発音]", definition_jp: "核", definition_en: "細胞の制御中心" } },
-            { front: { word: "onset" }, back: { pronunciation: "[発音]", definition_jp: "発症", definition_en: "始まり" } },
-            { front: { word: "integration" }, back: { pronunciation: "[発音]", definition_jp: "統合", definition_en: "物事を全体としてまとめること" } },
-            { front: { word: "dominant" }, back: { pronunciation: "[発音]", definition_jp: "優勢", definition_en: "最強" } },
-            { front: { word: "pathway" }, back: { pronunciation: "[発音]", definition_jp: "経路", definition_en: "経路；生化学では：反応の連鎖" } },
-            { front: { word: "coordinate" }, back: { pronunciation: "[発音]", definition_jp: "調整する", definition_en: "何かに秩序と組織をもたらす；（名）数学では：固定図形または線のシステムを参照して点または線の位置を定義するのに役立つ大きさ" } },
-            { front: { word: "calculation" }, back: { pronunciation: "[発音]", definition_jp: "計算", definition_en: "合計の答え；計算する行為" } },
-            { front: { word: "precede" }, back: { pronunciation: "[発音]", definition_jp: "先行する", definition_en: "先行する" } },
-            { front: { word: "subset" }, back: { pronunciation: "[発音]", definition_jp: "部分集合", definition_en: "より大きな集合の一部である小さな集合" } },
-            { front: { word: "syntactic" }, back: { pronunciation: "[発音]", definition_jp: "構文的", definition_en: "文法的" } },
-            { front: { word: "orientation" }, back: { pronunciation: "[発音]", definition_jp: "方向付け", definition_en: "時間、場所、人々を参照して自分の環境内で自分自身を位置づける能力" } },
-            { front: { word: "proposition" }, back: { pronunciation: "[発音]", definition_jp: "命題", definition_en: "アイデア；提案" } },
-            { front: { word: "inequality" }, back: { pronunciation: "[発音]", definition_jp: "不等式", definition_en: "同じではない；数学では：<、>、=、≠、または？を使用して2つの量を比較する文" } },
-            { front: { word: "identical" }, back: { pronunciation: "[発音]", definition_jp: "同一", definition_en: "あらゆる面で同じ" } },
-            { front: { word: "prevalence" }, back: { pronunciation: "[発音]", definition_jp: "普及率", definition_en: "広く普及している、一般的な" } },
-            { front: { word: "differential" }, back: { pronunciation: "[発音]", definition_jp: "微分", definition_en: "違い；多様性" } },
-            { front: { word: "generalize" }, back: { pronunciation: "[発音]", definition_jp: "一般化する", definition_en: "事実から共通の考えや結論を導き出す" } },
-            { front: { word: "beam" }, back: { pronunciation: "[発音]", definition_jp: "ビーム", definition_en: "金属や木の長い部分；光やエネルギーの線" } },
-            { front: { word: "pulse" }, back: { pronunciation: "[発音]", definition_jp: "脈拍", definition_en: "心臓の鼓動" } },
-            { front: { word: "norm" }, back: { pronunciation: "[発音]", definition_jp: "規範", definition_en: "パフォーマンスや行動の確立された基準" } },
-            { front: { word: "trait" }, back: { pronunciation: "[発音]", definition_jp: "特性", definition_en: "特徴" } },
-            { front: { word: "prediction" }, back: { pronunciation: "[発音]", definition_jp: "予測", definition_en: "これから起こることの声明" } },
-            { front: { word: "correspondence" }, back: { pronunciation: "[発音]", definition_jp: "対応", definition_en: "文章による通信；類似性" } },
-            { front: { word: "essentially" }, back: { pronunciation: "[発音]", definition_jp: "本質的に", definition_en: "基本的に、主に" } }
+            // ★ 変更点: 最初の50件のデータを更新
+            { front: { word: "repertoire" }, back: { pronunciation: "/ˈrɛp.ərˌtwɑr/", definition_jp: "レパートリー", definition_en: "習得してすぐに披露できる技能や演目のコレクション" } },
+            { front: { word: "obtain" }, back: { pronunciation: "/əbˈteɪn/", definition_jp: "獲得する", definition_en: "努力によって何かを手に入れたり所有したりすること" } },
+            { front: { word: "distribution" }, back: { pronunciation: "/ˌdɪs.trəˈbju.ʃən/", definition_jp: "分布", definition_en: "物事が特定の地域やグループに広がっている様子" } },
+            { front: { word: "parameter" }, back: { pronunciation: "/pəˈræm.ɪ.tər/", definition_jp: "パラメータ", definition_en: "あるものの動作を制御または説明する値" } },
+            { front: { word: "aspect" }, back: { pronunciation: "/ˈæs.pɛkt/", definition_jp: "側面", definition_en: "物事の特質や要素；特定の視点や見方" } },
+            { front: { word: "dynamic" }, back: { pronunciation: "/daɪˈnæ.mɪk/", definition_jp: "ダイナミック", definition_en: "活発で絶えず変化する；動きやエネルギーに関連する" } },
+            { front: { word: "impact" }, back: { pronunciation: "/ˈɪm.pækt/", definition_jp: "影響、衝撃", definition_en: "強い効果や作用；衝突の力" } },
+            { front: { word: "domain" }, back: { pronunciation: "/doʊˈmeɪn/", definition_jp: "領域、ドメイン", definition_en: "特定の活動、知識、または影響の範囲；コンピューターでは、インターネット上のアドレス名" } },
+            { front: { word: "publish" }, back: { pronunciation: "/ˈpʌb.lɪʃ/", definition_jp: "出版する", definition_en: "文書を印刷物やデジタル形式で一般に公開すること" } },
+            { front: { word: "denote" }, back: { pronunciation: "/dɪˈnoʊt/", definition_jp: "表す", definition_en: "何かを表現する、指し示す、または意味すること" } },
+            { front: { word: "authority" }, back: { pronunciation: "/əˈθɔr.ɪ.ti/", definition_jp: "権限、権威", definition_en: "統制する力や権利；認められた専門性を持つ人または組織" } },
+            { front: { word: "semantic" }, back: { pronunciation: "/sɪˈmæn.tɪk/", definition_jp: "意味論的", definition_en: "言葉や言語の意味に関連する" } },
+            { front: { word: "par" }, back: { pronunciation: "/pɑr/", definition_jp: "基準値", definition_en: "標準または規範とみなされる水準や値" } }, // ★ 更新
+            { front: { word: "ion" }, back: { pronunciation: "/ˈaɪ.ɒn/", definition_jp: "イオン", definition_en: "電子を得たり失ったりして電荷を帯びた原子や分子" } }, // ★ 更新
+            { front: { word: "matrix" }, back: { pronunciation: "/ˈmeɪ.trɪks/", definition_jp: "マトリックス、行列", definition_en: "物事が生まれ発展する構造や環境；数学では、数字や記号を行と列に並べた矩形配列（くけいはいれつ）" } },// ★ 更新
+            { front: { word: "linear" }, back: { pronunciation: "/ˈlɪn.i.ər/", definition_jp: "線形", definition_en: "一直線に並んだ；数学では、直線で表現できる関係を含む" } }, // ★ 更新
+            { front: { word: "cognitive" }, back: { pronunciation: "/ˈkɒg.nɪ.tɪv/", definition_jp: "認知的", definition_en: "知覚、思考、理解、学習、記憶などの心の働き（心的過程）に関連する" } },// ★ 更新
+            { front: { word: "graph" }, back: { pronunciation: "/græf,.grɑf/", definition_jp: "グラフ", definition_en: "変数やデータ間の関係を示す図；数学では、頂点と辺からなる構造" } },// ★ 更新
+            { front: { word: "correlation" }, back: { pronunciation: "/ˌkɔr.əˈleɪ.ʃən/", definition_jp: "相関", definition_en: "2つの変数がどの程度一緒に変動するかを示す統計的関係" } },// ★ 更新
+            { front: { word: "linguistic" }, back: { pronunciation: "/lɪŋˈgwɪs.tɪk/", definition_jp: "言語の、言語学的な", definition_en: "言語の構造や使用、または言語学的研究に関連する" } },// ★ 更新
+            { front: { word: "acid" }, back: { pronunciation: "/ˈæs.ɪd/", definition_jp: "酸", definition_en: "溶液中で水素イオン（H⁺）を放出し、塩基と反応する物質；通常は酸味を持つ" } },// ★ 更新
+            { front: { word: "induce" }, back: { pronunciation: "/ɪn.djus/", definition_jp: "誘発する", definition_en: "何かを引き起こしたり生じさせたりすること；人を説得したり影響を与えたりして、ある行動をするよう仕向けること" } },// ★ 更新
+            { front: { word: "velocity" }, back: { pronunciation: "/vəˈlɒs.ɪ.ti/", definition_jp: "速度（ベクトル量）", definition_en: "ある方向への変位の時間変化率（向きと大きさを持つ速さ）" } },// ★ 更新
+            { front: { word: "interval" }, back: { pronunciation: "/ˈɪn.tər.vəl/", definition_jp: "間隔", definition_en: "二つの点や数値、時刻の間の距離または差" } },// ★ 更新
+            { front: { word: "discourse" }, back: { pronunciation: "/ˈdɪs.kɔrs/", definition_jp: "談話、言説、論述", definition_en: "特定のテーマに関する形式的な議論や意見交換（特に口頭や文章において）" } },
+            { front: { word: "finite" }, back: { pronunciation: "/ˈfaɪ.naɪt/", definition_jp: "有限", definition_en: "限界あるいは境界を持つこと；限られた時間しか続かないこと" } },
+            { front: { word: "stimulus" }, back: { pronunciation: "/stɪmyələs/", definition_jp: "刺激", definition_en: "反応や応答を引き起こすもの" } },
+            { front: { word: "vector" }, back: { pronunciation: "/ˈvɛk.tər/", definition_jp: "ベクトル", definition_en: "大きさと方向の両方を持つ量" } },
+            { front: { word: "electron" }, back: { pronunciation: "/ɪˈlɛk.trɒn/", definition_jp: "電子", definition_en: "負に帯電した粒子" } },
+            { front: { word: "receptor" }, back: { pronunciation: "/rɪˈsɛp.tər/", definition_jp: "受容体", definition_en: "特定の信号や刺激を受け取り反応する構造" } },
+            { front: { word: "theorem" }, back: { pronunciation: "/ˈθɪər.əm/", definition_jp: "定理", definition_en: "推論によって証明できる数学的または論理的命題" } },
+            { front: { word: "algorithm" }, back: { pronunciation: "/ˈæl.gəˌrɪð.əm/", definition_jp: "アルゴリズム", definition_en: "特定の問題を解決したり計算を実行したりするために設計された体系的な論理手順" } },
+            { front: { word: "fluid" }, back: { pronunciation: "/ˈflu.ɪd/", definition_jp: "流体", definition_en: "力が加わると形状を変え流動する物質で、液体と気体の両方を含む。例：水、空気" } },
+            { front: { word: "developmental" }, back: { pronunciation: "/dɪˈvɛl.əp.mənt/", definition_jp: "発達的", definition_en: "物事や人の段階的な発展や成長に関する" } },
+            { front: { word: "bound" }, back: { pronunciation: "/baʊnd/", definition_jp: "制約される、飛び跳ねる", definition_en: "何かに制限または支配されること; 跳躍したり弾んだりすること" } },
+            { front: { word: "molecular" }, back: { pronunciation: "/məˈlɛk.jə.lər/", definition_jp: "分子的", definition_en: "分子に関する、分子から成る、または分子に特徴的な" } },
+            { front: { word: "transformation" }, back: { pronunciation: "/ˌtræns.fərˈmeɪ.ʃən/", definition_jp: "変換、変容、変形", definition_en: "形態、外観、または性質における重要な変化" } },
+            { front: { word: "spatial" }, back: { pronunciation: "/ˈspeɪ.ʃəl/", definition_jp: "空間的", definition_en: "空間における物体の位置や配置に関する" } },
+            { front: { word: "coefficient" }, back: { pronunciation: "/ˌkoʊ.əˈfɪʃ.ənt/", definition_jp: "係数", definition_en: "数学において変数や式に掛けられる数値" } },
+            { front: { word: "translation" }, back: { pronunciation: "/trænzleɪʃən/", definition_jp: "翻訳", definition_en: "あるものを別の形に変換するプロセス。特に文章をある言語から別の言語に移し替えること" } },
+            { front: { word: "membrane" }, back: { pronunciation: "/ˈmɛm.breɪn/", definition_jp: "膜", definition_en: "生物体内で境界を形成する薄い組織層" } },
+            { front: { word: "neuron" }, back: { pronunciation: "/ˈnʊər.ɒn/", definition_jp: "ニューロン", definition_en: "神経細胞；神経系の基本的な構成要素" } },
+            { front: { word: "simulation" }, back: { pronunciation: "/ˌsɪm.jəˈleɪ.ʃən/", definition_jp: "シミュレーション", definition_en: "システムの特性を研究するために、その振る舞いを模倣するモデル" } },
+            { front: { word: "lexical" }, back: { pronunciation: "/ˈlɛk.sɪ.kəl/", definition_jp: "語彙的", definition_en: "言語の語彙や単語に関する" } },
+            { front: { word: "regime" }, back: { pronunciation: "/rəˈʒim/", definition_jp: "体制", definition_en: "特定の方針によって特徴づけられる統治または行政の制度" } },
+            { front: { word: "variance" }, back: { pronunciation: "/ˈvɛər.i.əns/", definition_jp: "分散", definition_en: "値が平均からばらつく程度" } },
+            { front: { word: "molecule" }, back: { pronunciation: "/ˈmɒl.əˌkjul/", definition_jp: "分子", definition_en: "化学結合によって結びついた2つ以上の原子の集まり" } },
+            { front: { word: "marker" }, back: { pronunciation: "/ˈmɑr.kər/", definition_jp: "マーカー（標識、指標）", definition_en: "特定の位置、境界、または特性を示す物体、記号、または特徴" } },
+            { front: { word: "empirical" }, back: { pronunciation: "/ɛmˈpɪr.ɪ.kəl/", definition_jp: "経験的", definition_en: "理論ではなく、観察や実験に基づく" } },
+            { front: { word: "robot" }, back: { pronunciation: "/ˈroʊ.bɒt/", definition_jp: "ロボット", definition_en: "作業を自動的に、または自律的に実行するようプログラムされた機械" } }
         ];
         // ★ 選択されたカテゴリの総カード数を保持する変数
         let currentCategoryCards = []; // ★ カテゴリごとのカードを保持
@@ -1204,7 +1159,7 @@
             cardFront.innerHTML = `
                 <div class="main-content">
                     <h2>${card.front.word}</h2> </div>
-                <span class="pronunciation">${card.back.pronunciation}</span> `; // 発音記号 (プレースホルダー)
+                <span class="pronunciation">${card.back.pronunciation}</span> `; // ★ 発音記号を表示
             // カード裏面のHTMLを生成・設定
             cardBack.innerHTML = `
                  <div class="main-content">
@@ -1360,8 +1315,12 @@
                 } else {
                     // 他のカテゴリが選択された場合の処理
                     // TODO: 他のカテゴリのカードデータをロードし、currentCategoryCards と totalCardsInCategory を設定
-                    currentCategoryCards = cards; // ★ 仮: 全データを使用
-                    totalCardsInCategory = currentCategoryCards.length; // ★ 仮: 全データ数
+                    // ★ 仮: Rank 1-50 以外のカテゴリは準備中として扱う
+                    console.log("Selected category data is not ready yet.");
+                    alert("このカテゴリのデータは現在準備中です。"); // ユーザーに通知
+                    return; // 処理を終了
+                    // currentCategoryCards = cards; // ★ 仮: 全データを使用
+                    // totalCardsInCategory = currentCategoryCards.length; // ★ 仮: 全データ数
                 }
 
                 // 準備中でなければフラッシュカードを開始
@@ -1496,4 +1455,4 @@
          });
     </script>
 </body>
-</ht
+</html>
